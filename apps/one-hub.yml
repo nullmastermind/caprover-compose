@@ -1,0 +1,93 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: >-
+      One API is a unified interface for accessing various large language models like OpenAI, Claude, PaLM, etc.
+      This setup includes Redis for caching and MySQL for data persistence.
+    end: >-
+      One API has been successfully deployed! 
+      
+      Please wait a few minutes for the services to fully initialize.
+      Default credentials are:
+      - Username: root
+      - Password: 123456
+      
+      Please change these credentials after first login.
+  displayName: One API
+  isOfficial: false
+  description: A unified interface for multiple LLM APIs
+  documentation: Taken from https://github.com/songquanpeng/one-api
+  variables:
+    - id: $$cap_martialbe_oneapi_version
+      label: One API Version
+      defaultValue: latest
+      description: Check available versions at https://hub.docker.com/r/martialbe/one-api/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_mysql_root_password
+      label: MySQL Root Password
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Root password for MySQL database
+    - id: $$cap_mysql_user
+      label: MySQL User
+      defaultValue: oneapi
+      description: Username for MySQL database
+    - id: $$cap_mysql_password  
+      label: MySQL Password
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Password for MySQL database user
+    - id: $$cap_session_secret
+      label: Session Secret Key
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Secret key used for session encryption. Should be random and secure.
+    - id: $$cap_user_token_secret
+      label: User Token Secret Key
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Secret key used for user token encryption. Should be random and secure.
+    - id: $$cap_tz
+      label: Timezone
+      defaultValue: Asia/Shanghai
+      description: Server timezone in TZ database format
+      validRegex: /^[A-Za-z_]+\/[A-Za-z_]+$/
+    - id: $$cap_redis_version
+      label: Redis Version
+      defaultValue: latest
+      description: Check available versions at https://hub.docker.com/_/redis/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_mysql_version
+      label: MySQL Version
+      defaultValue: 8.2.0
+      description: Check available versions at https://hub.docker.com/_/mysql/tags
+      validRegex: /^([0-9]+\.)?([0-9]+\.)?([0-9]+)$/
+services:
+  $$cap_appname:
+    image: martialbe/one-api:$$cap_martialbe_oneapi_version
+    environment:
+      SQL_DSN: $$cap_mysql_user:$$cap_mysql_password@tcp(srv-captain--$$cap_appname-db:3306)/one-api
+      REDIS_CONN_STRING: redis://srv-captain--$$cap_appname-redis:6379
+      SESSION_SECRET: $$cap_session_secret
+      USER_TOKEN_SECRET: $$cap_user_token_secret
+      TZ: $$cap_tz
+    volumes:
+      - $$cap_appname-data:/data
+    caproverExtra:
+      containerHttpPort: "3000"
+    depends_on:
+      - $$cap_appname-redis
+      - $$cap_appname-db
+  $$cap_appname-redis:
+    image: redis:$$cap_redis_version
+    volumes:
+      - $$cap_appname-redis:/data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-db:
+    image: mysql:$$cap_mysql_version
+    environment:
+      MYSQL_ROOT_PASSWORD: $$cap_mysql_root_password
+      MYSQL_DATABASE: one-api
+      MYSQL_USER: $$cap_mysql_user
+      MYSQL_PASSWORD: $$cap_mysql_password
+    volumes:
+      - $$cap_appname-db:/var/lib/mysql
+    caproverExtra:
+      notExposeAsWebApp: true
