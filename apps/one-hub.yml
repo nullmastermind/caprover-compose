@@ -45,7 +45,7 @@ caproverOneClickApp:
       description: Secret key used for user token encryption. Should be random and secure.
     - id: $$cap_tz
       label: Timezone
-      defaultValue: Asia/Shanghai
+      defaultValue: Asia/Ho_Chi_Minh
       description: Server timezone in TZ database format
       validRegex: /^[A-Za-z_]+\/[A-Za-z_]+$/
     - id: $$cap_redis_version
@@ -67,8 +67,6 @@ services:
       SESSION_SECRET: $$cap_session_secret
       USER_TOKEN_SECRET: $$cap_user_token_secret
       TZ: $$cap_tz
-    volumes:
-      - $$cap_appname-data:/data
     caproverExtra:
       containerHttpPort: "3000"
     depends_on:
