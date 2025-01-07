@@ -240,6 +240,7 @@ caproverOneClickApp:
       label: Executor Secret Key
     - id: $$cap_app_executor_host
       label: Executor Host Address
+      defaultValue: srv-captain--$$cap_appname-openruntimes-executor
     - id: $$cap_app_logging_config
       label: Logging Configuration
     - id: $$cap_app_maintenance_interval
