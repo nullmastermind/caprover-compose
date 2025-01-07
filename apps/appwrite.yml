@@ -319,10 +319,8 @@ caproverOneClickApp:
       label: Email Certificates Path
     - id: $$cap_app_docker_hub_username
       label: Docker Hub Username
-      defaultValue: root
     - id: $$cap_app_docker_hub_password
       label: Docker Hub Password
-      defaultValue: $$cap_gen_random_hex(32)
     - id: $$cap_app_usage_aggregation_interval
       label: Usage Aggregation Interval (seconds)
       defaultValue: "30"
@@ -353,10 +351,6 @@ caproverOneClickApp:
       label: Functions Maintenance Interval
       defaultValue: "600"
       description: Interval in seconds between function maintenance runs
-    - id: $$cap_app_functions_runtimes_network
-      label: Functions Runtime Network
-      defaultValue: "captain-overlay-network"
-      description: Docker network name for function runtimes
 services:
   $$cap_appname:
     image: appwrite/appwrite:$$cap_appwrite_appwrite_version
@@ -1008,7 +1002,7 @@ services:
     environment:
       OPR_EXECUTOR_INACTIVE_TRESHOLD: $$cap_app_functions_inactive_threshold
       OPR_EXECUTOR_MAINTENANCE_INTERVAL: $$cap_app_functions_maintenance_interval
-      OPR_EXECUTOR_NETWORK: $$cap_app_functions_runtimes_network
+      OPR_EXECUTOR_NETWORK: captain-overlay-network
       OPR_EXECUTOR_DOCKER_HUB_USERNAME: $$cap_app_docker_hub_username
       OPR_EXECUTOR_DOCKER_HUB_PASSWORD: $$cap_app_docker_hub_password
       OPR_EXECUTOR_ENV: $$cap_app_env

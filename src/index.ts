@@ -146,15 +146,6 @@ async function main() {
       (variable) => variable.id,
     );
 
-    forEach(result.caproverOneClickApp.variables, (variable) => {
-      if (
-        variable.id.includes("password") &&
-        typeof variable.defaultValue === "undefined"
-      ) {
-        variable.defaultValue = `$$cap_gen_random_hex(32)`;
-      }
-    });
-
     // console.log(service);
   });
 
