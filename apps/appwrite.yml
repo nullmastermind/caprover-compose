@@ -107,22 +107,20 @@ caproverOneClickApp:
       label: Application Domain
       description: Primary domain for the application
       validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$/
+      defaultValue: "localhost"
     - id: $$cap_app_domain_target
       label: Domain Target
       description: Target domain for the application
       validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$/
+      defaultValue: "localhost"
     - id: $$cap_app_domain_functions
       label: _APP_DOMAIN_FUNCTIONS
     - id: $$cap_app_redis_user
       label: Redis Username
-      defaultValue: default
       description: Username for Redis authentication
-      validRegex: /^[a-zA-Z0-9_-]+$/
     - id: $$cap_app_redis_pass
       label: Redis Password
-      defaultValue: $$cap_gen_random_hex(32)
       description: Password for Redis authentication
-      validRegex: /^.{8,}$/
     - id: $$cap_app_db_schema
       label: Database Schema Name
       defaultValue: appwrite
@@ -1021,18 +1019,20 @@ services:
     caproverExtra:
       notExposeAsWebApp: true
   $$cap_appname-mariadb:
-    image: mariadb:$$cap_mariadb_version
     environment:
       MYSQL_ROOT_PASSWORD: $$cap_app_db_pass
       MYSQL_DATABASE: $$cap_app_db_schema
       MYSQL_USER: $$cap_app_db_user
       MYSQL_PASSWORD: $$cap_app_db_pass
-      MARIADB_AUTO_UPGRADE: "1"
-    command: mysqld --user=root --innodb-flush-method=fsync
+    #      MARIADB_AUTO_UPGRADE: "1"
+    #    command: mysqld --user=root --innodb-flush-method=fsync
     volumes:
       - $$cap_appname-appwrite-mariadb:/var/lib/mysql:rw
     caproverExtra:
       notExposeAsWebApp: true
+      dockerfileLines:
+        - FROM mariadb:$$cap_mariadb_version
+        - CMD ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--skip-character-set-client-handshake"]
   $$cap_appname-redis:
     image: redis:$$cap_redis_version
     command: >
