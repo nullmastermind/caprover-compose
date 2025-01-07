@@ -15,6 +15,7 @@ export interface DockerComposeService {
   command?: any;
   caproverExtra?: {
     containerHttpPort?: string;
+    notExposeAsWebApp?: boolean;
   };
   entrypoint?: string;
 }

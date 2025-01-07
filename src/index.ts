@@ -114,7 +114,9 @@ async function main() {
             containerHttpPort: service.ports[0].split(":").shift(),
           };
         }
-        return undefined;
+        return {
+          notExposeAsWebApp: true,
+        };
       })(),
       depends_on: (() => {
         const dependsOn = map(
