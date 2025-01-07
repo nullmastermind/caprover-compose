@@ -1,6 +1,6 @@
 import yaml from "yaml";
 import { readFileSync } from "fs";
-import { forEach, uniqBy } from "lodash";
+import { forEach, map, uniqBy } from "lodash";
 import type { CaproverVariable, DockerComposeService } from "./helper/types.ts";
 import { writeFileSync } from "node:fs";
 import slugify from "slugify";
@@ -17,8 +17,8 @@ async function main() {
         end: "Docker Compose is deployed.",
       },
       variables: [] as CaproverVariable[],
-      services: {} as Record<string, DockerComposeService>,
     },
+    services: {} as Record<string, DockerComposeService>,
   };
 
   forEach(compose.services, (service: DockerComposeService, serviceName) => {
@@ -83,9 +83,35 @@ async function main() {
     });
 
     //
-    result.caproverOneClickApp.services[`$$cap_appname-${serviceName}`] = {
+    result.services[`$$cap_appname-${serviceName}`] = {
       image,
       environment,
+      ports: service.ports,
+      hostname: service.hostname,
+      command: (() => {
+        if (!service.command && service.entrypoint) {
+          return service.entrypoint;
+        }
+        return service.command;
+      })(),
+      volumes: (() => {
+        const volumes = map(
+          service.volumes,
+          (volume) => `$$cap_appname-${volume}`,
+        );
+
+        if (volumes.length) return volumes;
+
+        return undefined;
+      })(),
+      caproverExtra: (() => {
+        if (service.ports?.length) {
+          return {
+            containerHttpPort: service.ports[0].split(":").shift(),
+          };
+        }
+        return undefined;
+      })(),
     };
     result.caproverOneClickApp.variables = uniqBy(
       result.caproverOneClickApp.variables,

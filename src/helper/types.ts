@@ -12,4 +12,9 @@ export interface DockerComposeService {
   volumes?: string[];
   depends_on?: string[];
   hostname?: string;
+  command?: any;
+  caproverExtra?: {
+    containerHttpPort?: string;
+  };
+  entrypoint?: string;
 }
