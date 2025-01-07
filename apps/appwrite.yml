@@ -15,17 +15,19 @@ caproverOneClickApp:
       1. Enable WebSocket Support in the HTTP Settings by ticking "Websocket Support"
       2. Add the following to "Edit Default Nginx Configurations":
 
-         location /console {
-                 proxy_pass http://srv-captain--$$cap_appname-console:80;
-         }
+      ```nginx
+      location /console {
+              proxy_pass http://srv-captain--$$cap_appname-console:80;
+      }
 
-         location /v1/realtime {
-                 proxy_pass http://srv-captain--$$cap_appname-realtime:80;
-                 proxy_buffering off;
-                 proxy_cache off;
-                 proxy_set_header Connection "Upgrade";
-                 proxy_set_header Upgrade $http_upgrade;
-         }
+      location /v1/realtime {
+              proxy_pass http://srv-captain--$$cap_appname-realtime:80;
+              proxy_buffering off;
+              proxy_cache off;
+              proxy_set_header Connection "Upgrade";
+              proxy_set_header Upgrade $http_upgrade;
+      }
+      ```
 
       3. Visit your Appwrite Console at https://$$cap_appname.$$cap_root_domain
       4. Create your first admin account
