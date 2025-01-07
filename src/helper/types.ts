@@ -6,7 +6,7 @@ export interface CaproverVariable {
 }
 
 export interface DockerComposeService {
-  image: string;
+  image?: string;
   environment?: string[] | Record<string, string>;
   ports?: string[];
   volumes?: string[];
@@ -18,5 +18,5 @@ export interface DockerComposeService {
     notExposeAsWebApp?: boolean;
     dockerfileLines?: string[];
   };
-  entrypoint?: string;
+  entrypoint?: string | string[];
 }

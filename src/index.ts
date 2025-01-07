@@ -22,27 +22,32 @@ async function main() {
   };
 
   forEach(compose.services, (service: DockerComposeService, serviceName) => {
+    const image = (() => {
+      let image = service.image!;
+      const [imageName, imageVersion] = image.split(":");
+
+      if (imageVersion) {
+        const varName = `$$cap_${slugify(imageName.replace(/\//g, "_"), {
+          replacement: "_",
+          strict: true,
+          trim: true,
+          lower: true,
+        })}_version`;
+
+        result.caproverOneClickApp.variables.push({
+          id: varName,
+          label: `${imageName} version`,
+          defaultValue: imageVersion,
+        });
+        image = `${imageName}:${varName}`;
+      }
+
+      return image;
+    })();
+
     result.services[`$$cap_appname-${serviceName}`] = {
       image: (() => {
-        let image = service.image;
-        const [imageName, imageVersion] = service.image.split(":");
-
-        if (imageVersion) {
-          const varName = `$$cap_${slugify(imageName.replace(/\//g, "_"), {
-            replacement: "_",
-            strict: true,
-            trim: true,
-            lower: true,
-          })}_version`;
-
-          result.caproverOneClickApp.variables.push({
-            id: varName,
-            label: `${imageName} version`,
-            defaultValue: imageVersion,
-          });
-          image = `${imageName}:${varName}`;
-        }
-
+        if (service.entrypoint) return undefined;
         return image;
       })(),
       environment: (() => {
@@ -92,12 +97,7 @@ async function main() {
       })(),
       ports: service.ports,
       hostname: service.hostname,
-      command: (() => {
-        if (!service.command && service.entrypoint) {
-          return service.entrypoint;
-        }
-        return service.command;
-      })(),
+      command: service.command,
       volumes: (() => {
         const volumes = map(
           service.volumes,
@@ -109,12 +109,24 @@ async function main() {
         return undefined;
       })(),
       caproverExtra: (() => {
+        const base: Record<string, any> = {};
+
+        if (service.entrypoint) {
+          base["dockerfileLines"] = [
+            `FROM ${image}`,
+            `ENTRYPOINT ${JSON.stringify(Array.isArray(service.entrypoint) ? service.entrypoint : [service.entrypoint])}`,
+          ];
+        }
+
         if (service.ports?.length) {
           return {
+            ...base,
             containerHttpPort: service.ports[0].split(":").shift(),
           };
         }
+
         return {
+          ...base,
           notExposeAsWebApp: true,
         };
       })(),
