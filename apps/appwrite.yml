@@ -1013,7 +1013,6 @@ services:
       OPR_EXECUTOR_STORAGE_WASABI_SECRET: $_APP_STORAGE_WASABI_SECRET
       OPR_EXECUTOR_STORAGE_WASABI_REGION: $_APP_STORAGE_WASABI_REGION
       OPR_EXECUTOR_STORAGE_WASABI_BUCKET: $_APP_STORAGE_WASABI_BUCKET
-    hostname: exc1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - $$cap_appname-builds:/storage/builds:rw
