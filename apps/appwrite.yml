@@ -12,9 +12,23 @@ caproverOneClickApp:
       Appwrite has been successfully deployed! 
 
       Important Next Steps:
-      1. Enable WebSocket Support in the HTTP Settings
-      2. Visit your Appwrite Console at https://$$cap_appname.$$cap_root_domain
-      3. Create your first admin account
+      1. Enable WebSocket Support in the HTTP Settings by ticking "Websocket Support"
+      2. Add the following to "Edit Default Nginx Configurations":
+
+         location /console {
+                 proxy_pass http://srv-captain--$$cap_appname-console:80;
+         }
+
+         location /v1/realtime {
+                 proxy_pass http://srv-captain--$$cap_appname-realtime:80;
+                 proxy_buffering off;
+                 proxy_cache off;
+                 proxy_set_header Connection "Upgrade";
+                 proxy_set_header Upgrade $http_upgrade;
+         }
+
+      3. Visit your Appwrite Console at https://$$cap_appname.$$cap_root_domain
+      4. Create your first admin account
 
       Note: It may take a few minutes for all services to fully initialize.
   variables:
@@ -321,7 +335,7 @@ caproverOneClickApp:
       defaultValue: 7.2.4-alpine
       description: Version of Redis to use
 services:
-  $$cap_appname-appwrite:
+  $$cap_appname:
     image: appwrite/appwrite:$$cap_appwrite_appwrite_version
     environment:
       _APP_ENV: $$cap_app_env
@@ -417,21 +431,23 @@ services:
       _APP_MIGRATIONS_FIREBASE_CLIENT_SECRET: $$cap_app_migrations_firebase_client_secret
       _APP_ASSISTANT_OPENAI_API_KEY: $$cap_app_assistant_openai_api_key
     volumes:
-      - $$cap_appname-appwrite-uploads:/storage/uploads:rw
-      - $$cap_appname-appwrite-cache:/storage/cache:rw
-      - $$cap_appname-appwrite-config:/storage/config:rw
-      - $$cap_appname-appwrite-certificates:/storage/certificates:rw
-      - $$cap_appname-appwrite-functions:/storage/functions:rw
+      - $$cap_appname-uploads:/storage/uploads:rw
+      - $$cap_appname-cache:/storage/cache:rw
+      - $$cap_appname-config:/storage/config:rw
+      - $$cap_appname-certificates:/storage/certificates:rw
+      - $$cap_appname-functions:/storage/functions:rw
     caproverExtra:
-      notExposeAsWebApp: true
+      notExposeAsWebApp: false
+      containerHttpPort: 80
+      websocketSupport: true
     depends_on:
       - $$cap_appname-mariadb
       - $$cap_appname-redis
-  $$cap_appname-appwrite-console:
+  $$cap_appname-console:
     image: appwrite/console:$$cap_appwrite_console_version
     caproverExtra:
       notExposeAsWebApp: true
-  $$cap_appname-appwrite-realtime:
+  $$cap_appname-realtime:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -457,7 +473,7 @@ services:
     depends_on:
       - $$cap_appname-mariadb
       - $$cap_appname-redis
-  $$cap_appname-appwrite-worker-audits:
+  $$cap_appname-worker-audits:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -480,7 +496,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-webhooks:
+  $$cap_appname-worker-webhooks:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -505,7 +521,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-deletes:
+  $$cap_appname-worker-deletes:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -547,11 +563,11 @@ services:
       _APP_MAINTENANCE_RETENTION_AUDIT: $$cap_app_maintenance_retention_audit
       _APP_MAINTENANCE_RETENTION_EXECUTION: $$cap_app_maintenance_retention_execution
     volumes:
-      - $$cap_appname-appwrite-uploads:/storage/uploads:rw
-      - $$cap_appname-appwrite-cache:/storage/cache:rw
-      - $$cap_appname-appwrite-functions:/storage/functions:rw
-      - $$cap_appname-appwrite-builds:/storage/builds:rw
-      - $$cap_appname-appwrite-certificates:/storage/certificates:rw
+      - $$cap_appname-uploads:/storage/uploads:rw
+      - $$cap_appname-cache:/storage/cache:rw
+      - $$cap_appname-functions:/storage/functions:rw
+      - $$cap_appname-builds:/storage/builds:rw
+      - $$cap_appname-certificates:/storage/certificates:rw
     caproverExtra:
       dockerfileLines:
         - FROM appwrite/appwrite:$$cap_appwrite_appwrite_version
@@ -560,7 +576,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-databases:
+  $$cap_appname-worker-databases:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -583,7 +599,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-builds:
+  $$cap_appname-worker-builds:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -633,8 +649,8 @@ services:
       _APP_STORAGE_WASABI_REGION: $$cap_app_storage_wasabi_region
       _APP_STORAGE_WASABI_BUCKET: $$cap_app_storage_wasabi_bucket
     volumes:
-      - $$cap_appname-appwrite-functions:/storage/functions:rw
-      - $$cap_appname-appwrite-builds:/storage/builds:rw
+      - $$cap_appname-functions:/storage/functions:rw
+      - $$cap_appname-builds:/storage/builds:rw
     caproverExtra:
       dockerfileLines:
         - FROM appwrite/appwrite:$$cap_appwrite_appwrite_version
@@ -643,7 +659,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-certificates:
+  $$cap_appname-worker-certificates:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -663,8 +679,8 @@ services:
       _APP_DB_PASS: $$cap_app_db_pass
       _APP_LOGGING_CONFIG: $$cap_app_logging_config
     volumes:
-      - $$cap_appname-appwrite-config:/storage/config:rw
-      - $$cap_appname-appwrite-certificates:/storage/certificates:rw
+      - $$cap_appname-config:/storage/config:rw
+      - $$cap_appname-certificates:/storage/certificates:rw
     caproverExtra:
       dockerfileLines:
         - FROM appwrite/appwrite:$$cap_appwrite_appwrite_version
@@ -673,7 +689,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-functions:
+  $$cap_appname-worker-functions:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -708,7 +724,7 @@ services:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
       - $$cap_appname-openruntimes-executor
-  $$cap_appname-appwrite-worker-mails:
+  $$cap_appname-worker-mails:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -737,7 +753,7 @@ services:
       notExposeAsWebApp: true
     depends_on:
       - $$cap_appname-redis
-  $$cap_appname-appwrite-worker-messaging:
+  $$cap_appname-worker-messaging:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -776,7 +792,7 @@ services:
       _APP_STORAGE_WASABI_REGION: $$cap_app_storage_wasabi_region
       _APP_STORAGE_WASABI_BUCKET: $$cap_app_storage_wasabi_bucket
     volumes:
-      - $$cap_appname-appwrite-uploads:/storage/uploads:rw
+      - $$cap_appname-uploads:/storage/uploads:rw
     caproverExtra:
       dockerfileLines:
         - FROM appwrite/appwrite:$$cap_appwrite_appwrite_version
@@ -784,7 +800,7 @@ services:
       notExposeAsWebApp: true
     depends_on:
       - $$cap_appname-redis
-  $$cap_appname-appwrite-worker-migrations:
+  $$cap_appname-worker-migrations:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -811,7 +827,7 @@ services:
       notExposeAsWebApp: true
     depends_on:
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-task-maintenance:
+  $$cap_appname-task-maintenance:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -842,7 +858,7 @@ services:
       notExposeAsWebApp: true
     depends_on:
       - $$cap_appname-redis
-  $$cap_appname-appwrite-worker-usage:
+  $$cap_appname-worker-usage:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -867,7 +883,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-worker-usage-dump:
+  $$cap_appname-worker-usage-dump:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -892,7 +908,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-mariadb
-  $$cap_appname-appwrite-task-scheduler-functions:
+  $$cap_appname-task-scheduler-functions:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -914,7 +930,7 @@ services:
     depends_on:
       - $$cap_appname-mariadb
       - $$cap_appname-redis
-  $$cap_appname-appwrite-task-scheduler-executions:
+  $$cap_appname-task-scheduler-executions:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -936,7 +952,7 @@ services:
     depends_on:
       - $$cap_appname-mariadb
       - $$cap_appname-redis
-  $$cap_appname-appwrite-task-scheduler-messages:
+  $$cap_appname-task-scheduler-messages:
     environment:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
@@ -958,7 +974,7 @@ services:
     depends_on:
       - $$cap_appname-mariadb
       - $$cap_appname-redis
-  $$cap_appname-appwrite-assistant:
+  $$cap_appname-assistant:
     image: appwrite/assistant:$$cap_appwrite_assistant_version
     environment:
       _APP_ASSISTANT_OPENAI_API_KEY: $$cap_app_assistant_openai_api_key
@@ -1000,8 +1016,8 @@ services:
     hostname: exc1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - $$cap_appname-appwrite-builds:/storage/builds:rw
-      - $$cap_appname-appwrite-functions:/storage/functions:rw
+      - $$cap_appname-builds:/storage/builds:rw
+      - $$cap_appname-functions:/storage/functions:rw
       - /tmp:/tmp:rw
     caproverExtra:
       notExposeAsWebApp: true
@@ -1014,7 +1030,7 @@ services:
     #      MARIADB_AUTO_UPGRADE: "1"
     #    command: mysqld --user=root --innodb-flush-method=fsync
     volumes:
-      - $$cap_appname-appwrite-mariadb:/var/lib/mysql:rw
+      - $$cap_appname-mariadb:/var/lib/mysql:rw
     caproverExtra:
       notExposeAsWebApp: true
       dockerfileLines:
@@ -1026,6 +1042,6 @@ services:
       redis-server --maxmemory            512mb
       --maxmemory-policy     allkeys-lru --maxmemory-samples    5
     volumes:
-      - $$cap_appname-appwrite-redis:/data:rw
+      - $$cap_appname-redis:/data:rw
     caproverExtra:
       notExposeAsWebApp: true
