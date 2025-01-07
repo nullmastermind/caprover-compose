@@ -1,6 +1,6 @@
 import yaml from "yaml";
 import { readFileSync } from "fs";
-import { forEach } from "lodash";
+import { forEach, uniqBy } from "lodash";
 import type { CaproverVariable, DockerComposeService } from "./helper/types.ts";
 import { writeFileSync } from "node:fs";
 import slugify from "slugify";
@@ -27,19 +27,19 @@ async function main() {
     const [imageName, imageVersion] = service.image.split(":");
 
     if (imageVersion) {
-      const varName = slugify(imageName.replace(/\//g, "_"), {
+      const varName = `$$cap_${slugify(imageName.replace(/\//g, "_"), {
         replacement: "_",
         strict: true,
         trim: true,
         lower: true,
-      });
+      })}_version`;
 
       result.caproverOneClickApp.variables.push({
-        id: `$$${varName}_version`,
+        id: varName,
         label: `${imageName} version`,
         defaultValue: imageVersion,
       });
-      image = `${imageName}:$$${varName}_version`;
+      image = `${imageName}:${varName}`;
     }
     // environment
     const composeEnv: Record<string, any> = {};
@@ -53,6 +53,32 @@ async function main() {
     }
 
     forEach(composeEnv, (value, key) => {
+      const varName = `$$cap_${slugify(key, {
+        replacement: "_",
+        strict: true,
+        trim: true,
+        lower: true,
+      })}`;
+
+      if (typeof value === "undefined") {
+        result.caproverOneClickApp.variables.push({
+          id: varName,
+          label: key,
+        });
+        value = varName;
+      } else if (value?.startsWith("$")) {
+        // result.caproverOneClickApp.variables.push({
+        //   id: value,
+        //   label: key,
+        // });
+      } else {
+        result.caproverOneClickApp.variables.push({
+          id: varName,
+          label: key,
+          defaultValue: value,
+        });
+      }
+
       environment[key] = value;
     });
 
@@ -61,6 +87,24 @@ async function main() {
       image,
       environment,
     };
+    result.caproverOneClickApp.variables = uniqBy(
+      result.caproverOneClickApp.variables,
+      (variable) => variable.id,
+    );
+
+    forEach(result.caproverOneClickApp.variables, (variable) => {
+      if (
+        variable.id.includes("password") &&
+        typeof variable.defaultValue === "undefined"
+      ) {
+        variable.defaultValue = `$$cap_gen_random_hex(32)`;
+      } else if (
+        variable.id.includes("user") &&
+        typeof variable.defaultValue === "undefined"
+      ) {
+        variable.defaultValue = `root`;
+      }
+    });
 
     // console.log(service);
   });
