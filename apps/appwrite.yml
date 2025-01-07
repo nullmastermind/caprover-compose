@@ -212,7 +212,7 @@ caproverOneClickApp:
       label: Backblaze Secret Key
     - id: $$cap_app_storage_backblaze_region
       label: Backblaze Region
-      defaultValue: us-west-004
+      defaultValue: us-east-1
     - id: $$cap_app_storage_backblaze_bucket
       label: Backblaze Bucket Name
     - id: $$cap_app_storage_linode_access_key
@@ -221,7 +221,7 @@ caproverOneClickApp:
       label: Linode Secret Key
     - id: $$cap_app_storage_linode_region
       label: Linode Region
-      defaultValue: eu-central-1
+      defaultValue: us-east-1
     - id: $$cap_app_storage_linode_bucket
       label: Linode Bucket Name
     - id: $$cap_app_storage_wasabi_access_key
@@ -230,7 +230,7 @@ caproverOneClickApp:
       label: Wasabi Secret Key
     - id: $$cap_app_storage_wasabi_region
       label: Wasabi Region
-      defaultValue: eu-central-1
+      defaultValue: us-east-1
     - id: $$cap_app_storage_wasabi_bucket
       label: Wasabi Bucket Name
     - id: $$cap_app_functions_size_limit
