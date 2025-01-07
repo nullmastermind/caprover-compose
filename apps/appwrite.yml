@@ -19,57 +19,98 @@ caproverOneClickApp:
       Note: It may take a few minutes for all services to fully initialize.
   variables:
     - id: $$cap_appwrite_appwrite_version
-      label: appwrite/appwrite version
+      label: Appwrite Server Version
       defaultValue: 1.6.0
+      description: Check out their Docker page for the valid tags https://hub.docker.com/r/appwrite/appwrite/tags
+      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_app_env
-      label: Environment (production/development)
+      label: Environment Type
       defaultValue: production
+      description: Set the environment type for Appwrite (production/development)
+      validRegex: /^(production|development)$/
     - id: $$cap_app_worker_per_core
       label: Workers Per CPU Core
       defaultValue: "6"
+      description: Number of workers to spawn per CPU core
+      validRegex: /^[1-9][0-9]*$/
     - id: $$cap_app_locale
-      label: Default Locale
+      label: Default System Locale
       defaultValue: en
+      description: Default locale for the system
+      validRegex: /^[a-z]{2}(-[A-Z]{2})?$/
     - id: $$cap_app_console_whitelist_root
-      label: Enable Root Access to Console
+      label: Root Access to Console
       defaultValue: enabled
+      description: Enable or disable root access to the console
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_console_whitelist_emails
-      label: _APP_CONSOLE_WHITELIST_EMAILS
+      label: Whitelisted Console Emails
+      description: Comma-separated list of emails allowed to access the console
+      validRegex: /^$|^[^,]+(,[^,]+)*$/
     - id: $$cap_app_console_session_alerts
-      label: Enable Console Session Alerts
+      label: Console Session Alerts
       defaultValue: disabled
+      description: Enable or disable console session alerts
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_console_whitelist_ips
-      label: _APP_CONSOLE_WHITELIST_IPS
+      label: Whitelisted Console IPs
+      description: Comma-separated list of IPs allowed to access the console
+      validRegex: /^$|^[0-9./]+(,[0-9./]+)*$/
     - id: $$cap_app_console_hostnames
-      label: _APP_CONSOLE_HOSTNAMES
+      label: Console Hostnames
+      description: Comma-separated list of allowed console hostnames
+      validRegex: /^$|^[^,]+(,[^,]+)*$/
     - id: $$cap_app_system_email_name
       label: System Email Sender Name
       defaultValue: Appwrite
+      description: Name used for system-generated emails
     - id: $$cap_app_system_email_address
       label: System Email Address
       defaultValue: noreply@appwrite.io
+      description: Email address used for system-generated emails
+      validRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     - id: $$cap_app_email_security
-      label: _APP_EMAIL_SECURITY
+      label: Email Security Mode
+      defaultValue: tls
+      description: Security mode for email transmission (tls/ssl/none)
+      validRegex: /^(tls|ssl|none)$/
     - id: $$cap_app_system_response_format
-      label: _APP_SYSTEM_RESPONSE_FORMAT
+      label: System Response Format
+      defaultValue: json
+      description: Default response format for API calls (json/xml)
+      validRegex: /^(json|xml)$/
     - id: $$cap_app_options_abuse
-      label: Enable Abuse Protection
+      label: Abuse Protection
       defaultValue: enabled
+      description: Enable or disable abuse protection
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_options_router_protection
-      label: Enable Router Protection
+      label: Router Protection
       defaultValue: disabled
+      description: Enable or disable router protection
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_options_force_https
       label: Force HTTPS
       defaultValue: disabled
+      description: Force all traffic over HTTPS
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_options_functions_force_https
       label: Force HTTPS for Functions
       defaultValue: disabled
+      description: Force all function calls over HTTPS
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_openssl_key_v1
-      label: _APP_OPENSSL_KEY_V1
+      label: OpenSSL Key
+      defaultValue: $$cap_gen_random_hex(64)
+      description: OpenSSL encryption key for sensitive data
     - id: $$cap_app_domain
-      label: _APP_DOMAIN
+      label: Application Domain
+      description: Primary domain for the application
+      validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$/
     - id: $$cap_app_domain_target
-      label: _APP_DOMAIN_TARGET
+      label: Domain Target
+      description: Target domain for the application
+      validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$/
     - id: $$cap_app_domain_functions
       label: _APP_DOMAIN_FUNCTIONS
     - id: $$cap_app_redis_user
@@ -240,8 +281,10 @@ caproverOneClickApp:
     - id: $$cap_app_assistant_openai_api_key
       label: _APP_ASSISTANT_OPENAI_API_KEY
     - id: $$cap_appwrite_console_version
-      label: appwrite/console version
+      label: Appwrite Console Version
       defaultValue: 5.0.12
+      description: Version of the Appwrite Console UI
+      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_app_system_security_email_address
       label: Security Email Address
       defaultValue: certs@appwrite.io
@@ -257,20 +300,28 @@ caproverOneClickApp:
       label: Usage Aggregation Interval (seconds)
       defaultValue: "30"
     - id: $$cap_appwrite_assistant_version
-      label: appwrite/assistant version
+      label: Appwrite Assistant Version
       defaultValue: 0.4.0
+      description: Version of the Appwrite Assistant
+      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_openruntimes_executor_version
-      label: openruntimes/executor version
+      label: OpenRuntimes Executor Version
       defaultValue: 0.6.11
+      description: Version of the OpenRuntimes Executor
+      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_mariadb_version
-      label: mariadb version
+      label: MariaDB Version
       defaultValue: "10.11"
+      description: Version of MariaDB to use
+      validRegex: /^[0-9]+\.[0-9]+$/
     - id: $$cap_mariadb_auto_upgrade
       label: MARIADB_AUTO_UPGRADE
       defaultValue: "1"
     - id: $$cap_redis_version
-      label: redis version
+      label: Redis Version
       defaultValue: 7.2.4-alpine
+      description: Version of Redis to use
+      validRegex: /^[0-9]+\.[0-9]+\.[0-9]+-alpine$/
 services:
   $$cap_appname-appwrite:
     image: appwrite/appwrite:$$cap_appwrite_appwrite_version
