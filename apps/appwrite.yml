@@ -5,226 +5,186 @@ caproverOneClickApp:
     end: Docker Compose is deployed.
   variables:
     - id: $$cap_appwrite_appwrite_version
-      label: appwrite/appwrite version
-      defaultValue: 1.6.0
+      label: Appwrite Server Version
+      defaultValue: "1.6.0"
     - id: $$cap_app_env
-      label: _APP_ENV
+      label: Environment Type
+      defaultValue: "production"
+      options:
+        - production
+        - development
     - id: $$cap_app_worker_per_core
-      label: _APP_WORKER_PER_CORE
+      label: Workers Per CPU Core
+      defaultValue: "6"
+      validRegex: /^[1-9][0-9]*$/
     - id: $$cap_app_locale
-      label: _APP_LOCALE
+      label: Default System Locale
+      defaultValue: "en"
     - id: $$cap_app_console_whitelist_root
-      label: _APP_CONSOLE_WHITELIST_ROOT
+      label: Enable Root Access to Console
+      defaultValue: "enabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_console_whitelist_emails
-      label: _APP_CONSOLE_WHITELIST_EMAILS
+      label: Allowed Console Email Addresses (comma-separated)
+      defaultValue: ""
     - id: $$cap_app_console_session_alerts
-      label: _APP_CONSOLE_SESSION_ALERTS
+      label: Enable Console Session Alerts
+      defaultValue: "disabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_console_whitelist_ips
-      label: _APP_CONSOLE_WHITELIST_IPS
+      label: Allowed Console IP Addresses (comma-separated)
+      defaultValue: ""
     - id: $$cap_app_console_hostnames
-      label: _APP_CONSOLE_HOSTNAMES
+      label: Allowed Console Hostnames (comma-separated)
+      defaultValue: ""
     - id: $$cap_app_system_email_name
-      label: _APP_SYSTEM_EMAIL_NAME
+      label: System Email Sender Name
+      defaultValue: "Appwrite"
     - id: $$cap_app_system_email_address
-      label: _APP_SYSTEM_EMAIL_ADDRESS
+      label: System Email Address
+      defaultValue: "noreply@appwrite.io"
+      validRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     - id: $$cap_app_email_security
-      label: _APP_EMAIL_SECURITY
+      label: Email Security Mode (tls/ssl)
+      defaultValue: ""
     - id: $$cap_app_system_response_format
-      label: _APP_SYSTEM_RESPONSE_FORMAT
+      label: Default API Response Format
+      defaultValue: ""
     - id: $$cap_app_options_abuse
-      label: _APP_OPTIONS_ABUSE
+      label: Enable Abuse Protection
+      defaultValue: "enabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_options_router_protection
-      label: _APP_OPTIONS_ROUTER_PROTECTION
+      label: Enable Router Protection
+      defaultValue: "disabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_options_force_https
-      label: _APP_OPTIONS_FORCE_HTTPS
+      label: Force HTTPS for API
+      defaultValue: "disabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_options_functions_force_https
-      label: _APP_OPTIONS_FUNCTIONS_FORCE_HTTPS
+      label: Force HTTPS for Functions
+      defaultValue: "disabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_openssl_key_v1
-      label: _APP_OPENSSL_KEY_V1
+      label: OpenSSL Secret Key
+      defaultValue: "$$cap_gen_random_hex(64)"
+      required: true
     - id: $$cap_app_domain
-      label: _APP_DOMAIN
+      label: API Domain
+      defaultValue: "localhost"
+      required: true
     - id: $$cap_app_domain_target
-      label: _APP_DOMAIN_TARGET
+      label: API Domain Target
+      defaultValue: "localhost"
+      required: true
     - id: $$cap_app_domain_functions
-      label: _APP_DOMAIN_FUNCTIONS
-    - id: $$cap_app_redis_host
-      label: _APP_REDIS_HOST
-    - id: $$cap_app_redis_port
-      label: _APP_REDIS_PORT
-    - id: $$cap_app_redis_user
-      label: _APP_REDIS_USER
-      defaultValue: root
-    - id: $$cap_app_redis_pass
-      label: _APP_REDIS_PASS
+      label: Functions Domain
+      defaultValue: "functions.localhost"
+      required: true
     - id: $$cap_app_db_host
-      label: _APP_DB_HOST
+      label: Database Host
+      defaultValue: "mariadb"
+      required: true
     - id: $$cap_app_db_port
-      label: _APP_DB_PORT
+      label: Database Port
+      defaultValue: "3306"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_db_schema
-      label: _APP_DB_SCHEMA
+      label: Database Name
+      defaultValue: "appwrite"
+      required: true
     - id: $$cap_app_db_user
-      label: _APP_DB_USER
-      defaultValue: root
+      label: Database User
+      defaultValue: "user"
+      required: true
     - id: $$cap_app_db_pass
-      label: _APP_DB_PASS
-    - id: $$cap_app_smtp_host
-      label: _APP_SMTP_HOST
-    - id: $$cap_app_smtp_port
-      label: _APP_SMTP_PORT
-    - id: $$cap_app_smtp_secure
-      label: _APP_SMTP_SECURE
-    - id: $$cap_app_smtp_username
-      label: _APP_SMTP_USERNAME
-      defaultValue: root
-    - id: $$cap_app_smtp_password
-      label: _APP_SMTP_PASSWORD
-      defaultValue: $$cap_gen_random_hex(32)
-    - id: $$cap_app_usage_stats
-      label: _APP_USAGE_STATS
+      label: Database Password
+      defaultValue: "$$cap_gen_random_hex(32)"
+      required: true
+    - id: $$cap_app_redis_host
+      label: Redis Host
+      defaultValue: "redis"
+      required: true
+    - id: $$cap_app_redis_port
+      label: Redis Port
+      defaultValue: "6379"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_storage_limit
-      label: _APP_STORAGE_LIMIT
+      label: Max Storage Size (bytes)
+      defaultValue: "30000000"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_storage_preview_limit
-      label: _APP_STORAGE_PREVIEW_LIMIT
+      label: Max Preview Size (bytes)
+      defaultValue: "20000000"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_storage_antivirus
-      label: _APP_STORAGE_ANTIVIRUS
-    - id: $$cap_app_storage_antivirus_host
-      label: _APP_STORAGE_ANTIVIRUS_HOST
-    - id: $$cap_app_storage_antivirus_port
-      label: _APP_STORAGE_ANTIVIRUS_PORT
+      label: Enable Antivirus Scanning
+      defaultValue: "disabled"
+      options:
+        - enabled
+        - disabled
     - id: $$cap_app_storage_device
-      label: _APP_STORAGE_DEVICE
-    - id: $$cap_app_storage_s3_access_key
-      label: _APP_STORAGE_S3_ACCESS_KEY
-    - id: $$cap_app_storage_s3_secret
-      label: _APP_STORAGE_S3_SECRET
-    - id: $$cap_app_storage_s3_region
-      label: _APP_STORAGE_S3_REGION
-    - id: $$cap_app_storage_s3_bucket
-      label: _APP_STORAGE_S3_BUCKET
-    - id: $$cap_app_storage_do_spaces_access_key
-      label: _APP_STORAGE_DO_SPACES_ACCESS_KEY
-    - id: $$cap_app_storage_do_spaces_secret
-      label: _APP_STORAGE_DO_SPACES_SECRET
-    - id: $$cap_app_storage_do_spaces_region
-      label: _APP_STORAGE_DO_SPACES_REGION
-    - id: $$cap_app_storage_do_spaces_bucket
-      label: _APP_STORAGE_DO_SPACES_BUCKET
-    - id: $$cap_app_storage_backblaze_access_key
-      label: _APP_STORAGE_BACKBLAZE_ACCESS_KEY
-    - id: $$cap_app_storage_backblaze_secret
-      label: _APP_STORAGE_BACKBLAZE_SECRET
-    - id: $$cap_app_storage_backblaze_region
-      label: _APP_STORAGE_BACKBLAZE_REGION
-    - id: $$cap_app_storage_backblaze_bucket
-      label: _APP_STORAGE_BACKBLAZE_BUCKET
-    - id: $$cap_app_storage_linode_access_key
-      label: _APP_STORAGE_LINODE_ACCESS_KEY
-    - id: $$cap_app_storage_linode_secret
-      label: _APP_STORAGE_LINODE_SECRET
-    - id: $$cap_app_storage_linode_region
-      label: _APP_STORAGE_LINODE_REGION
-    - id: $$cap_app_storage_linode_bucket
-      label: _APP_STORAGE_LINODE_BUCKET
-    - id: $$cap_app_storage_wasabi_access_key
-      label: _APP_STORAGE_WASABI_ACCESS_KEY
-    - id: $$cap_app_storage_wasabi_secret
-      label: _APP_STORAGE_WASABI_SECRET
-    - id: $$cap_app_storage_wasabi_region
-      label: _APP_STORAGE_WASABI_REGION
-    - id: $$cap_app_storage_wasabi_bucket
-      label: _APP_STORAGE_WASABI_BUCKET
-    - id: $$cap_app_functions_size_limit
-      label: _APP_FUNCTIONS_SIZE_LIMIT
+      label: Storage Device Type
+      defaultValue: "local"
+      options:
+        - local
+        - s3
+        - do
+        - backblaze
+        - linode
+        - wasabi
     - id: $$cap_app_functions_timeout
-      label: _APP_FUNCTIONS_TIMEOUT
+      label: Function Execution Timeout (seconds)
+      defaultValue: "900"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_build_timeout
-      label: _APP_FUNCTIONS_BUILD_TIMEOUT
+      label: Function Build Timeout (seconds)
+      defaultValue: "900"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_cpus
-      label: _APP_FUNCTIONS_CPUS
+      label: Function CPU Limit (0 for unlimited)
+      defaultValue: "0"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_memory
-      label: _APP_FUNCTIONS_MEMORY
+      label: Function Memory Limit MB (0 for unlimited)
+      defaultValue: "0"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_runtimes
-      label: _APP_FUNCTIONS_RUNTIMES
-    - id: $$cap_app_executor_secret
-      label: _APP_EXECUTOR_SECRET
-    - id: $$cap_app_executor_host
-      label: _APP_EXECUTOR_HOST
-    - id: $$cap_app_logging_config
-      label: _APP_LOGGING_CONFIG
+      label: Enabled Function Runtimes (comma-separated)
+      defaultValue: "node-16.0,php-8.0,python-3.9,ruby-3.0"
     - id: $$cap_app_maintenance_interval
-      label: _APP_MAINTENANCE_INTERVAL
-    - id: $$cap_app_maintenance_delay
-      label: _APP_MAINTENANCE_DELAY
+      label: Maintenance Interval (seconds)
+      defaultValue: "86400"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_maintenance_retention_execution
-      label: _APP_MAINTENANCE_RETENTION_EXECUTION
-    - id: $$cap_app_maintenance_retention_cache
-      label: _APP_MAINTENANCE_RETENTION_CACHE
-    - id: $$cap_app_maintenance_retention_abuse
-      label: _APP_MAINTENANCE_RETENTION_ABUSE
-    - id: $$cap_app_maintenance_retention_audit
-      label: _APP_MAINTENANCE_RETENTION_AUDIT
-    - id: $$cap_app_maintenance_retention_usage_hourly
-      label: _APP_MAINTENANCE_RETENTION_USAGE_HOURLY
-    - id: $$cap_app_maintenance_retention_schedules
-      label: _APP_MAINTENANCE_RETENTION_SCHEDULES
-    - id: $$cap_app_sms_provider
-      label: _APP_SMS_PROVIDER
-    - id: $$cap_app_sms_from
-      label: _APP_SMS_FROM
+      label: Function Execution Log Retention (seconds)
+      defaultValue: "1209600"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_graphql_max_batch_size
-      label: _APP_GRAPHQL_MAX_BATCH_SIZE
+      label: GraphQL Max Batch Size
+      defaultValue: "10"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_graphql_max_complexity
-      label: _APP_GRAPHQL_MAX_COMPLEXITY
+      label: GraphQL Max Query Complexity
+      defaultValue: "250"
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_graphql_max_depth
-      label: _APP_GRAPHQL_MAX_DEPTH
-    - id: $$cap_app_vcs_github_app_name
-      label: _APP_VCS_GITHUB_APP_NAME
-    - id: $$cap_app_vcs_github_private_key
-      label: _APP_VCS_GITHUB_PRIVATE_KEY
-    - id: $$cap_app_vcs_github_app_id
-      label: _APP_VCS_GITHUB_APP_ID
-    - id: $$cap_app_vcs_github_webhook_secret
-      label: _APP_VCS_GITHUB_WEBHOOK_SECRET
-    - id: $$cap_app_vcs_github_client_secret
-      label: _APP_VCS_GITHUB_CLIENT_SECRET
-    - id: $$cap_app_vcs_github_client_id
-      label: _APP_VCS_GITHUB_CLIENT_ID
-    - id: $$cap_app_migrations_firebase_client_id
-      label: _APP_MIGRATIONS_FIREBASE_CLIENT_ID
-    - id: $$cap_app_migrations_firebase_client_secret
-      label: _APP_MIGRATIONS_FIREBASE_CLIENT_SECRET
-    - id: $$cap_app_assistant_openai_api_key
-      label: _APP_ASSISTANT_OPENAI_API_KEY
-    - id: $$cap_appwrite_console_version
-      label: appwrite/console version
-      defaultValue: 5.0.12
-    - id: $$cap_app_system_security_email_address
-      label: _APP_SYSTEM_SECURITY_EMAIL_ADDRESS
-    - id: $$cap_app_email_certificates
-      label: _APP_EMAIL_CERTIFICATES
-    - id: $$cap_app_docker_hub_username
-      label: _APP_DOCKER_HUB_USERNAME
-      defaultValue: root
-    - id: $$cap_app_docker_hub_password
-      label: _APP_DOCKER_HUB_PASSWORD
-      defaultValue: $$cap_gen_random_hex(32)
-    - id: $$cap_app_usage_aggregation_interval
-      label: _APP_USAGE_AGGREGATION_INTERVAL
-    - id: $$cap_appwrite_assistant_version
-      label: appwrite/assistant version
-      defaultValue: 0.4.0
-    - id: $$cap_openruntimes_executor_version
-      label: openruntimes/executor version
-      defaultValue: 0.6.11
-    - id: $$cap_mariadb_version
-      label: mariadb version
-      defaultValue: "10.11"
-    - id: $$cap_mariadb_auto_upgrade
-      label: MARIADB_AUTO_UPGRADE
-      defaultValue: "1"
-    - id: $$cap_redis_version
-      label: redis version
-      defaultValue: 7.2.4-alpine
+      label: GraphQL Max Query Depth
+      defaultValue: "3"
+      validRegex: /^[0-9]+$/
 services:
   $$cap_appname-appwrite:
     image: appwrite/appwrite:$$cap_appwrite_appwrite_version
