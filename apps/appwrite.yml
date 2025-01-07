@@ -1,8 +1,30 @@
 captainVersion: 4
 caproverOneClickApp:
+  displayName: Appwrite
+  isOfficial: true
+  description: Appwrite is a secure end-to-end backend server for Web, Mobile, and Flutter developers that is packaged as a set of Docker containers.
+  documentation: Taken from https://appwrite.io/docs/self-hosting
   instructions:
-    start: Just a plain Docker Compose.
-    end: Docker Compose is deployed.
+    start: |-
+      Appwrite is an open-source backend platform that helps you build apps faster and more securely.
+      It provides a suite of integrated services including:
+      - Authentication & User Management
+      - Database & Collections
+      - Storage & File Management  
+      - Cloud Functions
+      - Realtime Updates
+      This instance uses the official Appwrite Docker images.
+    end: |-
+      Appwrite has been successfully deployed! 
+
+      Important Next Steps:
+      1. Enable HTTPS and force HTTPS redirect for security
+      2. Enable WebSocket support in the app settings
+      3. The initial setup may take a few minutes to complete
+      4. Access your Appwrite Console at: https://$$cap_appname.$$cap_root_domain/console
+
+      For additional configuration and usage information, visit:
+      https://appwrite.io/docs
   variables:
     - id: $$cap_traefik_version
       label: Traefik Version
@@ -106,7 +128,7 @@ caproverOneClickApp:
       description: Maximum storage limit in bytes
       validRegex: /^[0-9]+$/
     - id: $$cap_app_storage_preview_limit
-      label: Preview Size Limit (bytes) 
+      label: Preview Size Limit (bytes)
       defaultValue: "2000000"
       description: Maximum preview file size in bytes
       validRegex: /^[0-9]+$/
