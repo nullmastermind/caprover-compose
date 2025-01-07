@@ -67,6 +67,8 @@ services:
       SESSION_SECRET: $$cap_session_secret
       USER_TOKEN_SECRET: $$cap_user_token_secret
       TZ: $$cap_tz
+    volumes:
+      - $$cap_appname-data:/data
     caproverExtra:
       containerHttpPort: "3000"
     depends_on:
