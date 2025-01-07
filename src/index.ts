@@ -7,7 +7,7 @@ import slugify from "slugify";
 
 async function main() {
   const compose: Record<any, any> = yaml.parse(
-    readFileSync("files/compose.yml", "utf-8"),
+    readFileSync(process.env.COMPOSE_FILE as string, "utf-8"),
   );
   const result = {
     captainVersion: 4,
@@ -149,7 +149,10 @@ async function main() {
     // console.log(service);
   });
 
-  writeFileSync("files/result.yml", yaml.stringify(result, null, 2));
+  writeFileSync(
+    process.env.OUTPUT_FILE as string,
+    yaml.stringify(result, null, 2),
+  );
 }
 
 void main();
