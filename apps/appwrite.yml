@@ -124,16 +124,19 @@ caproverOneClickApp:
       validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_openssl_key_v1
       label: OpenSSL Key
-      defaultValue: $$cap_gen_random_hex(64)
+      defaultValue: $$cap_gen_random_hex(256)
       description: OpenSSL encryption key for sensitive data
     - id: $$cap_app_domain
       label: Application Domain
+      defaultValue: localhost
       description: Primary domain for the application
     - id: $$cap_app_domain_target
       label: Domain Target
+      defaultValue: localhost
       description: Target domain for the application
     - id: $$cap_app_domain_functions
       label: Functions Domain
+      defaultValue: localhost
     - id: $$cap_app_redis_user
       label: Redis Username
       description: Username for Redis authentication
@@ -1048,15 +1051,14 @@ services:
       MYSQL_DATABASE: $$cap_app_db_schema
       MYSQL_USER: $$cap_app_db_user
       MYSQL_PASSWORD: $$cap_app_db_pass
-    #      MARIADB_AUTO_UPGRADE: "1"
-    #    command: mysqld --user=root --innodb-flush-method=fsync
+      MARIADB_AUTO_UPGRADE: $$cap_mariadb_auto_upgrade
     volumes:
       - $$cap_appname-mariadb:/var/lib/mysql:rw
     caproverExtra:
       notExposeAsWebApp: true
       dockerfileLines:
         - FROM mariadb:$$cap_mariadb_version
-        - CMD ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--skip-character-set-client-handshake"]
+        - CMD ["--innodb-flush-method", "fsync"]
   $$cap_appname-redis:
     image: redis:$$cap_redis_version
     command: >
