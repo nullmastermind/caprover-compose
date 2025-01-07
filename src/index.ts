@@ -100,7 +100,7 @@ async function main() {
       command: service.command,
       volumes: (() => {
         const volumes = map(service.volumes, (volume) => {
-          if (volume.includes("/")) return volume;
+          if (volume.split(":")?.[0]?.includes("/")) return volume;
           return `$$cap_appname-${volume}`;
         });
 
