@@ -22,7 +22,6 @@ caproverOneClickApp:
       label: Appwrite Server Version
       defaultValue: 1.6.0
       description: Check out their Docker page for the valid tags https://hub.docker.com/r/appwrite/appwrite/tags
-      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_app_env
       label: Environment Type
       defaultValue: production
@@ -106,15 +105,11 @@ caproverOneClickApp:
     - id: $$cap_app_domain
       label: Application Domain
       description: Primary domain for the application
-      validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$/
-      defaultValue: "localhost"
     - id: $$cap_app_domain_target
       label: Domain Target
       description: Target domain for the application
-      validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]*[a-zA-Z0-9]$/
-      defaultValue: "localhost"
     - id: $$cap_app_domain_functions
-      label: _APP_DOMAIN_FUNCTIONS
+      label: Functions Domain
     - id: $$cap_app_redis_user
       label: Redis Username
       description: Username for Redis authentication
@@ -125,28 +120,25 @@ caproverOneClickApp:
       label: Database Schema Name
       defaultValue: appwrite
       description: Name of the database schema to use
-      validRegex: /^[a-zA-Z0-9_-]+$/
     - id: $$cap_app_db_user
       label: Database Username
       defaultValue: appwrite
       description: Username for database authentication
-      validRegex: /^[a-zA-Z0-9_-]+$/
     - id: $$cap_app_db_pass
       label: Database Password
       defaultValue: $$cap_gen_random_hex(32)
       description: Password for database authentication
-      validRegex: /^.{8,}$/
     - id: $$cap_app_smtp_host
-      label: _APP_SMTP_HOST
+      label: SMTP Server Host
     - id: $$cap_app_smtp_port
-      label: _APP_SMTP_PORT
+      label: SMTP Server Port
     - id: $$cap_app_smtp_secure
-      label: _APP_SMTP_SECURE
+      label: SMTP Security Type
     - id: $$cap_app_smtp_username
-      label: _APP_SMTP_USERNAME
+      label: SMTP Username
       defaultValue: root
     - id: $$cap_app_smtp_password
-      label: _APP_SMTP_PASSWORD
+      label: SMTP Password
       defaultValue: $$cap_gen_random_hex(32)
     - id: $$cap_app_usage_stats
       label: Enable Usage Statistics
@@ -170,50 +162,50 @@ caproverOneClickApp:
       label: Storage Device (local/s3/do/backblaze/linode/wasabi)
       defaultValue: local
     - id: $$cap_app_storage_s3_access_key
-      label: _APP_STORAGE_S3_ACCESS_KEY
+      label: AWS S3 Access Key
     - id: $$cap_app_storage_s3_secret
-      label: _APP_STORAGE_S3_SECRET
+      label: AWS S3 Secret Key
     - id: $$cap_app_storage_s3_region
       label: AWS S3 Region
       defaultValue: us-east-1
     - id: $$cap_app_storage_s3_bucket
-      label: _APP_STORAGE_S3_BUCKET
+      label: AWS S3 Bucket Name
     - id: $$cap_app_storage_do_spaces_access_key
-      label: _APP_STORAGE_DO_SPACES_ACCESS_KEY
+      label: DigitalOcean Spaces Access Key
     - id: $$cap_app_storage_do_spaces_secret
-      label: _APP_STORAGE_DO_SPACES_SECRET
+      label: DigitalOcean Spaces Secret Key
     - id: $$cap_app_storage_do_spaces_region
       label: DigitalOcean Spaces Region
       defaultValue: us-east-1
     - id: $$cap_app_storage_do_spaces_bucket
-      label: _APP_STORAGE_DO_SPACES_BUCKET
+      label: DigitalOcean Spaces Bucket Name
     - id: $$cap_app_storage_backblaze_access_key
-      label: _APP_STORAGE_BACKBLAZE_ACCESS_KEY
+      label: Backblaze Access Key
     - id: $$cap_app_storage_backblaze_secret
-      label: _APP_STORAGE_BACKBLAZE_SECRET
+      label: Backblaze Secret Key
     - id: $$cap_app_storage_backblaze_region
       label: Backblaze Region
       defaultValue: us-west-004
     - id: $$cap_app_storage_backblaze_bucket
-      label: _APP_STORAGE_BACKBLAZE_BUCKET
+      label: Backblaze Bucket Name
     - id: $$cap_app_storage_linode_access_key
-      label: _APP_STORAGE_LINODE_ACCESS_KEY
+      label: Linode Access Key
     - id: $$cap_app_storage_linode_secret
-      label: _APP_STORAGE_LINODE_SECRET
+      label: Linode Secret Key
     - id: $$cap_app_storage_linode_region
       label: Linode Region
       defaultValue: eu-central-1
     - id: $$cap_app_storage_linode_bucket
-      label: _APP_STORAGE_LINODE_BUCKET
+      label: Linode Bucket Name
     - id: $$cap_app_storage_wasabi_access_key
-      label: _APP_STORAGE_WASABI_ACCESS_KEY
+      label: Wasabi Access Key
     - id: $$cap_app_storage_wasabi_secret
-      label: _APP_STORAGE_WASABI_SECRET
+      label: Wasabi Secret Key
     - id: $$cap_app_storage_wasabi_region
       label: Wasabi Region
       defaultValue: eu-central-1
     - id: $$cap_app_storage_wasabi_bucket
-      label: _APP_STORAGE_WASABI_BUCKET
+      label: Wasabi Bucket Name
     - id: $$cap_app_functions_size_limit
       label: Functions Size Limit (bytes)
       defaultValue: "30000000"
@@ -224,18 +216,18 @@ caproverOneClickApp:
       label: Functions Build Timeout (seconds)
       defaultValue: "900"
     - id: $$cap_app_functions_cpus
-      label: _APP_FUNCTIONS_CPUS
+      label: Functions CPU Allocation
     - id: $$cap_app_functions_memory
-      label: _APP_FUNCTIONS_MEMORY
+      label: Functions Memory Allocation
     - id: $$cap_app_functions_runtimes
       label: Available Function Runtimes
       defaultValue: "node-16.0,php-8.0,python-3.9,ruby-3.0"
     - id: $$cap_app_executor_secret
-      label: _APP_EXECUTOR_SECRET
+      label: Executor Secret Key
     - id: $$cap_app_executor_host
-      label: _APP_EXECUTOR_HOST
+      label: Executor Host Address
     - id: $$cap_app_logging_config
-      label: _APP_LOGGING_CONFIG
+      label: Logging Configuration
     - id: $$cap_app_maintenance_interval
       label: Maintenance Interval (seconds)
       defaultValue: "86400"
@@ -261,9 +253,9 @@ caproverOneClickApp:
       label: Schedules Retention (seconds)
       defaultValue: "86400"
     - id: $$cap_app_sms_provider
-      label: _APP_SMS_PROVIDER
+      label: SMS Provider Name
     - id: $$cap_app_sms_from
-      label: _APP_SMS_FROM
+      label: SMS From Number
     - id: $$cap_app_graphql_max_batch_size
       label: GraphQL Max Batch Size
       defaultValue: "10"
@@ -274,38 +266,37 @@ caproverOneClickApp:
       label: GraphQL Max Query Depth
       defaultValue: "3"
     - id: $$cap_app_vcs_github_app_name
-      label: _APP_VCS_GITHUB_APP_NAME
+      label: GitHub App Name
     - id: $$cap_app_vcs_github_private_key
-      label: _APP_VCS_GITHUB_PRIVATE_KEY
+      label: GitHub Private Key
     - id: $$cap_app_vcs_github_app_id
-      label: _APP_VCS_GITHUB_APP_ID
+      label: GitHub App ID
     - id: $$cap_app_vcs_github_webhook_secret
-      label: _APP_VCS_GITHUB_WEBHOOK_SECRET
+      label: GitHub Webhook Secret
     - id: $$cap_app_vcs_github_client_secret
-      label: _APP_VCS_GITHUB_CLIENT_SECRET
+      label: GitHub Client Secret
     - id: $$cap_app_vcs_github_client_id
-      label: _APP_VCS_GITHUB_CLIENT_ID
+      label: GitHub Client ID
     - id: $$cap_app_migrations_firebase_client_id
-      label: _APP_MIGRATIONS_FIREBASE_CLIENT_ID
+      label: Firebase Client ID
     - id: $$cap_app_migrations_firebase_client_secret
-      label: _APP_MIGRATIONS_FIREBASE_CLIENT_SECRET
+      label: Firebase Client Secret
     - id: $$cap_app_assistant_openai_api_key
-      label: _APP_ASSISTANT_OPENAI_API_KEY
+      label: OpenAI API Key
     - id: $$cap_appwrite_console_version
       label: Appwrite Console Version
       defaultValue: 5.0.12
       description: Version of the Appwrite Console UI
-      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_app_system_security_email_address
       label: Security Email Address
       defaultValue: certs@appwrite.io
     - id: $$cap_app_email_certificates
-      label: _APP_EMAIL_CERTIFICATES
+      label: Email Certificates Path
     - id: $$cap_app_docker_hub_username
-      label: _APP_DOCKER_HUB_USERNAME
+      label: Docker Hub Username
       defaultValue: root
     - id: $$cap_app_docker_hub_password
-      label: _APP_DOCKER_HUB_PASSWORD
+      label: Docker Hub Password
       defaultValue: $$cap_gen_random_hex(32)
     - id: $$cap_app_usage_aggregation_interval
       label: Usage Aggregation Interval (seconds)
@@ -314,17 +305,14 @@ caproverOneClickApp:
       label: Appwrite Assistant Version
       defaultValue: 0.4.0
       description: Version of the Appwrite Assistant
-      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_openruntimes_executor_version
       label: OpenRuntimes Executor Version
       defaultValue: 0.6.11
       description: Version of the OpenRuntimes Executor
-      validRegex: /^([0-9]+\.){2}[0-9]+$/
     - id: $$cap_mariadb_version
       label: MariaDB Version
       defaultValue: "10.11"
       description: Version of MariaDB to use
-      validRegex: /^[0-9]+\.[0-9]+$/
     - id: $$cap_mariadb_auto_upgrade
       label: MARIADB_AUTO_UPGRADE
       defaultValue: "1"
@@ -332,7 +320,6 @@ caproverOneClickApp:
       label: Redis Version
       defaultValue: 7.2.4-alpine
       description: Version of Redis to use
-      validRegex: /^[0-9]+\.[0-9]+\.[0-9]+-alpine$/
 services:
   $$cap_appname-appwrite:
     image: appwrite/appwrite:$$cap_appwrite_appwrite_version
