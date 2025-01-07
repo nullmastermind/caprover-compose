@@ -308,7 +308,7 @@ services:
       - --entrypoints.appwrite_web.address=:80
       - --entrypoints.appwrite_websecure.address=:443
     volumes:
-      - $$cap_appname-/var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       - $$cap_appname-appwrite-config:/storage/config:ro
       - $$cap_appname-appwrite-certificates:/storage/certificates:ro
     caproverExtra:
@@ -993,10 +993,10 @@ services:
       OPR_EXECUTOR_STORAGE_WASABI_BUCKET: $_APP_STORAGE_WASABI_BUCKET
     hostname: exc1
     volumes:
-      - $$cap_appname-/var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       - $$cap_appname-appwrite-builds:/storage/builds:rw
       - $$cap_appname-appwrite-functions:/storage/functions:rw
-      - $$cap_appname-/tmp:/tmp:rw
+      - /tmp:/tmp:rw
     caproverExtra:
       notExposeAsWebApp: true
   $$cap_appname-mariadb:
