@@ -1,153 +1,70 @@
 captainVersion: 4
 caproverOneClickApp:
-  displayName: Appwrite
-  isOfficial: true
-  description: Open-source Backend-as-a-Service platform that provides developers with all the core APIs required to build any application
-  documentation: Taken from https://appwrite.io/docs
   instructions:
-    start: |-
-      Appwrite is a secure open-source backend server for web, mobile & Flutter developers that is packaged as a set of Docker containers.
-      
-      It provides ready-to-use REST APIs for:
-      - Authentication & User Management
-      - Realtime Database
-      - File Storage
-      - Cloud Functions
-      - And more...
-    end: |-
-      Appwrite has been successfully deployed! 
-      
-      Important next steps:
-      1. Enable HTTPS and force HTTPS redirect in your app settings
-      2. Enable WebSocket support in your app settings
-      3. Access your Appwrite Console at https://$$cap_appname.$$cap_root_domain/console
-      4. Create your first admin account
-      
-      For detailed setup instructions, visit: https://appwrite.io/docs/getting-started-for-web
-
+    start: Just a plain Docker Compose.
+    end: Docker Compose is deployed.
   variables:
     - id: $$cap_traefik_version
-      label: Traefik Version
+      label: traefik version
       defaultValue: "2.11"
-      description: Check out their Docker page for valid tags https://hub.docker.com/_/traefik/tags
-      validRegex: /^[0-9]+\.[0-9]+$/
     - id: $$cap_appwrite_appwrite_version
-      label: Appwrite Version
+      label: appwrite/appwrite version
       defaultValue: 1.6.0
-      description: Check out their Docker page for valid tags https://hub.docker.com/r/appwrite/appwrite/tags
-      validRegex: /^[0-9]+\.[0-9]+\.[0-9]+$/
     - id: $$cap_app_env
-      label: Environment
-      defaultValue: "production"
-      description: Application environment (production or development)
-      validRegex: /^(production|development)$/
+      label: _APP_ENV
     - id: $$cap_app_worker_per_core
-      label: Workers Per CPU Core
-      defaultValue: "1"
-      description: Number of worker processes per CPU core
-      validRegex: /^[1-9][0-9]*$/
+      label: _APP_WORKER_PER_CORE
     - id: $$cap_app_locale
-      label: Default Locale
-      defaultValue: "en"
-      description: Default application locale
-      validRegex: /^[a-z]{2}(-[A-Z]{2})?$/
+      label: _APP_LOCALE
     - id: $$cap_app_console_whitelist_root
-      label: Console Root Access
-      defaultValue: "false"
-      description: Enable root access to console
-      validRegex: /^(true|false)$/
+      label: _APP_CONSOLE_WHITELIST_ROOT
     - id: $$cap_app_console_whitelist_emails
-      label: Whitelisted Email Addresses
-      defaultValue: ""
-      description: Comma-separated list of emails allowed to access console
+      label: _APP_CONSOLE_WHITELIST_EMAILS
     - id: $$cap_app_console_session_alerts
-      label: Session Alert Timeout
-      defaultValue: "30"
-      description: Session alert timeout in minutes
-      validRegex: /^[0-9]+$/
+      label: _APP_CONSOLE_SESSION_ALERTS
     - id: $$cap_app_console_whitelist_ips
-      label: Whitelisted IP Addresses
-      defaultValue: ""
-      description: Comma-separated list of IPs allowed to access console
+      label: _APP_CONSOLE_WHITELIST_IPS
     - id: $$cap_app_console_hostnames
-      label: Allowed Console Hostnames
-      defaultValue: ""
-      description: Comma-separated list of allowed hostnames for console access
+      label: _APP_CONSOLE_HOSTNAMES
     - id: $$cap_app_system_email_name
-      label: System Email Name
-      defaultValue: "Appwrite"
-      description: Name used for system emails
+      label: _APP_SYSTEM_EMAIL_NAME
     - id: $$cap_app_system_email_address
-      label: System Email Address
-      defaultValue: "team@appwrite.io"
-      description: Email address used for system emails
-      validRegex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      label: _APP_SYSTEM_EMAIL_ADDRESS
     - id: $$cap_app_email_security
-      label: Email Security Mode
-      defaultValue: "tls"
-      description: Email security mode (tls, ssl, or none)
-      validRegex: /^(tls|ssl|none)$/
+      label: _APP_EMAIL_SECURITY
     - id: $$cap_app_system_response_format
-      label: API Response Format
-      defaultValue: "json"
-      description: Default API response format
-      validRegex: /^(json|xml)$/
+      label: _APP_SYSTEM_RESPONSE_FORMAT
     - id: $$cap_app_options_abuse
-      label: Enable Abuse Detection
-      defaultValue: "true"
-      description: Enable abuse detection features
-      validRegex: /^(true|false)$/
+      label: _APP_OPTIONS_ABUSE
     - id: $$cap_app_options_router_protection
-      label: Enable Router Protection
-      defaultValue: "true"
-      description: Enable router protection features
-      validRegex: /^(true|false)$/
+      label: _APP_OPTIONS_ROUTER_PROTECTION
     - id: $$cap_app_options_force_https
-      label: Force HTTPS
-      defaultValue: "true"
-      description: Force HTTPS for all connections
-      validRegex: /^(true|false)$/
+      label: _APP_OPTIONS_FORCE_HTTPS
     - id: $$cap_app_options_functions_force_https
-      label: Force HTTPS for Functions
-      defaultValue: "true"
-      description: Force HTTPS for function endpoints
-      validRegex: /^(true|false)$/
+      label: _APP_OPTIONS_FUNCTIONS_FORCE_HTTPS
     - id: $$cap_app_openssl_key_v1
-      label: OpenSSL Key
-      defaultValue: $$cap_gen_random_hex(32)
-      description: OpenSSL encryption key
+      label: _APP_OPENSSL_KEY_V1
     - id: $$cap_app_domain
-      label: Application Domain
-      description: Main application domain
-      validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]+[a-zA-Z0-9]$/
+      label: _APP_DOMAIN
     - id: $$cap_app_domain_target
-      label: Domain Target
-      description: Target domain for application
-      validRegex: /^[a-zA-Z0-9][a-zA-Z0-9-_.]+[a-zA-Z0-9]$/
+      label: _APP_DOMAIN_TARGET
     - id: $$cap_app_domain_functions
       label: _APP_DOMAIN_FUNCTIONS
+    - id: $$cap_app_redis_host
+      label: _APP_REDIS_HOST
     - id: $$cap_app_redis_port
-      label: Redis Port
-      defaultValue: "6379"
-      description: Redis server port
-      validRegex: /^[0-9]+$/
+      label: _APP_REDIS_PORT
     - id: $$cap_app_redis_user
-      label: Redis Username
-      defaultValue: "default"
-      description: Redis authentication username
+      label: _APP_REDIS_USER
+      defaultValue: root
     - id: $$cap_app_redis_pass
-      label: Redis Password
-      defaultValue: $$cap_gen_random_hex(32)
-      description: Redis authentication password
+      label: _APP_REDIS_PASS
+    - id: $$cap_app_db_host
+      label: _APP_DB_HOST
     - id: $$cap_app_db_port
-      label: Database Port
-      defaultValue: "3306"
-      description: MariaDB server port
-      validRegex: /^[0-9]+$/
+      label: _APP_DB_PORT
     - id: $$cap_app_db_schema
-      label: Database Name
-      defaultValue: "appwrite"
-      description: Name of the MariaDB database
+      label: _APP_DB_SCHEMA
     - id: $$cap_app_db_user
       label: _APP_DB_USER
       defaultValue: root
@@ -168,15 +85,9 @@ caproverOneClickApp:
     - id: $$cap_app_usage_stats
       label: _APP_USAGE_STATS
     - id: $$cap_app_storage_limit
-      label: Storage Limit
-      defaultValue: "10000000"
-      description: Maximum storage limit in bytes
-      validRegex: /^[0-9]+$/
+      label: _APP_STORAGE_LIMIT
     - id: $$cap_app_storage_preview_limit
-      label: Preview Size Limit
-      defaultValue: "20000000"
-      description: Maximum preview size in bytes
-      validRegex: /^[0-9]+$/
+      label: _APP_STORAGE_PREVIEW_LIMIT
     - id: $$cap_app_storage_antivirus
       label: _APP_STORAGE_ANTIVIRUS
     - id: $$cap_app_storage_antivirus_host
@@ -228,25 +139,13 @@ caproverOneClickApp:
     - id: $$cap_app_functions_size_limit
       label: _APP_FUNCTIONS_SIZE_LIMIT
     - id: $$cap_app_functions_timeout
-      label: Function Timeout
-      defaultValue: "900"
-      description: Function execution timeout in seconds
-      validRegex: /^[0-9]+$/
+      label: _APP_FUNCTIONS_TIMEOUT
     - id: $$cap_app_functions_build_timeout
-      label: Function Build Timeout
-      defaultValue: "900"
-      description: Function build timeout in seconds
-      validRegex: /^[0-9]+$/
+      label: _APP_FUNCTIONS_BUILD_TIMEOUT
     - id: $$cap_app_functions_cpus
-      label: Function CPU Limit
-      defaultValue: "1"
-      description: CPU cores allocated per function
-      validRegex: /^[0-9]+$/
+      label: _APP_FUNCTIONS_CPUS
     - id: $$cap_app_functions_memory
-      label: Function Memory Limit
-      defaultValue: "512"
-      description: Memory limit per function in MB
-      validRegex: /^[0-9]+$/
+      label: _APP_FUNCTIONS_MEMORY
     - id: $$cap_app_functions_runtimes
       label: _APP_FUNCTIONS_RUNTIMES
     - id: $$cap_app_executor_secret
@@ -374,11 +273,11 @@ services:
       _APP_DOMAIN: $$cap_app_domain
       _APP_DOMAIN_TARGET: $$cap_app_domain_target
       _APP_DOMAIN_FUNCTIONS: $$cap_app_domain_functions
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -469,11 +368,11 @@ services:
       _APP_OPTIONS_ABUSE: $$cap_app_options_abuse
       _APP_OPTIONS_ROUTER_PROTECTION: $$cap_app_options_router_protection
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -492,11 +391,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -516,12 +415,12 @@ services:
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
       _APP_EMAIL_SECURITY: $$cap_app_email_security
       _APP_SYSTEM_SECURITY_EMAIL_ADDRESS: $$cap_app_system_security_email_address
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
       _APP_DB_PASS: $$cap_app_db_pass
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
@@ -538,11 +437,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -592,11 +491,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -616,11 +515,11 @@ services:
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
       _APP_EXECUTOR_SECRET: $$cap_app_executor_secret
       _APP_EXECUTOR_HOST: $$cap_app_executor_host
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -677,11 +576,11 @@ services:
       _APP_DOMAIN_TARGET: $$cap_app_domain_target
       _APP_DOMAIN_FUNCTIONS: $$cap_app_domain_functions
       _APP_EMAIL_CERTIFICATES: $$cap_app_email_certificates
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -704,11 +603,11 @@ services:
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
       _APP_DOMAIN: $$cap_app_domain
       _APP_OPTIONS_FORCE_HTTPS: $$cap_app_options_force_https
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -738,12 +637,12 @@ services:
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
       _APP_SYSTEM_EMAIL_NAME: $$cap_app_system_email_name
       _APP_SYSTEM_EMAIL_ADDRESS: $$cap_app_system_email_address
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
       _APP_DB_PASS: $$cap_app_db_pass
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
@@ -764,11 +663,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -813,11 +712,11 @@ services:
       _APP_DOMAIN: $$cap_app_domain
       _APP_DOMAIN_TARGET: $$cap_app_domain_target
       _APP_EMAIL_SECURITY: $$cap_app_email_security
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -839,11 +738,11 @@ services:
       _APP_DOMAIN_TARGET: $$cap_app_domain_target
       _APP_DOMAIN_FUNCTIONS: $$cap_app_domain_functions
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -866,12 +765,12 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
       _APP_DB_PASS: $$cap_app_db_pass
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
@@ -890,12 +789,12 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
       _APP_DB_PASS: $$cap_app_db_pass
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
@@ -914,11 +813,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -935,11 +834,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
@@ -956,11 +855,11 @@ services:
       _APP_ENV: $$cap_app_env
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
-      _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
+      _APP_REDIS_HOST: $$cap_app_redis_host
       _APP_REDIS_PORT: $$cap_app_redis_port
       _APP_REDIS_USER: $$cap_app_redis_user
       _APP_REDIS_PASS: $$cap_app_redis_pass
-      _APP_DB_HOST: srv-captain--$$cap_appname-mariadb
+      _APP_DB_HOST: $$cap_app_db_host
       _APP_DB_PORT: $$cap_app_db_port
       _APP_DB_SCHEMA: $$cap_app_db_schema
       _APP_DB_USER: $$cap_app_db_user
