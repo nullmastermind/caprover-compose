@@ -17,15 +17,23 @@ caproverOneClickApp:
 
       ```nginx
       location /console {
-              proxy_pass http://srv-captain--$$cap_appname-console:80;
+          proxy_pass http://srv-captain--$$cap_appname-console:80;
       }
 
       location /v1/realtime {
-              proxy_pass http://srv-captain--$$cap_appname-realtime:80;
-              proxy_buffering off;
-              proxy_cache off;
-              proxy_set_header Connection "Upgrade";
-              proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-Host $host;
+          proxy_set_header X-Forwarded-Port $server_port;
+          proxy_pass http://srv-captain--$$cap_appname-realtime;
+          proxy_http_version 1.1;
+          proxy_connect_timeout 7d;
+          proxy_send_timeout 7d;
+          proxy_read_timeout 7d;
       }
       ```
 
@@ -420,7 +428,7 @@ services:
       _APP_FUNCTIONS_MEMORY: $$cap_app_functions_memory
       _APP_FUNCTIONS_RUNTIMES: $$cap_app_functions_runtimes
       _APP_EXECUTOR_SECRET: $$cap_app_executor_secret
-      _APP_EXECUTOR_HOST: srv-captain--$$cap_appname-openruntimes-executor
+      _APP_EXECUTOR_HOST: http://srv-captain--$$cap_appname-openruntimes-executor/v1
       _APP_LOGGING_CONFIG: $$cap_app_logging_config
       _APP_MAINTENANCE_INTERVAL: $$cap_app_maintenance_interval
       _APP_MAINTENANCE_DELAY: $$cap_app_maintenance_delay
@@ -572,7 +580,7 @@ services:
       _APP_STORAGE_WASABI_BUCKET: $$cap_app_storage_wasabi_bucket
       _APP_LOGGING_CONFIG: $$cap_app_logging_config
       _APP_EXECUTOR_SECRET: $$cap_app_executor_secret
-      _APP_EXECUTOR_HOST: srv-captain--$$cap_appname-openruntimes-executor
+      _APP_EXECUTOR_HOST: http://srv-captain--$$cap_appname-openruntimes-executor/v1
       _APP_MAINTENANCE_RETENTION_ABUSE: $$cap_app_maintenance_retention_abuse
       _APP_MAINTENANCE_RETENTION_AUDIT: $$cap_app_maintenance_retention_audit
       _APP_MAINTENANCE_RETENTION_EXECUTION: $$cap_app_maintenance_retention_execution
@@ -619,7 +627,7 @@ services:
       _APP_WORKER_PER_CORE: $$cap_app_worker_per_core
       _APP_OPENSSL_KEY_V1: $$cap_app_openssl_key_v1
       _APP_EXECUTOR_SECRET: $$cap_app_executor_secret
-      _APP_EXECUTOR_HOST: srv-captain--$$cap_appname-openruntimes-executor
+      _APP_EXECUTOR_HOST: http://srv-captain--$$cap_appname-openruntimes-executor/v1
       _APP_REDIS_HOST: srv-captain--$$cap_appname-redis
       _APP_REDIS_PORT: "6379"
       _APP_REDIS_USER: $$cap_app_redis_user
@@ -724,7 +732,7 @@ services:
       _APP_FUNCTIONS_CPUS: $$cap_app_functions_cpus
       _APP_FUNCTIONS_MEMORY: $$cap_app_functions_memory
       _APP_EXECUTOR_SECRET: $$cap_app_executor_secret
-      _APP_EXECUTOR_HOST: srv-captain--$$cap_appname-openruntimes-executor
+      _APP_EXECUTOR_HOST: http://srv-captain--$$cap_appname-openruntimes-executor/v1
       _APP_USAGE_STATS: $$cap_app_usage_stats
       _APP_DOCKER_HUB_USERNAME: $$cap_app_docker_hub_username
       _APP_DOCKER_HUB_PASSWORD: $$cap_app_docker_hub_password
