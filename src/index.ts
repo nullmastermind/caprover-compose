@@ -99,10 +99,10 @@ async function main() {
       hostname: service.hostname,
       command: service.command,
       volumes: (() => {
-        const volumes = map(
-          service.volumes,
-          (volume) => `$$cap_appname-${volume}`,
-        );
+        const volumes = map(service.volumes, (volume) => {
+          if (volume.includes("/")) return volume;
+          return `$$cap_appname-${volume}`;
+        });
 
         if (volumes.length) return volumes;
 
