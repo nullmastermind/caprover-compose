@@ -10,12 +10,12 @@ caproverOneClickApp:
       required to build a modern backend API from scratch and allows you to build secure apps faster.
     end: |-
       Appwrite has been successfully deployed! 
-      
+
       Important Next Steps:
       1. Enable WebSocket Support in the HTTP Settings
       2. Visit your Appwrite Console at https://$$cap_appname.$$cap_root_domain
       3. Create your first admin account
-      
+
       Note: It may take a few minutes for all services to fully initialize.
   variables:
     - id: $$cap_appwrite_appwrite_version
@@ -114,17 +114,30 @@ caproverOneClickApp:
     - id: $$cap_app_domain_functions
       label: _APP_DOMAIN_FUNCTIONS
     - id: $$cap_app_redis_user
-      label: _APP_REDIS_USER
-      defaultValue: root
+      label: Redis Username
+      defaultValue: default
+      description: Username for Redis authentication
+      validRegex: /^[a-zA-Z0-9_-]+$/
     - id: $$cap_app_redis_pass
-      label: _APP_REDIS_PASS
+      label: Redis Password
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Password for Redis authentication
+      validRegex: /^.{8,}$/
     - id: $$cap_app_db_schema
-      label: _APP_DB_SCHEMA
+      label: Database Schema Name
+      defaultValue: appwrite
+      description: Name of the database schema to use
+      validRegex: /^[a-zA-Z0-9_-]+$/
     - id: $$cap_app_db_user
-      label: _APP_DB_USER
-      defaultValue: root
+      label: Database Username
+      defaultValue: appwrite
+      description: Username for database authentication
+      validRegex: /^[a-zA-Z0-9_-]+$/
     - id: $$cap_app_db_pass
-      label: _APP_DB_PASS
+      label: Database Password
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Password for database authentication
+      validRegex: /^.{8,}$/
     - id: $$cap_app_smtp_host
       label: _APP_SMTP_HOST
     - id: $$cap_app_smtp_port
