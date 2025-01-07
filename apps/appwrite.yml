@@ -163,10 +163,8 @@ caproverOneClickApp:
       label: SMTP Security Type
     - id: $$cap_app_smtp_username
       label: SMTP Username
-      defaultValue: root
     - id: $$cap_app_smtp_password
       label: SMTP Password
-      defaultValue: $$cap_gen_random_hex(32)
     - id: $$cap_app_usage_stats
       label: Enable Usage Statistics
       defaultValue: enabled
@@ -248,7 +246,7 @@ caproverOneClickApp:
       label: Functions Memory Allocation
     - id: $$cap_app_functions_runtimes
       label: Available Function Runtimes
-      defaultValue: "node-16.0,php-8.0,python-3.9,ruby-3.0"
+      defaultValue: "node-22,bun-1.1,python-3.12"
     - id: $$cap_app_executor_secret
       label: Executor Secret Key
       defaultValue: $$cap_gen_random_hex(32)
