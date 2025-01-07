@@ -152,11 +152,6 @@ async function main() {
         typeof variable.defaultValue === "undefined"
       ) {
         variable.defaultValue = `$$cap_gen_random_hex(32)`;
-      } else if (
-        variable.id.includes("user") &&
-        typeof variable.defaultValue === "undefined"
-      ) {
-        variable.defaultValue = `root`;
       }
     });
 
