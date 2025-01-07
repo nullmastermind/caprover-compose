@@ -22,70 +22,74 @@ async function main() {
   };
 
   forEach(compose.services, (service: DockerComposeService, serviceName) => {
-    // image
-    let image = service.image;
-    const [imageName, imageVersion] = service.image.split(":");
-
-    if (imageVersion) {
-      const varName = `$$cap_${slugify(imageName.replace(/\//g, "_"), {
-        replacement: "_",
-        strict: true,
-        trim: true,
-        lower: true,
-      })}_version`;
-
-      result.caproverOneClickApp.variables.push({
-        id: varName,
-        label: `${imageName} version`,
-        defaultValue: imageVersion,
-      });
-      image = `${imageName}:${varName}`;
-    }
-    // environment
-    const composeEnv: Record<string, any> = {};
-    const environment: Record<string, any> = {};
-
-    if (Array.isArray(service.environment)) {
-      forEach(service.environment, (env) => {
-        const [key, value] = env.split("=");
-        composeEnv[key] = value;
-      });
-    }
-
-    forEach(composeEnv, (value, key) => {
-      const varName = `$$cap_${slugify(key, {
-        replacement: "_",
-        strict: true,
-        trim: true,
-        lower: true,
-      })}`;
-
-      if (typeof value === "undefined") {
-        result.caproverOneClickApp.variables.push({
-          id: varName,
-          label: key,
-        });
-        value = varName;
-      } else if (value?.startsWith("$")) {
-        // result.caproverOneClickApp.variables.push({
-        //   id: value,
-        //   label: key,
-        // });
-      } else {
-        result.caproverOneClickApp.variables.push({
-          id: varName,
-          label: key,
-          defaultValue: value,
-        });
-      }
-
-      environment[key] = value;
-    });
-
-    //
     result.services[`$$cap_appname-${serviceName}`] = {
-      image,
-      environment,
+      image: (() => {
+        let image = service.image;
+        const [imageName, imageVersion] = service.image.split(":");
+
+        if (imageVersion) {
+          const varName = `$$cap_${slugify(imageName.replace(/\//g, "_"), {
+            replacement: "_",
+            strict: true,
+            trim: true,
+            lower: true,
+          })}_version`;
+
+          result.caproverOneClickApp.variables.push({
+            id: varName,
+            label: `${imageName} version`,
+            defaultValue: imageVersion,
+          });
+          image = `${imageName}:${varName}`;
+        }
+
+        return image;
+      })(),
+      environment: (() => {
+        const composeEnv: Record<string, any> = {};
+        const environment: Record<string, any> = {};
+
+        if (Array.isArray(service.environment)) {
+          forEach(service.environment, (env) => {
+            const [key, value] = env.split("=");
+            composeEnv[key] = value;
+          });
+        }
+
+        forEach(composeEnv, (value, key) => {
+          const varName = `$$cap_${slugify(key, {
+            replacement: "_",
+            strict: true,
+            trim: true,
+            lower: true,
+          })}`;
+
+          if (typeof value === "undefined") {
+            result.caproverOneClickApp.variables.push({
+              id: varName,
+              label: key,
+            });
+            value = varName;
+          } else if (value?.startsWith("$")) {
+            // result.caproverOneClickApp.variables.push({
+            //   id: value,
+            //   label: key,
+            // });
+          } else {
+            result.caproverOneClickApp.variables.push({
+              id: varName,
+              label: key,
+              defaultValue: value,
+            });
+          }
+
+          environment[key] = value;
+        });
+
+        if (Object.keys(environment).length) return environment;
+
+        return undefined;
+      })(),
       ports: service.ports,
       hostname: service.hostname,
       command: (() => {
