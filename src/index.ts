@@ -112,6 +112,16 @@ async function main() {
         }
         return undefined;
       })(),
+      depends_on: (() => {
+        const dependsOn = map(
+          service.depends_on,
+          (dependOn) => `$$cap_appname-${dependOn}`,
+        );
+
+        if (dependsOn.length) return dependsOn;
+
+        return undefined;
+      })(),
     };
     result.caproverOneClickApp.variables = uniqBy(
       result.caproverOneClickApp.variables,
