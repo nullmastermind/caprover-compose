@@ -1,8 +1,22 @@
 captainVersion: 4
 caproverOneClickApp:
+  displayName: Appwrite
+  description: Appwrite is an open-source platform that helps you build apps faster and more securely with REST APIs.
+  documentation: Taken from https://appwrite.io/docs
   instructions:
-    start: Just a plain Docker Compose.
-    end: Docker Compose is deployed.
+    start: |-
+      Appwrite is a secure end-to-end backend server for Web, Mobile, and Flutter developers that is 
+      packaged as a set of Docker containers. Appwrite abstracts the complexity and repetitiveness 
+      required to build a modern backend API from scratch and allows you to build secure apps faster.
+    end: |-
+      Appwrite has been successfully deployed! 
+      
+      Important Next Steps:
+      1. Enable WebSocket Support in the HTTP Settings
+      2. Visit your Appwrite Console at https://$$cap_appname.$$cap_root_domain
+      3. Create your first admin account
+      
+      Note: It may take a few minutes for all services to fully initialize.
   variables:
     - id: $$cap_appwrite_appwrite_version
       label: appwrite/appwrite version
