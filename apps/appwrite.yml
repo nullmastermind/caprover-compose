@@ -5,23 +5,42 @@ caproverOneClickApp:
     end: Docker Compose is deployed.
   variables:
     - id: $$cap_traefik_version
-      label: traefik version
+      label: Traefik Version
       defaultValue: "2.11"
+      description: Check out their Docker page for valid tags https://hub.docker.com/_/traefik/tags
+      validRegex: /^[0-9]+\.[0-9]+$/
     - id: $$cap_appwrite_appwrite_version
       label: appwrite/appwrite version
       defaultValue: 1.6.0
     - id: $$cap_app_env
-      label: _APP_ENV
+      label: Environment Mode
+      defaultValue: "production"
+      description: Application environment (production/development)
+      validRegex: /^(production|development)$/
     - id: $$cap_app_worker_per_core
-      label: _APP_WORKER_PER_CORE
+      label: Workers Per CPU Core
+      defaultValue: "6"
+      description: Number of worker processes per CPU core
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_locale
-      label: _APP_LOCALE
+      label: Default Locale
+      defaultValue: "en"
+      description: Default application locale (e.g. en, fr, es)
+      validRegex: /^[a-z]{2}$/
     - id: $$cap_app_console_whitelist_root
-      label: _APP_CONSOLE_WHITELIST_ROOT
+      label: Console Root Access
+      defaultValue: "enabled"
+      description: Enable/disable root access to console
+      validRegex: /^(enabled|disabled)$/
     - id: $$cap_app_console_whitelist_emails
-      label: _APP_CONSOLE_WHITELIST_EMAILS
+      label: Whitelisted Admin Emails
+      defaultValue: ""
+      description: Comma-separated list of admin email addresses
     - id: $$cap_app_console_session_alerts
-      label: _APP_CONSOLE_SESSION_ALERTS
+      label: Session Alert Duration (minutes)
+      defaultValue: "30"
+      description: Duration in minutes before session alerts
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_console_whitelist_ips
       label: _APP_CONSOLE_WHITELIST_IPS
     - id: $$cap_app_console_hostnames
@@ -80,14 +99,22 @@ caproverOneClickApp:
       label: _APP_SMTP_USERNAME
       defaultValue: root
     - id: $$cap_app_smtp_password
-      label: _APP_SMTP_PASSWORD
+      label: SMTP Password
       defaultValue: $$cap_gen_random_hex(32)
+      description: Password for SMTP authentication
+      validRegex: /.{8,}/
     - id: $$cap_app_usage_stats
       label: _APP_USAGE_STATS
     - id: $$cap_app_storage_limit
-      label: _APP_STORAGE_LIMIT
+      label: Storage Limit (bytes)
+      defaultValue: "10000000"
+      description: Maximum storage limit in bytes
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_storage_preview_limit
-      label: _APP_STORAGE_PREVIEW_LIMIT
+      label: Preview Size Limit (bytes) 
+      defaultValue: "2000000"
+      description: Maximum preview file size in bytes
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_storage_antivirus
       label: _APP_STORAGE_ANTIVIRUS
     - id: $$cap_app_storage_antivirus_host
@@ -139,13 +166,22 @@ caproverOneClickApp:
     - id: $$cap_app_functions_size_limit
       label: _APP_FUNCTIONS_SIZE_LIMIT
     - id: $$cap_app_functions_timeout
-      label: _APP_FUNCTIONS_TIMEOUT
+      label: Function Timeout (seconds)
+      defaultValue: "900"
+      description: Maximum execution time for functions in seconds
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_build_timeout
       label: _APP_FUNCTIONS_BUILD_TIMEOUT
     - id: $$cap_app_functions_cpus
-      label: _APP_FUNCTIONS_CPUS
+      label: Function CPU Limit
+      defaultValue: "1"
+      description: Number of CPUs allocated per function
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_memory
-      label: _APP_FUNCTIONS_MEMORY
+      label: Function Memory Limit (MB)
+      defaultValue: "1024"
+      description: Memory limit per function in MB
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_functions_runtimes
       label: _APP_FUNCTIONS_RUNTIMES
     - id: $$cap_app_executor_secret
@@ -155,7 +191,10 @@ caproverOneClickApp:
     - id: $$cap_app_logging_config
       label: _APP_LOGGING_CONFIG
     - id: $$cap_app_maintenance_interval
-      label: _APP_MAINTENANCE_INTERVAL
+      label: Maintenance Interval (seconds)
+      defaultValue: "3600"
+      description: Interval between maintenance runs in seconds
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_maintenance_delay
       label: _APP_MAINTENANCE_DELAY
     - id: $$cap_app_maintenance_retention_execution
@@ -175,11 +214,20 @@ caproverOneClickApp:
     - id: $$cap_app_sms_from
       label: _APP_SMS_FROM
     - id: $$cap_app_graphql_max_batch_size
-      label: _APP_GRAPHQL_MAX_BATCH_SIZE
+      label: GraphQL Max Batch Size
+      defaultValue: "10"
+      description: Maximum number of operations per GraphQL batch request
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_graphql_max_complexity
-      label: _APP_GRAPHQL_MAX_COMPLEXITY
+      label: GraphQL Max Complexity
+      defaultValue: "100"
+      description: Maximum allowed complexity for GraphQL queries
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_graphql_max_depth
-      label: _APP_GRAPHQL_MAX_DEPTH
+      label: GraphQL Max Depth
+      defaultValue: "5"
+      description: Maximum allowed depth for GraphQL queries
+      validRegex: /^[0-9]+$/
     - id: $$cap_app_vcs_github_app_name
       label: _APP_VCS_GITHUB_APP_NAME
     - id: $$cap_app_vcs_github_private_key
