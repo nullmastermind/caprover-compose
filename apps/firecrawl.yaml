@@ -116,6 +116,7 @@ caproverOneClickApp:
       description: Redis Docker image version tag
 services:
   $$cap_appname-playwright-service:
+    image: nullmastermind/firecrawl-playwright-service:latest
     environment:
       PORT: "3000"
       PROXY_SERVER: $$cap_proxy_server
@@ -125,6 +126,7 @@ services:
     caproverExtra:
       notExposeAsWebApp: true
   $$cap_appname-api:
+    image: nullmastermind/firecrawl-api:latest
     environment:
       REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
       REDIS_RATE_LIMIT_URL: redis://srv-captain--$$cap_appname-redis:6379
@@ -150,8 +152,6 @@ services:
       SELF_HOSTED_WEBHOOK_URL: $$cap_self_hosted_webhook_url
       LOGGING_LEVEL: $$cap_logging_level
       FLY_PROCESS_GROUP: app
-    ports:
-      - 3002:3002
     command:
       - pnpm
       - run
@@ -162,6 +162,7 @@ services:
       - $$cap_appname-redis
       - $$cap_appname-playwright-service
   $$cap_appname-worker:
+    image: nullmastermind/firecrawl-worker:latest
     environment:
       REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
       REDIS_RATE_LIMIT_URL: redis://srv-captain--$$cap_appname-redis:6379
