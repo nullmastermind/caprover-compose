@@ -36,12 +36,10 @@ caproverOneClickApp:
     - id: $$cap_openai_api_key
       label: OpenAI API Key
       description: API key for OpenAI services
-      validRegex: /^sk-[a-zA-Z0-9]+$/
     - id: $$cap_openai_base_url
       label: OpenAI API Base URL
       defaultValue: "https://api.openai.com/v1"
       description: Base URL for OpenAI API (for custom endpoints)
-      validRegex: /^https?:\/\/.+/
     - id: $$cap_model_name
       label: OpenAI Model Name
       defaultValue: "gpt-4o-mini"
@@ -49,7 +47,6 @@ caproverOneClickApp:
     - id: $$cap_slack_webhook_url
       label: Slack Webhook URL
       description: Webhook URL for Slack notifications
-      validRegex: /^https:\/\/hooks\.slack\.com\/.+/
     - id: $$cap_llamaparse_api_key
       label: LlamaParse API Key
       description: API key for LlamaParse service
@@ -58,7 +55,6 @@ caproverOneClickApp:
       description: Source token for Logtail logging
     - id: $$cap_bull_auth_key
       label: Bull Queue Auth Key
-      defaultValue: $$cap_gen_random_hex(16)
       description: Authentication key for Bull queue dashboard
     - id: $$cap_test_api_key
       label: Test API Key
@@ -69,16 +65,13 @@ caproverOneClickApp:
       description: API key for PostHog analytics
     - id: $$cap_posthog_host
       label: PostHog Host URL
-      defaultValue: "https://app.posthog.com"
       description: Host URL for PostHog instance
-      validRegex: /^https?:\/\/.+/
     - id: $$cap_supabase_anon_token
       label: Supabase Anon Key
       description: Anonymous API key for Supabase
     - id: $$cap_supabase_url
       label: Supabase Project URL
       description: URL of your Supabase project
-      validRegex: /^https?:\/\/.+/
     - id: $$cap_supabase_service_token
       label: Supabase Service Role Key
       description: Service role API key for Supabase
@@ -89,26 +82,20 @@ caproverOneClickApp:
       label: Application Host
       defaultValue: "0.0.0.0"
       description: Host address to bind the application to
-      validRegex: /^[0-9\.]+$/
     - id: $$cap_self_hosted_webhook_url
       label: Self-Hosted Webhook URL
       description: Webhook URL for self-hosted notifications
-      validRegex: /^https?:\/\/.+/
     - id: $$cap_logging_level
       label: Logging Level
       defaultValue: "info"
       description: Application logging level (debug, info, warn, error)
-      validRegex: /^(debug|info|warn|error)$/
     - id: $$cap_fly_process_group
       label: Fly.io Process Group
-      defaultValue: "app"
       description: Process group identifier for Fly.io deployment
-      validRegex: /^[a-zA-Z0-9-_]+$/
     - id: $$cap_redis_version
       label: Redis Version
       defaultValue: "alpine"
       description: Redis Docker image version tag
-      validRegex: /^[a-zA-Z0-9\.-]+$/
 services:
   $$cap_appname-playwright-service:
     environment:
