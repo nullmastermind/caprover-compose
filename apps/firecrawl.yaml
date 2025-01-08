@@ -46,7 +46,6 @@ caproverOneClickApp:
       label: OpenAI Model Name
       defaultValue: "gpt-4o-mini"
       description: Name of the OpenAI model to use
-      validRegex: /^[a-zA-Z0-9-]+$/
     - id: $$cap_slack_webhook_url
       label: Slack Webhook URL
       description: Webhook URL for Slack notifications
