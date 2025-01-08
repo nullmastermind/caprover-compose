@@ -32,7 +32,7 @@ caproverOneClickApp:
       validRegex: /.{1,}/
 
 services:
-  $$cap_appname-litellm:
+  $$cap_appname:
     image: ghcr.io/berriai/litellm:$$cap_ghcrio_berriai_litellm_version
     environment:
       LITELLM_LOG: $$cap_litellm_log
