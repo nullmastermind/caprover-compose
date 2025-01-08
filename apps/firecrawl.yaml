@@ -125,7 +125,7 @@ services:
       BLOCK_MEDIA: $$cap_block_media
     caproverExtra:
       notExposeAsWebApp: true
-  $$cap_appname-api:
+  $$cap_appname:
     image: nullmastermind/firecrawl-api:latest
     environment:
       REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
@@ -197,7 +197,7 @@ services:
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-playwright-service
-      - $$cap_appname-api
+      - $$cap_appname
   $$cap_appname-redis:
     image: redis:$$cap_redis_version
     command: redis-server
