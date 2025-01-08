@@ -23,7 +23,10 @@ async function main() {
 
   forEach(compose.services, (service: DockerComposeService, serviceName) => {
     const image = (() => {
-      let image = service.image!;
+      let image = service.image;
+
+      if (!image) return undefined;
+
       const [imageName, imageVersion] = image.split(":");
 
       if (imageVersion) {
