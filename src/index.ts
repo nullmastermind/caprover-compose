@@ -121,7 +121,7 @@ async function main() {
         if (service.ports?.length) {
           return {
             ...base,
-            containerHttpPort: service.ports[0].split(":").shift(),
+            containerHttpPort: service.ports[0].split(":").pop(),
           };
         }
 
