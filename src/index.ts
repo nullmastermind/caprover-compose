@@ -62,6 +62,10 @@ async function main() {
             const [key, value] = env.split("=");
             composeEnv[key] = value;
           });
+        } else {
+          forEach(service.environment, (value, key) => {
+            composeEnv[key] = value;
+          });
         }
 
         forEach(composeEnv, (value, key) => {
@@ -79,10 +83,11 @@ async function main() {
             });
             value = varName;
           } else if (value?.startsWith("$")) {
-            // result.caproverOneClickApp.variables.push({
-            //   id: value,
-            //   label: key,
-            // });
+            result.caproverOneClickApp.variables.push({
+              id: varName,
+              label: key,
+            });
+            value = varName;
           } else {
             result.caproverOneClickApp.variables.push({
               id: varName,

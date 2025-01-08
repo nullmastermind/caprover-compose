@@ -1,0 +1,155 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: Just a plain Docker Compose.
+    end: Docker Compose is deployed.
+  variables:
+    - id: $$cap_port
+      label: PORT
+      defaultValue: "3000"
+    - id: $$cap_proxy_server
+      label: PROXY_SERVER
+    - id: $$cap_proxy_username
+      label: PROXY_USERNAME
+    - id: $$cap_proxy_password
+      label: PROXY_PASSWORD
+    - id: $$cap_block_media
+      label: BLOCK_MEDIA
+    - id: $$cap_redis_url
+      label: REDIS_URL
+    - id: $$cap_redis_rate_limit_url
+      label: REDIS_RATE_LIMIT_URL
+    - id: $$cap_playwright_microservice_url
+      label: PLAYWRIGHT_MICROSERVICE_URL
+    - id: $$cap_use_db_authentication
+      label: USE_DB_AUTHENTICATION
+    - id: $$cap_num_workers_per_queue
+      label: NUM_WORKERS_PER_QUEUE
+    - id: $$cap_openai_api_key
+      label: OPENAI_API_KEY
+    - id: $$cap_openai_base_url
+      label: OPENAI_BASE_URL
+    - id: $$cap_model_name
+      label: MODEL_NAME
+    - id: $$cap_slack_webhook_url
+      label: SLACK_WEBHOOK_URL
+    - id: $$cap_llamaparse_api_key
+      label: LLAMAPARSE_API_KEY
+    - id: $$cap_logtail_key
+      label: LOGTAIL_KEY
+    - id: $$cap_bull_auth_key
+      label: BULL_AUTH_KEY
+    - id: $$cap_test_api_key
+      label: TEST_API_KEY
+    - id: $$cap_posthog_api_key
+      label: POSTHOG_API_KEY
+    - id: $$cap_posthog_host
+      label: POSTHOG_HOST
+    - id: $$cap_supabase_anon_token
+      label: SUPABASE_ANON_TOKEN
+    - id: $$cap_supabase_url
+      label: SUPABASE_URL
+    - id: $$cap_supabase_service_token
+      label: SUPABASE_SERVICE_TOKEN
+    - id: $$cap_scraping_bee_api_key
+      label: SCRAPING_BEE_API_KEY
+    - id: $$cap_host
+      label: HOST
+    - id: $$cap_self_hosted_webhook_url
+      label: SELF_HOSTED_WEBHOOK_URL
+    - id: $$cap_logging_level
+      label: LOGGING_LEVEL
+    - id: $$cap_fly_process_group
+      label: FLY_PROCESS_GROUP
+      defaultValue: app
+    - id: $$cap_redis_version
+      label: redis version
+      defaultValue: alpine
+services:
+  $$cap_appname-playwright-service:
+    environment:
+      PORT: "3000"
+      PROXY_SERVER: $$cap_proxy_server
+      PROXY_USERNAME: $$cap_proxy_username
+      PROXY_PASSWORD: $$cap_proxy_password
+      BLOCK_MEDIA: $$cap_block_media
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-api:
+    environment:
+      REDIS_URL: $$cap_redis_url
+      REDIS_RATE_LIMIT_URL: $$cap_redis_rate_limit_url
+      PLAYWRIGHT_MICROSERVICE_URL: $$cap_playwright_microservice_url
+      USE_DB_AUTHENTICATION: $$cap_use_db_authentication
+      PORT: $$cap_port
+      NUM_WORKERS_PER_QUEUE: $$cap_num_workers_per_queue
+      OPENAI_API_KEY: $$cap_openai_api_key
+      OPENAI_BASE_URL: $$cap_openai_base_url
+      MODEL_NAME: $$cap_model_name
+      SLACK_WEBHOOK_URL: $$cap_slack_webhook_url
+      LLAMAPARSE_API_KEY: $$cap_llamaparse_api_key
+      LOGTAIL_KEY: $$cap_logtail_key
+      BULL_AUTH_KEY: $$cap_bull_auth_key
+      TEST_API_KEY: $$cap_test_api_key
+      POSTHOG_API_KEY: $$cap_posthog_api_key
+      POSTHOG_HOST: $$cap_posthog_host
+      SUPABASE_ANON_TOKEN: $$cap_supabase_anon_token
+      SUPABASE_URL: $$cap_supabase_url
+      SUPABASE_SERVICE_TOKEN: $$cap_supabase_service_token
+      SCRAPING_BEE_API_KEY: $$cap_scraping_bee_api_key
+      HOST: $$cap_host
+      SELF_HOSTED_WEBHOOK_URL: $$cap_self_hosted_webhook_url
+      LOGGING_LEVEL: $$cap_logging_level
+      FLY_PROCESS_GROUP: app
+    ports:
+      - 3002:3002
+    command:
+      - pnpm
+      - run
+      - start:production
+    caproverExtra:
+      containerHttpPort: "3002"
+    depends_on:
+      - $$cap_appname-redis
+      - $$cap_appname-playwright-service
+  $$cap_appname-worker:
+    environment:
+      REDIS_URL: $$cap_redis_url
+      REDIS_RATE_LIMIT_URL: $$cap_redis_rate_limit_url
+      PLAYWRIGHT_MICROSERVICE_URL: $$cap_playwright_microservice_url
+      USE_DB_AUTHENTICATION: $$cap_use_db_authentication
+      PORT: $$cap_port
+      NUM_WORKERS_PER_QUEUE: $$cap_num_workers_per_queue
+      OPENAI_API_KEY: $$cap_openai_api_key
+      OPENAI_BASE_URL: $$cap_openai_base_url
+      MODEL_NAME: $$cap_model_name
+      SLACK_WEBHOOK_URL: $$cap_slack_webhook_url
+      LLAMAPARSE_API_KEY: $$cap_llamaparse_api_key
+      LOGTAIL_KEY: $$cap_logtail_key
+      BULL_AUTH_KEY: $$cap_bull_auth_key
+      TEST_API_KEY: $$cap_test_api_key
+      POSTHOG_API_KEY: $$cap_posthog_api_key
+      POSTHOG_HOST: $$cap_posthog_host
+      SUPABASE_ANON_TOKEN: $$cap_supabase_anon_token
+      SUPABASE_URL: $$cap_supabase_url
+      SUPABASE_SERVICE_TOKEN: $$cap_supabase_service_token
+      SCRAPING_BEE_API_KEY: $$cap_scraping_bee_api_key
+      HOST: $$cap_host
+      SELF_HOSTED_WEBHOOK_URL: $$cap_self_hosted_webhook_url
+      LOGGING_LEVEL: $$cap_logging_level
+      FLY_PROCESS_GROUP: worker
+    command:
+      - pnpm
+      - run
+      - workers
+    caproverExtra:
+      notExposeAsWebApp: true
+    depends_on:
+      - $$cap_appname-redis
+      - $$cap_appname-playwright-service
+      - $$cap_appname-api
+  $$cap_appname-redis:
+    image: redis:$$cap_redis_version
+    command: redis-server --bind 0.0.0.0
+    caproverExtra:
+      notExposeAsWebApp: true
