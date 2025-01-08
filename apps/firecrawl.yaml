@@ -1,8 +1,26 @@
 captainVersion: 4
 caproverOneClickApp:
+  displayName: FireCrawl
+  isOfficial: false
+  description: A distributed web crawling and scraping system with AI-powered content extraction capabilities.
   instructions:
-    start: Just a plain Docker Compose.
-    end: Docker Compose is deployed.
+    start: |-
+      FireCrawl is a powerful web crawling system that combines:
+      - Distributed crawling with Redis-backed queues
+      - Playwright-based browser automation
+      - AI-powered content extraction
+      - Rate limiting and proxy support
+      - Real-time notifications
+    end: |-
+      FireCrawl has been successfully deployed! 
+
+      Important next steps:
+      1. Configure your environment variables, especially:
+         - OpenAI API key for content extraction
+         - Proxy settings if needed
+         - Authentication details if enabled
+      2. The API will be available at http://$$cap_appname.$$cap_root_domain
+      3. Make sure to set up your webhook URLs for notifications if needed
   variables:
     - id: $$cap_port
       label: API Port
