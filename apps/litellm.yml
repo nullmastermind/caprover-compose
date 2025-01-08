@@ -1,20 +1,36 @@
 captainVersion: 4
 caproverOneClickApp:
   instructions:
-    start: Just a plain Docker Compose.
-    end: Docker Compose is deployed.
+    start: LiteLLM is a unified API interface that lets you call 100+ LLM APIs (Bedrock, Azure, OpenAI, Cohere, Anthropic, Ollama, etc.) using the same format.
+    end: LiteLLM proxy has been successfully deployed. You can now start making API calls to your proxy endpoint.
+  displayName: LiteLLM
+  isOfficial: false
+  description: Universal API for LLM models - Bedrock, Azure, OpenAI, Cohere, Anthropic, Ollama, etc.
+  documentation: For more information, visit https://docs.litellm.ai/docs/
   variables:
     - id: $$cap_ghcrio_berriai_litellm_version
-      label: ghcr.io/berriai/litellm version
+      label: LiteLLM Version
       defaultValue: main-latest
+      description: Check available versions at https://github.com/BerriAI/litellm/pkgs/container/litellm
+      validRegex: /^([^\s^\/])+$/
+
     - id: $$cap_litellm_log
-      label: LITELLM_LOG
+      label: Log Level
       defaultValue: ERROR
+      description: Set logging level (DEBUG, INFO, WARNING, ERROR)
+      validRegex: /^(DEBUG|INFO|WARNING|ERROR)$/
+
     - id: $$cap_litellm_master_key
-      label: LITELLM_MASTER_KEY
-      defaultValue: sk-MASTER_KEY
+      label: Master API Key
+      defaultValue: sk-$$cap_gen_random_hex(32)
+      description: Master key for authentication. Should start with 'sk-'
+      validRegex: /^sk-[a-zA-Z0-9]+$/
+
     - id: $$cap_base_64_config
-      label: Base64 of configuration content
+      label: Configuration (Base64)
+      description: Base64 encoded LiteLLM configuration YAML content. See https://docs.litellm.ai/docs/proxy/configs
+      validRegex: /.{1,}/
+
 services:
   $$cap_appname-litellm:
     image: ghcr.io/berriai/litellm:$$cap_ghcrio_berriai_litellm_version
