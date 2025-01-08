@@ -98,7 +98,7 @@ caproverOneClickApp:
       description: API key for ScrapingBee service
     - id: $$cap_host
       label: Application Host
-      defaultValue: "localhost"
+      defaultValue: "0.0.0.0"
       description: Host address to bind the application to
     - id: $$cap_self_hosted_webhook_url
       label: Self-Hosted Webhook URL
@@ -157,7 +157,7 @@ services:
       - run
       - start:production
     caproverExtra:
-      containerHttpPort: "3002"
+      containerHttpPort: "$$cap_port"
     depends_on:
       - $$cap_appname-redis
       - $$cap_appname-playwright-service
