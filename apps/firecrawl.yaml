@@ -23,18 +23,6 @@ caproverOneClickApp:
       defaultValue: "false"
       description: Whether to block loading media resources like images and videos
       validRegex: /^(true|false)$/
-    - id: $$cap_redis_url
-      label: Redis Connection URL
-      description: Full Redis connection URL for the main database
-      validRegex: /^redis:\/\/.+/
-    - id: $$cap_redis_rate_limit_url
-      label: Redis Rate Limit URL
-      description: Redis connection URL for rate limiting
-      validRegex: /^redis:\/\/.+/
-    - id: $$cap_playwright_microservice_url
-      label: Playwright Service URL
-      description: URL of the Playwright microservice
-      validRegex: /^https?:\/\/.+/
     - id: $$cap_use_db_authentication
       label: Enable Database Authentication
       defaultValue: "false"
@@ -134,9 +122,9 @@ services:
       notExposeAsWebApp: true
   $$cap_appname-api:
     environment:
-      REDIS_URL: $$cap_redis_url
-      REDIS_RATE_LIMIT_URL: $$cap_redis_rate_limit_url
-      PLAYWRIGHT_MICROSERVICE_URL: $$cap_playwright_microservice_url
+      REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
+      REDIS_RATE_LIMIT_URL: redis://srv-captain--$$cap_appname-redis:6379
+      PLAYWRIGHT_MICROSERVICE_URL: http://srv-captain--$$cap_appname-playwright-service:3000
       USE_DB_AUTHENTICATION: $$cap_use_db_authentication
       PORT: $$cap_port
       NUM_WORKERS_PER_QUEUE: $$cap_num_workers_per_queue
@@ -171,9 +159,9 @@ services:
       - $$cap_appname-playwright-service
   $$cap_appname-worker:
     environment:
-      REDIS_URL: $$cap_redis_url
-      REDIS_RATE_LIMIT_URL: $$cap_redis_rate_limit_url
-      PLAYWRIGHT_MICROSERVICE_URL: $$cap_playwright_microservice_url
+      REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
+      REDIS_RATE_LIMIT_URL: redis://srv-captain--$$cap_appname-redis:6379
+      PLAYWRIGHT_MICROSERVICE_URL: http://srv-captain--$$cap_appname-playwright-service:3000
       USE_DB_AUTHENTICATION: $$cap_use_db_authentication
       PORT: $$cap_port
       NUM_WORKERS_PER_QUEUE: $$cap_num_workers_per_queue
