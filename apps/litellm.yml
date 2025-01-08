@@ -1,0 +1,27 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: Just a plain Docker Compose.
+    end: Docker Compose is deployed.
+  variables:
+    - id: $$cap_ghcrio_berriai_litellm_version
+      label: ghcr.io/berriai/litellm version
+      defaultValue: main-latest
+    - id: $$cap_litellm_log
+      label: LITELLM_LOG
+      defaultValue: ERROR
+    - id: $$cap_litellm_master_key
+      label: LITELLM_MASTER_KEY
+      defaultValue: sk-MASTER_KEY
+    - id: $$cap_base_64_config
+      label: Base64 of configuration content
+services:
+  $$cap_appname-litellm:
+    image: ghcr.io/berriai/litellm:$$cap_ghcrio_berriai_litellm_version
+    environment:
+      LITELLM_LOG: $$cap_litellm_log
+      LITELLM_MASTER_KEY: $$cap_litellm_master_key
+      LITELLM_CONFIG_BASE64: $$cap_base_64_config
+    command: sh -c 'echo "$LITELLM_CONFIG_BASE64" | base64 -d > /app/config.yaml && litellm --config /app/config.yaml'
+    caproverExtra:
+      containerHttpPort: "4000"

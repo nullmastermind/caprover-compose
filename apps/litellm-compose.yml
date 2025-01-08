@@ -1,0 +1,10 @@
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    restart: always
+    environment:
+      - LITELLM_LOG=ERROR
+      - LITELLM_MASTER_KEY=sk-MASTER_KEY
+    ports:
+      - '9001:4000'
+    command: --config /app/config.yaml
