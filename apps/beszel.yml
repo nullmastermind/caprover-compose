@@ -38,6 +38,8 @@ caproverOneClickApp:
 services:
   $$cap_appname-beszel:
     image: henrygd/beszel:$$cap_henrygd_beszel_version
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes:
       - ./beszel_data:/beszel_data
     caproverExtra:
