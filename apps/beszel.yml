@@ -34,17 +34,16 @@ caproverOneClickApp:
       label: Security | Public Key
       defaultValue: ""
       description: Your public key for authentication (required, copy from "Add system" dialog in the web interface)
-      validRegex: /^[A-Za-z0-9+/=]{32,}$/
 services:
-  $$cap_appname-beszel:
+  $$cap_appname:
     image: henrygd/beszel:$$cap_henrygd_beszel_version
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
-      - ./beszel_data:/beszel_data
+      - $$cap_appname-data:/beszel_data
     caproverExtra:
       containerHttpPort: "8090"
-  $$cap_appname-beszel-agent:
+  $$cap_appname-agent:
     image: henrygd/beszel-agent:$$cap_henrygd_beszelagent_version
     environment:
       PORT: $$cap_port
