@@ -76,6 +76,8 @@ async function main() {
             lower: true,
           })}`;
 
+          if (typeof value === "number") value = value.toString();
+
           if (typeof value === "undefined") {
             result.caproverOneClickApp.variables.push({
               id: varName,

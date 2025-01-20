@@ -1,0 +1,53 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: |-
+      Beszel is a self-hosted remote desktop solution that allows you to access your systems remotely through a web browser.
+      This will set up both the Beszel server and agent components.
+    end: |-
+      Beszel has been successfully deployed! 
+      
+      Please ensure to:
+      1. Configure your public key in the agent environment
+      2. Access the web interface at https://$$cap_appname.$$cap_root_domain
+  displayName: Beszel
+  isOfficial: false
+  description: A self-hosted remote desktop solution for accessing your systems through a web browser
+  documentation: For more information, visit https://github.com/henrygd/beszel
+  variables:
+    - id: $$cap_henrygd_beszel_version
+      label: Version | Beszel Server
+      defaultValue: latest
+      description: Version of the Beszel server. Check available tags at https://hub.docker.com/r/henrygd/beszel/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_henrygd_beszelagent_version
+      label: Version | Beszel Agent
+      defaultValue: latest
+      description: Version of the Beszel agent. Check available tags at https://hub.docker.com/r/henrygd/beszel-agent/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_port
+      label: Network | Agent Port
+      defaultValue: "45876"
+      description: The port number that the Beszel agent will listen on (1024-65535)
+      validRegex: /^([1-9][0-9]{3,4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/
+    - id: $$cap_key
+      label: Security | Public Key
+      defaultValue: ""
+      description: Your public key for authentication (required, copy from "Add system" dialog in the web interface)
+      validRegex: /^[A-Za-z0-9+/=]{32,}$/
+services:
+  $$cap_appname-beszel:
+    image: henrygd/beszel:$$cap_henrygd_beszel_version
+    volumes:
+      - ./beszel_data:/beszel_data
+    caproverExtra:
+      containerHttpPort: "8090"
+  $$cap_appname-beszel-agent:
+    image: henrygd/beszel-agent:$$cap_henrygd_beszelagent_version
+    environment:
+      PORT: $$cap_port
+      KEY: $$cap_key
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    caproverExtra:
+      notExposeAsWebApp: true
