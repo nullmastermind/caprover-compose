@@ -1,0 +1,2047 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: Just a plain Docker Compose.
+    end: Docker Compose is deployed.
+  variables:
+    - id: $$cap_langgenius_difyapi_version
+      label: langgenius/dify-api version
+      defaultValue: 0.15.2
+    - id: $$cap_mode
+      label: MODE
+      defaultValue: api
+    - id: $$cap_sentry_dsn
+      label: SENTRY_DSN
+    - id: $$cap_sentry_traces_sample_rate
+      label: SENTRY_TRACES_SAMPLE_RATE
+    - id: $$cap_sentry_profiles_sample_rate
+      label: SENTRY_PROFILES_SAMPLE_RATE
+    - id: $$cap_console_api_url
+      label: CONSOLE_API_URL
+    - id: $$cap_console_web_url
+      label: CONSOLE_WEB_URL
+    - id: $$cap_service_api_url
+      label: SERVICE_API_URL
+    - id: $$cap_app_api_url
+      label: APP_API_URL
+    - id: $$cap_app_web_url
+      label: APP_WEB_URL
+    - id: $$cap_files_url
+      label: FILES_URL
+    - id: $$cap_log_level
+      label: LOG_LEVEL
+    - id: $$cap_log_file
+      label: LOG_FILE
+    - id: $$cap_log_file_max_size
+      label: LOG_FILE_MAX_SIZE
+    - id: $$cap_log_file_backup_count
+      label: LOG_FILE_BACKUP_COUNT
+    - id: $$cap_log_dateformat
+      label: LOG_DATEFORMAT
+    - id: $$cap_log_tz
+      label: LOG_TZ
+    - id: $$cap_debug
+      label: DEBUG
+    - id: $$cap_flask_debug
+      label: FLASK_DEBUG
+    - id: $$cap_secret_key
+      label: SECRET_KEY
+    - id: $$cap_init_password
+      label: INIT_PASSWORD
+    - id: $$cap_deploy_env
+      label: DEPLOY_ENV
+    - id: $$cap_check_update_url
+      label: CHECK_UPDATE_URL
+    - id: $$cap_openai_api_base
+      label: OPENAI_API_BASE
+    - id: $$cap_migration_enabled
+      label: MIGRATION_ENABLED
+    - id: $$cap_files_access_timeout
+      label: FILES_ACCESS_TIMEOUT
+    - id: $$cap_access_token_expire_minutes
+      label: ACCESS_TOKEN_EXPIRE_MINUTES
+    - id: $$cap_refresh_token_expire_days
+      label: REFRESH_TOKEN_EXPIRE_DAYS
+    - id: $$cap_app_max_active_requests
+      label: APP_MAX_ACTIVE_REQUESTS
+    - id: $$cap_app_max_execution_time
+      label: APP_MAX_EXECUTION_TIME
+    - id: $$cap_dify_bind_address
+      label: DIFY_BIND_ADDRESS
+    - id: $$cap_dify_port
+      label: DIFY_PORT
+    - id: $$cap_server_worker_amount
+      label: SERVER_WORKER_AMOUNT
+    - id: $$cap_server_worker_class
+      label: SERVER_WORKER_CLASS
+    - id: $$cap_server_worker_connections
+      label: SERVER_WORKER_CONNECTIONS
+    - id: $$cap_celery_worker_class
+      label: CELERY_WORKER_CLASS
+    - id: $$cap_gunicorn_timeout
+      label: GUNICORN_TIMEOUT
+    - id: $$cap_celery_worker_amount
+      label: CELERY_WORKER_AMOUNT
+    - id: $$cap_celery_auto_scale
+      label: CELERY_AUTO_SCALE
+    - id: $$cap_celery_max_workers
+      label: CELERY_MAX_WORKERS
+    - id: $$cap_celery_min_workers
+      label: CELERY_MIN_WORKERS
+    - id: $$cap_api_tool_default_connect_timeout
+      label: API_TOOL_DEFAULT_CONNECT_TIMEOUT
+    - id: $$cap_api_tool_default_read_timeout
+      label: API_TOOL_DEFAULT_READ_TIMEOUT
+    - id: $$cap_db_username
+      label: DB_USERNAME
+    - id: $$cap_db_password
+      label: DB_PASSWORD
+    - id: $$cap_db_host
+      label: DB_HOST
+    - id: $$cap_db_port
+      label: DB_PORT
+    - id: $$cap_db_database
+      label: DB_DATABASE
+    - id: $$cap_sqlalchemy_pool_size
+      label: SQLALCHEMY_POOL_SIZE
+    - id: $$cap_sqlalchemy_pool_recycle
+      label: SQLALCHEMY_POOL_RECYCLE
+    - id: $$cap_sqlalchemy_echo
+      label: SQLALCHEMY_ECHO
+    - id: $$cap_postgres_max_connections
+      label: POSTGRES_MAX_CONNECTIONS
+    - id: $$cap_postgres_shared_buffers
+      label: POSTGRES_SHARED_BUFFERS
+    - id: $$cap_postgres_work_mem
+      label: POSTGRES_WORK_MEM
+    - id: $$cap_postgres_maintenance_work_mem
+      label: POSTGRES_MAINTENANCE_WORK_MEM
+    - id: $$cap_postgres_effective_cache_size
+      label: POSTGRES_EFFECTIVE_CACHE_SIZE
+    - id: $$cap_redis_host
+      label: REDIS_HOST
+    - id: $$cap_redis_port
+      label: REDIS_PORT
+    - id: $$cap_redis_username
+      label: REDIS_USERNAME
+    - id: $$cap_redis_password
+      label: REDIS_PASSWORD
+    - id: $$cap_redis_use_ssl
+      label: REDIS_USE_SSL
+    - id: $$cap_redis_db
+      label: REDIS_DB
+    - id: $$cap_redis_use_sentinel
+      label: REDIS_USE_SENTINEL
+    - id: $$cap_redis_sentinels
+      label: REDIS_SENTINELS
+    - id: $$cap_redis_sentinel_service_name
+      label: REDIS_SENTINEL_SERVICE_NAME
+    - id: $$cap_redis_sentinel_username
+      label: REDIS_SENTINEL_USERNAME
+    - id: $$cap_redis_sentinel_password
+      label: REDIS_SENTINEL_PASSWORD
+    - id: $$cap_redis_sentinel_socket_timeout
+      label: REDIS_SENTINEL_SOCKET_TIMEOUT
+    - id: $$cap_redis_use_clusters
+      label: REDIS_USE_CLUSTERS
+    - id: $$cap_redis_clusters
+      label: REDIS_CLUSTERS
+    - id: $$cap_redis_clusters_password
+      label: REDIS_CLUSTERS_PASSWORD
+    - id: $$cap_celery_broker_url
+      label: CELERY_BROKER_URL
+    - id: $$cap_broker_use_ssl
+      label: BROKER_USE_SSL
+    - id: $$cap_celery_use_sentinel
+      label: CELERY_USE_SENTINEL
+    - id: $$cap_celery_sentinel_master_name
+      label: CELERY_SENTINEL_MASTER_NAME
+    - id: $$cap_celery_sentinel_socket_timeout
+      label: CELERY_SENTINEL_SOCKET_TIMEOUT
+    - id: $$cap_web_api_cors_allow_origins
+      label: WEB_API_CORS_ALLOW_ORIGINS
+    - id: $$cap_console_cors_allow_origins
+      label: CONSOLE_CORS_ALLOW_ORIGINS
+    - id: $$cap_storage_type
+      label: STORAGE_TYPE
+    - id: $$cap_opendal_scheme
+      label: OPENDAL_SCHEME
+    - id: $$cap_opendal_fs_root
+      label: OPENDAL_FS_ROOT
+    - id: $$cap_s3_endpoint
+      label: S3_ENDPOINT
+    - id: $$cap_s3_region
+      label: S3_REGION
+    - id: $$cap_s3_bucket_name
+      label: S3_BUCKET_NAME
+    - id: $$cap_s3_access_key
+      label: S3_ACCESS_KEY
+    - id: $$cap_s3_secret_key
+      label: S3_SECRET_KEY
+    - id: $$cap_s3_use_aws_managed_iam
+      label: S3_USE_AWS_MANAGED_IAM
+    - id: $$cap_azure_blob_account_name
+      label: AZURE_BLOB_ACCOUNT_NAME
+    - id: $$cap_azure_blob_account_key
+      label: AZURE_BLOB_ACCOUNT_KEY
+    - id: $$cap_azure_blob_container_name
+      label: AZURE_BLOB_CONTAINER_NAME
+    - id: $$cap_azure_blob_account_url
+      label: AZURE_BLOB_ACCOUNT_URL
+    - id: $$cap_google_storage_bucket_name
+      label: GOOGLE_STORAGE_BUCKET_NAME
+    - id: $$cap_google_storage_service_account_json_base64
+      label: GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64
+    - id: $$cap_aliyun_oss_bucket_name
+      label: ALIYUN_OSS_BUCKET_NAME
+    - id: $$cap_aliyun_oss_access_key
+      label: ALIYUN_OSS_ACCESS_KEY
+    - id: $$cap_aliyun_oss_secret_key
+      label: ALIYUN_OSS_SECRET_KEY
+    - id: $$cap_aliyun_oss_endpoint
+      label: ALIYUN_OSS_ENDPOINT
+    - id: $$cap_aliyun_oss_region
+      label: ALIYUN_OSS_REGION
+    - id: $$cap_aliyun_oss_auth_version
+      label: ALIYUN_OSS_AUTH_VERSION
+    - id: $$cap_aliyun_oss_path
+      label: ALIYUN_OSS_PATH
+    - id: $$cap_tencent_cos_bucket_name
+      label: TENCENT_COS_BUCKET_NAME
+    - id: $$cap_tencent_cos_secret_key
+      label: TENCENT_COS_SECRET_KEY
+    - id: $$cap_tencent_cos_secret_id
+      label: TENCENT_COS_SECRET_ID
+    - id: $$cap_tencent_cos_region
+      label: TENCENT_COS_REGION
+    - id: $$cap_tencent_cos_scheme
+      label: TENCENT_COS_SCHEME
+    - id: $$cap_oci_endpoint
+      label: OCI_ENDPOINT
+    - id: $$cap_oci_bucket_name
+      label: OCI_BUCKET_NAME
+    - id: $$cap_oci_access_key
+      label: OCI_ACCESS_KEY
+    - id: $$cap_oci_secret_key
+      label: OCI_SECRET_KEY
+    - id: $$cap_oci_region
+      label: OCI_REGION
+    - id: $$cap_huawei_obs_bucket_name
+      label: HUAWEI_OBS_BUCKET_NAME
+    - id: $$cap_huawei_obs_secret_key
+      label: HUAWEI_OBS_SECRET_KEY
+    - id: $$cap_huawei_obs_access_key
+      label: HUAWEI_OBS_ACCESS_KEY
+    - id: $$cap_huawei_obs_server
+      label: HUAWEI_OBS_SERVER
+    - id: $$cap_volcengine_tos_bucket_name
+      label: VOLCENGINE_TOS_BUCKET_NAME
+    - id: $$cap_volcengine_tos_secret_key
+      label: VOLCENGINE_TOS_SECRET_KEY
+    - id: $$cap_volcengine_tos_access_key
+      label: VOLCENGINE_TOS_ACCESS_KEY
+    - id: $$cap_volcengine_tos_endpoint
+      label: VOLCENGINE_TOS_ENDPOINT
+    - id: $$cap_volcengine_tos_region
+      label: VOLCENGINE_TOS_REGION
+    - id: $$cap_baidu_obs_bucket_name
+      label: BAIDU_OBS_BUCKET_NAME
+    - id: $$cap_baidu_obs_secret_key
+      label: BAIDU_OBS_SECRET_KEY
+    - id: $$cap_baidu_obs_access_key
+      label: BAIDU_OBS_ACCESS_KEY
+    - id: $$cap_baidu_obs_endpoint
+      label: BAIDU_OBS_ENDPOINT
+    - id: $$cap_supabase_bucket_name
+      label: SUPABASE_BUCKET_NAME
+    - id: $$cap_supabase_api_key
+      label: SUPABASE_API_KEY
+    - id: $$cap_supabase_url
+      label: SUPABASE_URL
+    - id: $$cap_vector_store
+      label: VECTOR_STORE
+    - id: $$cap_weaviate_endpoint
+      label: WEAVIATE_ENDPOINT
+    - id: $$cap_weaviate_api_key
+      label: WEAVIATE_API_KEY
+    - id: $$cap_qdrant_url
+      label: QDRANT_URL
+    - id: $$cap_qdrant_api_key
+      label: QDRANT_API_KEY
+    - id: $$cap_qdrant_client_timeout
+      label: QDRANT_CLIENT_TIMEOUT
+    - id: $$cap_qdrant_grpc_enabled
+      label: QDRANT_GRPC_ENABLED
+    - id: $$cap_qdrant_grpc_port
+      label: QDRANT_GRPC_PORT
+    - id: $$cap_milvus_uri
+      label: MILVUS_URI
+    - id: $$cap_milvus_token
+      label: MILVUS_TOKEN
+    - id: $$cap_milvus_user
+      label: MILVUS_USER
+    - id: $$cap_milvus_password
+      label: MILVUS_PASSWORD
+    - id: $$cap_milvus_enable_hybrid_search
+      label: MILVUS_ENABLE_HYBRID_SEARCH
+    - id: $$cap_myscale_host
+      label: MYSCALE_HOST
+    - id: $$cap_myscale_port
+      label: MYSCALE_PORT
+    - id: $$cap_myscale_user
+      label: MYSCALE_USER
+    - id: $$cap_myscale_password
+      label: MYSCALE_PASSWORD
+    - id: $$cap_myscale_database
+      label: MYSCALE_DATABASE
+    - id: $$cap_myscale_fts_params
+      label: MYSCALE_FTS_PARAMS
+    - id: $$cap_couchbase_connection_string
+      label: COUCHBASE_CONNECTION_STRING
+    - id: $$cap_couchbase_user
+      label: COUCHBASE_USER
+    - id: $$cap_couchbase_password
+      label: COUCHBASE_PASSWORD
+    - id: $$cap_couchbase_bucket_name
+      label: COUCHBASE_BUCKET_NAME
+    - id: $$cap_couchbase_scope_name
+      label: COUCHBASE_SCOPE_NAME
+    - id: $$cap_pgvector_host
+      label: PGVECTOR_HOST
+    - id: $$cap_pgvector_port
+      label: PGVECTOR_PORT
+    - id: $$cap_pgvector_user
+      label: PGVECTOR_USER
+    - id: $$cap_pgvector_password
+      label: PGVECTOR_PASSWORD
+    - id: $$cap_pgvector_database
+      label: PGVECTOR_DATABASE
+    - id: $$cap_pgvector_min_connection
+      label: PGVECTOR_MIN_CONNECTION
+    - id: $$cap_pgvector_max_connection
+      label: PGVECTOR_MAX_CONNECTION
+    - id: $$cap_pgvecto_rs_host
+      label: PGVECTO_RS_HOST
+    - id: $$cap_pgvecto_rs_port
+      label: PGVECTO_RS_PORT
+    - id: $$cap_pgvecto_rs_user
+      label: PGVECTO_RS_USER
+    - id: $$cap_pgvecto_rs_password
+      label: PGVECTO_RS_PASSWORD
+    - id: $$cap_pgvecto_rs_database
+      label: PGVECTO_RS_DATABASE
+    - id: $$cap_analyticdb_key_id
+      label: ANALYTICDB_KEY_ID
+    - id: $$cap_analyticdb_key_secret
+      label: ANALYTICDB_KEY_SECRET
+    - id: $$cap_analyticdb_region_id
+      label: ANALYTICDB_REGION_ID
+    - id: $$cap_analyticdb_instance_id
+      label: ANALYTICDB_INSTANCE_ID
+    - id: $$cap_analyticdb_account
+      label: ANALYTICDB_ACCOUNT
+    - id: $$cap_analyticdb_password
+      label: ANALYTICDB_PASSWORD
+    - id: $$cap_analyticdb_namespace
+      label: ANALYTICDB_NAMESPACE
+    - id: $$cap_analyticdb_namespace_password
+      label: ANALYTICDB_NAMESPACE_PASSWORD
+    - id: $$cap_analyticdb_host
+      label: ANALYTICDB_HOST
+    - id: $$cap_analyticdb_port
+      label: ANALYTICDB_PORT
+    - id: $$cap_analyticdb_min_connection
+      label: ANALYTICDB_MIN_CONNECTION
+    - id: $$cap_analyticdb_max_connection
+      label: ANALYTICDB_MAX_CONNECTION
+    - id: $$cap_tidb_vector_host
+      label: TIDB_VECTOR_HOST
+    - id: $$cap_tidb_vector_port
+      label: TIDB_VECTOR_PORT
+    - id: $$cap_tidb_vector_user
+      label: TIDB_VECTOR_USER
+    - id: $$cap_tidb_vector_password
+      label: TIDB_VECTOR_PASSWORD
+    - id: $$cap_tidb_vector_database
+      label: TIDB_VECTOR_DATABASE
+    - id: $$cap_tidb_on_qdrant_url
+      label: TIDB_ON_QDRANT_URL
+    - id: $$cap_tidb_on_qdrant_api_key
+      label: TIDB_ON_QDRANT_API_KEY
+    - id: $$cap_tidb_on_qdrant_client_timeout
+      label: TIDB_ON_QDRANT_CLIENT_TIMEOUT
+    - id: $$cap_tidb_on_qdrant_grpc_enabled
+      label: TIDB_ON_QDRANT_GRPC_ENABLED
+    - id: $$cap_tidb_on_qdrant_grpc_port
+      label: TIDB_ON_QDRANT_GRPC_PORT
+    - id: $$cap_tidb_public_key
+      label: TIDB_PUBLIC_KEY
+    - id: $$cap_tidb_private_key
+      label: TIDB_PRIVATE_KEY
+    - id: $$cap_tidb_api_url
+      label: TIDB_API_URL
+    - id: $$cap_tidb_iam_api_url
+      label: TIDB_IAM_API_URL
+    - id: $$cap_tidb_region
+      label: TIDB_REGION
+    - id: $$cap_tidb_project_id
+      label: TIDB_PROJECT_ID
+    - id: $$cap_tidb_spend_limit
+      label: TIDB_SPEND_LIMIT
+    - id: $$cap_chroma_host
+      label: CHROMA_HOST
+    - id: $$cap_chroma_port
+      label: CHROMA_PORT
+    - id: $$cap_chroma_tenant
+      label: CHROMA_TENANT
+    - id: $$cap_chroma_database
+      label: CHROMA_DATABASE
+    - id: $$cap_chroma_auth_provider
+      label: CHROMA_AUTH_PROVIDER
+    - id: $$cap_chroma_auth_credentials
+      label: CHROMA_AUTH_CREDENTIALS
+    - id: $$cap_oracle_host
+      label: ORACLE_HOST
+    - id: $$cap_oracle_port
+      label: ORACLE_PORT
+    - id: $$cap_oracle_user
+      label: ORACLE_USER
+    - id: $$cap_oracle_password
+      label: ORACLE_PASSWORD
+    - id: $$cap_oracle_database
+      label: ORACLE_DATABASE
+    - id: $$cap_relyt_host
+      label: RELYT_HOST
+    - id: $$cap_relyt_port
+      label: RELYT_PORT
+    - id: $$cap_relyt_user
+      label: RELYT_USER
+    - id: $$cap_relyt_password
+      label: RELYT_PASSWORD
+    - id: $$cap_relyt_database
+      label: RELYT_DATABASE
+    - id: $$cap_opensearch_host
+      label: OPENSEARCH_HOST
+    - id: $$cap_opensearch_port
+      label: OPENSEARCH_PORT
+    - id: $$cap_opensearch_user
+      label: OPENSEARCH_USER
+    - id: $$cap_opensearch_password
+      label: OPENSEARCH_PASSWORD
+    - id: $$cap_opensearch_secure
+      label: OPENSEARCH_SECURE
+    - id: $$cap_tencent_vector_db_url
+      label: TENCENT_VECTOR_DB_URL
+    - id: $$cap_tencent_vector_db_api_key
+      label: TENCENT_VECTOR_DB_API_KEY
+    - id: $$cap_tencent_vector_db_timeout
+      label: TENCENT_VECTOR_DB_TIMEOUT
+    - id: $$cap_tencent_vector_db_username
+      label: TENCENT_VECTOR_DB_USERNAME
+    - id: $$cap_tencent_vector_db_database
+      label: TENCENT_VECTOR_DB_DATABASE
+    - id: $$cap_tencent_vector_db_shard
+      label: TENCENT_VECTOR_DB_SHARD
+    - id: $$cap_tencent_vector_db_replicas
+      label: TENCENT_VECTOR_DB_REPLICAS
+    - id: $$cap_elasticsearch_host
+      label: ELASTICSEARCH_HOST
+    - id: $$cap_elasticsearch_port
+      label: ELASTICSEARCH_PORT
+    - id: $$cap_elasticsearch_username
+      label: ELASTICSEARCH_USERNAME
+    - id: $$cap_elasticsearch_password
+      label: ELASTICSEARCH_PASSWORD
+    - id: $$cap_kibana_port
+      label: KIBANA_PORT
+    - id: $$cap_baidu_vector_db_endpoint
+      label: BAIDU_VECTOR_DB_ENDPOINT
+    - id: $$cap_baidu_vector_db_connection_timeout_ms
+      label: BAIDU_VECTOR_DB_CONNECTION_TIMEOUT_MS
+    - id: $$cap_baidu_vector_db_account
+      label: BAIDU_VECTOR_DB_ACCOUNT
+    - id: $$cap_baidu_vector_db_api_key
+      label: BAIDU_VECTOR_DB_API_KEY
+    - id: $$cap_baidu_vector_db_database
+      label: BAIDU_VECTOR_DB_DATABASE
+    - id: $$cap_baidu_vector_db_shard
+      label: BAIDU_VECTOR_DB_SHARD
+    - id: $$cap_baidu_vector_db_replicas
+      label: BAIDU_VECTOR_DB_REPLICAS
+    - id: $$cap_vikingdb_access_key
+      label: VIKINGDB_ACCESS_KEY
+    - id: $$cap_vikingdb_secret_key
+      label: VIKINGDB_SECRET_KEY
+    - id: $$cap_vikingdb_region
+      label: VIKINGDB_REGION
+    - id: $$cap_vikingdb_host
+      label: VIKINGDB_HOST
+    - id: $$cap_vikingdb_schema
+      label: VIKINGDB_SCHEMA
+    - id: $$cap_vikingdb_connection_timeout
+      label: VIKINGDB_CONNECTION_TIMEOUT
+    - id: $$cap_vikingdb_socket_timeout
+      label: VIKINGDB_SOCKET_TIMEOUT
+    - id: $$cap_lindorm_url
+      label: LINDORM_URL
+    - id: $$cap_lindorm_username
+      label: LINDORM_USERNAME
+    - id: $$cap_lindorm_password
+      label: LINDORM_PASSWORD
+    - id: $$cap_oceanbase_vector_host
+      label: OCEANBASE_VECTOR_HOST
+    - id: $$cap_oceanbase_vector_port
+      label: OCEANBASE_VECTOR_PORT
+    - id: $$cap_oceanbase_vector_user
+      label: OCEANBASE_VECTOR_USER
+    - id: $$cap_oceanbase_vector_password
+      label: OCEANBASE_VECTOR_PASSWORD
+    - id: $$cap_oceanbase_vector_database
+      label: OCEANBASE_VECTOR_DATABASE
+    - id: $$cap_oceanbase_cluster_name
+      label: OCEANBASE_CLUSTER_NAME
+    - id: $$cap_oceanbase_memory_limit
+      label: OCEANBASE_MEMORY_LIMIT
+    - id: $$cap_upstash_vector_url
+      label: UPSTASH_VECTOR_URL
+    - id: $$cap_upstash_vector_token
+      label: UPSTASH_VECTOR_TOKEN
+    - id: $$cap_upload_file_size_limit
+      label: UPLOAD_FILE_SIZE_LIMIT
+    - id: $$cap_upload_file_batch_limit
+      label: UPLOAD_FILE_BATCH_LIMIT
+    - id: $$cap_etl_type
+      label: ETL_TYPE
+    - id: $$cap_unstructured_api_url
+      label: UNSTRUCTURED_API_URL
+    - id: $$cap_unstructured_api_key
+      label: UNSTRUCTURED_API_KEY
+    - id: $$cap_scarf_no_analytics
+      label: SCARF_NO_ANALYTICS
+    - id: $$cap_prompt_generation_max_tokens
+      label: PROMPT_GENERATION_MAX_TOKENS
+    - id: $$cap_code_generation_max_tokens
+      label: CODE_GENERATION_MAX_TOKENS
+    - id: $$cap_multimodal_send_format
+      label: MULTIMODAL_SEND_FORMAT
+    - id: $$cap_upload_image_file_size_limit
+      label: UPLOAD_IMAGE_FILE_SIZE_LIMIT
+    - id: $$cap_upload_video_file_size_limit
+      label: UPLOAD_VIDEO_FILE_SIZE_LIMIT
+    - id: $$cap_upload_audio_file_size_limit
+      label: UPLOAD_AUDIO_FILE_SIZE_LIMIT
+    - id: $$cap_api_sentry_dsn
+      label: API_SENTRY_DSN
+    - id: $$cap_api_sentry_traces_sample_rate
+      label: API_SENTRY_TRACES_SAMPLE_RATE
+    - id: $$cap_api_sentry_profiles_sample_rate
+      label: API_SENTRY_PROFILES_SAMPLE_RATE
+    - id: $$cap_web_sentry_dsn
+      label: WEB_SENTRY_DSN
+    - id: $$cap_notion_integration_type
+      label: NOTION_INTEGRATION_TYPE
+    - id: $$cap_notion_client_secret
+      label: NOTION_CLIENT_SECRET
+    - id: $$cap_notion_client_id
+      label: NOTION_CLIENT_ID
+    - id: $$cap_notion_internal_secret
+      label: NOTION_INTERNAL_SECRET
+    - id: $$cap_mail_type
+      label: MAIL_TYPE
+    - id: $$cap_mail_default_send_from
+      label: MAIL_DEFAULT_SEND_FROM
+    - id: $$cap_resend_api_url
+      label: RESEND_API_URL
+    - id: $$cap_resend_api_key
+      label: RESEND_API_KEY
+    - id: $$cap_smtp_server
+      label: SMTP_SERVER
+    - id: $$cap_smtp_port
+      label: SMTP_PORT
+    - id: $$cap_smtp_username
+      label: SMTP_USERNAME
+    - id: $$cap_smtp_password
+      label: SMTP_PASSWORD
+    - id: $$cap_smtp_use_tls
+      label: SMTP_USE_TLS
+    - id: $$cap_smtp_opportunistic_tls
+      label: SMTP_OPPORTUNISTIC_TLS
+    - id: $$cap_indexing_max_segmentation_tokens_length
+      label: INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH
+    - id: $$cap_invite_expiry_hours
+      label: INVITE_EXPIRY_HOURS
+    - id: $$cap_reset_password_token_expiry_minutes
+      label: RESET_PASSWORD_TOKEN_EXPIRY_MINUTES
+    - id: $$cap_code_execution_endpoint
+      label: CODE_EXECUTION_ENDPOINT
+    - id: $$cap_code_execution_api_key
+      label: CODE_EXECUTION_API_KEY
+    - id: $$cap_code_max_number
+      label: CODE_MAX_NUMBER
+    - id: $$cap_code_min_number
+      label: CODE_MIN_NUMBER
+    - id: $$cap_code_max_depth
+      label: CODE_MAX_DEPTH
+    - id: $$cap_code_max_precision
+      label: CODE_MAX_PRECISION
+    - id: $$cap_code_max_string_length
+      label: CODE_MAX_STRING_LENGTH
+    - id: $$cap_code_max_string_array_length
+      label: CODE_MAX_STRING_ARRAY_LENGTH
+    - id: $$cap_code_max_object_array_length
+      label: CODE_MAX_OBJECT_ARRAY_LENGTH
+    - id: $$cap_code_max_number_array_length
+      label: CODE_MAX_NUMBER_ARRAY_LENGTH
+    - id: $$cap_code_execution_connect_timeout
+      label: CODE_EXECUTION_CONNECT_TIMEOUT
+    - id: $$cap_code_execution_read_timeout
+      label: CODE_EXECUTION_READ_TIMEOUT
+    - id: $$cap_code_execution_write_timeout
+      label: CODE_EXECUTION_WRITE_TIMEOUT
+    - id: $$cap_template_transform_max_length
+      label: TEMPLATE_TRANSFORM_MAX_LENGTH
+    - id: $$cap_workflow_max_execution_steps
+      label: WORKFLOW_MAX_EXECUTION_STEPS
+    - id: $$cap_workflow_max_execution_time
+      label: WORKFLOW_MAX_EXECUTION_TIME
+    - id: $$cap_workflow_call_max_depth
+      label: WORKFLOW_CALL_MAX_DEPTH
+    - id: $$cap_max_variable_size
+      label: MAX_VARIABLE_SIZE
+    - id: $$cap_workflow_parallel_depth_limit
+      label: WORKFLOW_PARALLEL_DEPTH_LIMIT
+    - id: $$cap_workflow_file_upload_limit
+      label: WORKFLOW_FILE_UPLOAD_LIMIT
+    - id: $$cap_http_request_node_max_binary_size
+      label: HTTP_REQUEST_NODE_MAX_BINARY_SIZE
+    - id: $$cap_http_request_node_max_text_size
+      label: HTTP_REQUEST_NODE_MAX_TEXT_SIZE
+    - id: $$cap_ssrf_proxy_http_url
+      label: SSRF_PROXY_HTTP_URL
+    - id: $$cap_ssrf_proxy_https_url
+      label: SSRF_PROXY_HTTPS_URL
+    - id: $$cap_text_generation_timeout_ms
+      label: TEXT_GENERATION_TIMEOUT_MS
+    - id: $$cap_pguser
+      label: PGUSER
+    - id: $$cap_postgres_password
+      label: POSTGRES_PASSWORD
+    - id: $$cap_postgres_db
+      label: POSTGRES_DB
+    - id: $$cap_pgdata
+      label: PGDATA
+    - id: $$cap_sandbox_api_key
+      label: SANDBOX_API_KEY
+    - id: $$cap_sandbox_gin_mode
+      label: SANDBOX_GIN_MODE
+    - id: $$cap_sandbox_worker_timeout
+      label: SANDBOX_WORKER_TIMEOUT
+    - id: $$cap_sandbox_enable_network
+      label: SANDBOX_ENABLE_NETWORK
+    - id: $$cap_sandbox_http_proxy
+      label: SANDBOX_HTTP_PROXY
+    - id: $$cap_sandbox_https_proxy
+      label: SANDBOX_HTTPS_PROXY
+    - id: $$cap_sandbox_port
+      label: SANDBOX_PORT
+    - id: $$cap_weaviate_persistence_data_path
+      label: WEAVIATE_PERSISTENCE_DATA_PATH
+    - id: $$cap_weaviate_query_defaults_limit
+      label: WEAVIATE_QUERY_DEFAULTS_LIMIT
+    - id: $$cap_weaviate_authentication_anonymous_access_enabled
+      label: WEAVIATE_AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED
+    - id: $$cap_weaviate_default_vectorizer_module
+      label: WEAVIATE_DEFAULT_VECTORIZER_MODULE
+    - id: $$cap_weaviate_cluster_hostname
+      label: WEAVIATE_CLUSTER_HOSTNAME
+    - id: $$cap_weaviate_authentication_apikey_enabled
+      label: WEAVIATE_AUTHENTICATION_APIKEY_ENABLED
+    - id: $$cap_weaviate_authentication_apikey_allowed_keys
+      label: WEAVIATE_AUTHENTICATION_APIKEY_ALLOWED_KEYS
+    - id: $$cap_weaviate_authentication_apikey_users
+      label: WEAVIATE_AUTHENTICATION_APIKEY_USERS
+    - id: $$cap_weaviate_authorization_adminlist_enabled
+      label: WEAVIATE_AUTHORIZATION_ADMINLIST_ENABLED
+    - id: $$cap_weaviate_authorization_adminlist_users
+      label: WEAVIATE_AUTHORIZATION_ADMINLIST_USERS
+    - id: $$cap_chroma_server_authn_credentials
+      label: CHROMA_SERVER_AUTHN_CREDENTIALS
+    - id: $$cap_chroma_server_authn_provider
+      label: CHROMA_SERVER_AUTHN_PROVIDER
+    - id: $$cap_chroma_is_persistent
+      label: CHROMA_IS_PERSISTENT
+    - id: $$cap_oracle_pwd
+      label: ORACLE_PWD
+    - id: $$cap_oracle_characterset
+      label: ORACLE_CHARACTERSET
+    - id: $$cap_etcd_auto_compaction_mode
+      label: ETCD_AUTO_COMPACTION_MODE
+    - id: $$cap_etcd_auto_compaction_retention
+      label: ETCD_AUTO_COMPACTION_RETENTION
+    - id: $$cap_etcd_quota_backend_bytes
+      label: ETCD_QUOTA_BACKEND_BYTES
+    - id: $$cap_etcd_snapshot_count
+      label: ETCD_SNAPSHOT_COUNT
+    - id: $$cap_minio_access_key
+      label: MINIO_ACCESS_KEY
+    - id: $$cap_minio_secret_key
+      label: MINIO_SECRET_KEY
+    - id: $$cap_etcd_endpoints
+      label: ETCD_ENDPOINTS
+    - id: $$cap_minio_address
+      label: MINIO_ADDRESS
+    - id: $$cap_milvus_authorization_enabled
+      label: MILVUS_AUTHORIZATION_ENABLED
+    - id: $$cap_pgvector_pguser
+      label: PGVECTOR_PGUSER
+    - id: $$cap_pgvector_postgres_password
+      label: PGVECTOR_POSTGRES_PASSWORD
+    - id: $$cap_pgvector_postgres_db
+      label: PGVECTOR_POSTGRES_DB
+    - id: $$cap_pgvector_pgdata
+      label: PGVECTOR_PGDATA
+    - id: $$cap_opensearch_discovery_type
+      label: OPENSEARCH_DISCOVERY_TYPE
+    - id: $$cap_opensearch_bootstrap_memory_lock
+      label: OPENSEARCH_BOOTSTRAP_MEMORY_LOCK
+    - id: $$cap_opensearch_java_opts_min
+      label: OPENSEARCH_JAVA_OPTS_MIN
+    - id: $$cap_opensearch_java_opts_max
+      label: OPENSEARCH_JAVA_OPTS_MAX
+    - id: $$cap_opensearch_initial_admin_password
+      label: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+    - id: $$cap_opensearch_memlock_soft
+      label: OPENSEARCH_MEMLOCK_SOFT
+    - id: $$cap_opensearch_memlock_hard
+      label: OPENSEARCH_MEMLOCK_HARD
+    - id: $$cap_opensearch_nofile_soft
+      label: OPENSEARCH_NOFILE_SOFT
+    - id: $$cap_opensearch_nofile_hard
+      label: OPENSEARCH_NOFILE_HARD
+    - id: $$cap_nginx_server_name
+      label: NGINX_SERVER_NAME
+    - id: $$cap_nginx_https_enabled
+      label: NGINX_HTTPS_ENABLED
+    - id: $$cap_nginx_port
+      label: NGINX_PORT
+    - id: $$cap_nginx_ssl_port
+      label: NGINX_SSL_PORT
+    - id: $$cap_nginx_ssl_cert_filename
+      label: NGINX_SSL_CERT_FILENAME
+    - id: $$cap_nginx_ssl_cert_key_filename
+      label: NGINX_SSL_CERT_KEY_FILENAME
+    - id: $$cap_nginx_ssl_protocols
+      label: NGINX_SSL_PROTOCOLS
+    - id: $$cap_nginx_worker_processes
+      label: NGINX_WORKER_PROCESSES
+    - id: $$cap_nginx_client_max_body_size
+      label: NGINX_CLIENT_MAX_BODY_SIZE
+    - id: $$cap_nginx_keepalive_timeout
+      label: NGINX_KEEPALIVE_TIMEOUT
+    - id: $$cap_nginx_proxy_read_timeout
+      label: NGINX_PROXY_READ_TIMEOUT
+    - id: $$cap_nginx_proxy_send_timeout
+      label: NGINX_PROXY_SEND_TIMEOUT
+    - id: $$cap_nginx_enable_certbot_challenge
+      label: NGINX_ENABLE_CERTBOT_CHALLENGE
+    - id: $$cap_certbot_email
+      label: CERTBOT_EMAIL
+    - id: $$cap_certbot_domain
+      label: CERTBOT_DOMAIN
+    - id: $$cap_certbot_options
+      label: CERTBOT_OPTIONS
+    - id: $$cap_ssrf_http_port
+      label: SSRF_HTTP_PORT
+    - id: $$cap_ssrf_coredump_dir
+      label: SSRF_COREDUMP_DIR
+    - id: $$cap_ssrf_reverse_proxy_port
+      label: SSRF_REVERSE_PROXY_PORT
+    - id: $$cap_ssrf_sandbox_host
+      label: SSRF_SANDBOX_HOST
+    - id: $$cap_expose_nginx_port
+      label: EXPOSE_NGINX_PORT
+    - id: $$cap_expose_nginx_ssl_port
+      label: EXPOSE_NGINX_SSL_PORT
+    - id: $$cap_position_tool_pins
+      label: POSITION_TOOL_PINS
+    - id: $$cap_position_tool_includes
+      label: POSITION_TOOL_INCLUDES
+    - id: $$cap_position_tool_excludes
+      label: POSITION_TOOL_EXCLUDES
+    - id: $$cap_position_provider_pins
+      label: POSITION_PROVIDER_PINS
+    - id: $$cap_position_provider_includes
+      label: POSITION_PROVIDER_INCLUDES
+    - id: $$cap_position_provider_excludes
+      label: POSITION_PROVIDER_EXCLUDES
+    - id: $$cap_csp_whitelist
+      label: CSP_WHITELIST
+    - id: $$cap_create_tidb_service_job_enabled
+      label: CREATE_TIDB_SERVICE_JOB_ENABLED
+    - id: $$cap_max_submit_count
+      label: MAX_SUBMIT_COUNT
+    - id: $$cap_top_k_max_value
+      label: TOP_K_MAX_VALUE
+    - id: $$cap_langgenius_difyweb_version
+      label: langgenius/dify-web version
+      defaultValue: 0.15.2
+    - id: $$cap_next_telemetry_disabled
+      label: NEXT_TELEMETRY_DISABLED
+    - id: $$cap_postgres_version
+      label: postgres version
+      defaultValue: 15-alpine
+    - id: $$cap_redis_version
+      label: redis version
+      defaultValue: 6-alpine
+    - id: $$cap_rediscli_auth
+      label: REDISCLI_AUTH
+    - id: $$cap_langgenius_difysandbox_version
+      label: langgenius/dify-sandbox version
+      defaultValue: 0.2.10
+    - id: $$cap_api_key
+      label: API_KEY
+    - id: $$cap_gin_mode
+      label: GIN_MODE
+    - id: $$cap_worker_timeout
+      label: WORKER_TIMEOUT
+    - id: $$cap_enable_network
+      label: ENABLE_NETWORK
+    - id: $$cap_http_proxy
+      label: HTTP_PROXY
+    - id: $$cap_https_proxy
+      label: HTTPS_PROXY
+    - id: $$cap_pingcap_tidb_version
+      label: pingcap/tidb version
+      defaultValue: v8.4.0
+    - id: $$cap_semitechnologies_weaviate_version
+      label: semitechnologies/weaviate version
+      defaultValue: 1.19.0
+    - id: $$cap_persistence_data_path
+      label: PERSISTENCE_DATA_PATH
+    - id: $$cap_query_defaults_limit
+      label: QUERY_DEFAULTS_LIMIT
+    - id: $$cap_authentication_anonymous_access_enabled
+      label: AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED
+    - id: $$cap_default_vectorizer_module
+      label: DEFAULT_VECTORIZER_MODULE
+    - id: $$cap_cluster_hostname
+      label: CLUSTER_HOSTNAME
+    - id: $$cap_authentication_apikey_enabled
+      label: AUTHENTICATION_APIKEY_ENABLED
+    - id: $$cap_authentication_apikey_allowed_keys
+      label: AUTHENTICATION_APIKEY_ALLOWED_KEYS
+    - id: $$cap_authentication_apikey_users
+      label: AUTHENTICATION_APIKEY_USERS
+    - id: $$cap_authorization_adminlist_enabled
+      label: AUTHORIZATION_ADMINLIST_ENABLED
+    - id: $$cap_authorization_adminlist_users
+      label: AUTHORIZATION_ADMINLIST_USERS
+    - id: $$cap_langgenius_qdrant_version
+      label: langgenius/qdrant version
+      defaultValue: v1.7.3
+    - id: $$cap_cluster_name
+      label: CLUSTER_NAME
+      defaultValue: dify_search
+    - id: $$cap_couchbase_administrator_username
+      label: COUCHBASE_ADMINISTRATOR_USERNAME
+    - id: $$cap_couchbase_administrator_password
+      label: COUCHBASE_ADMINISTRATOR_PASSWORD
+    - id: $$cap_couchbase_bucket
+      label: COUCHBASE_BUCKET
+    - id: $$cap_couchbase_bucket_ramsize
+      label: COUCHBASE_BUCKET_RAMSIZE
+      defaultValue: "512"
+    - id: $$cap_couchbase_ram_size
+      label: COUCHBASE_RAM_SIZE
+      defaultValue: "2048"
+    - id: $$cap_couchbase_eventing_ram_size
+      label: COUCHBASE_EVENTING_RAM_SIZE
+      defaultValue: "512"
+    - id: $$cap_couchbase_index_ram_size
+      label: COUCHBASE_INDEX_RAM_SIZE
+      defaultValue: "512"
+    - id: $$cap_couchbase_fts_ram_size
+      label: COUCHBASE_FTS_RAM_SIZE
+      defaultValue: "1024"
+    - id: $$cap_pgvector_pgvector_version
+      label: pgvector/pgvector version
+      defaultValue: pg16
+    - id: $$cap_tensorchord_pgvectors_version
+      label: tensorchord/pgvecto-rs version
+      defaultValue: pg16-v0.3.0
+    - id: $$cap_ghcrio_chromacore_chroma_version
+      label: ghcr.io/chroma-core/chroma version
+      defaultValue: 0.5.20
+    - id: $$cap_is_persistent
+      label: IS_PERSISTENT
+    - id: $$cap_quayio_oceanbase_oceanbasece_version
+      label: quay.io/oceanbase/oceanbase-ce version
+      defaultValue: 4.3.3.0-100000142024101215
+    - id: $$cap_ob_memory_limit
+      label: OB_MEMORY_LIMIT
+    - id: $$cap_ob_sys_password
+      label: OB_SYS_PASSWORD
+    - id: $$cap_ob_tenant_password
+      label: OB_TENANT_PASSWORD
+    - id: $$cap_ob_cluster_name
+      label: OB_CLUSTER_NAME
+    - id: $$cap_ob_server_ip
+      label: OB_SERVER_IP
+      defaultValue: 127.0.0.1
+    - id: $$cap_containerregistryoraclecom_database_free_version
+      label: container-registry.oracle.com/database/free version
+      defaultValue: latest
+    - id: $$cap_quayio_coreos_etcd_version
+      label: quay.io/coreos/etcd version
+      defaultValue: v3.5.5
+    - id: $$cap_minio_minio_version
+      label: minio/minio version
+      defaultValue: RELEASE.2023-03-20T20-16-18Z
+    - id: $$cap_milvusdb_milvus_version
+      label: milvusdb/milvus version
+      defaultValue: v2.5.0-beta
+    - id: $$cap_commonsecurityauthorizationenabled
+      label: common.security.authorizationEnabled
+    - id: $$cap_opensearchproject_opensearch_version
+      label: opensearchproject/opensearch version
+      defaultValue: latest
+    - id: $$cap_discoverytype
+      label: discovery.type
+    - id: $$cap_bootstrapmemory_lock
+      label: bootstrap.memory_lock
+    - id: $$cap_opensearch_java_opts
+      label: OPENSEARCH_JAVA_OPTS
+      defaultValue: -Xms${OPENSEARCH_JAVA_OPTS_MIN:-512m}
+        -Xmx${OPENSEARCH_JAVA_OPTS_MAX:-1024m}
+    - id: $$cap_opensearchproject_opensearchdashboards_version
+      label: opensearchproject/opensearch-dashboards version
+      defaultValue: latest
+    - id: $$cap_opensearch_hosts
+      label: OPENSEARCH_HOSTS
+      defaultValue: '["https://opensearch:9200"]'
+    - id: $$cap_myscale_myscaledb_version
+      label: myscale/myscaledb version
+      defaultValue: 1.6.4
+    - id: $$cap_dockerelasticco_elasticsearch_elasticsearch_version
+      label: docker.elastic.co/elasticsearch/elasticsearch version
+      defaultValue: 8.14.3
+    - id: $$cap_elastic_password
+      label: ELASTIC_PASSWORD
+    - id: $$cap_clustername
+      label: cluster.name
+      defaultValue: dify-es-cluster
+    - id: $$cap_nodename
+      label: node.name
+      defaultValue: dify-es0
+    - id: $$cap_xpacklicenseself_generatedtype
+      label: xpack.license.self_generated.type
+      defaultValue: basic
+    - id: $$cap_xpacksecurityenabled
+      label: xpack.security.enabled
+      defaultValue: "true"
+    - id: $$cap_xpacksecurityenrollmentenabled
+      label: xpack.security.enrollment.enabled
+      defaultValue: "false"
+    - id: $$cap_xpacksecurityhttpsslenabled
+      label: xpack.security.http.ssl.enabled
+      defaultValue: "false"
+    - id: $$cap_dockerelasticco_kibana_kibana_version
+      label: docker.elastic.co/kibana/kibana version
+      defaultValue: 8.14.3
+    - id: $$cap_xpack_encryptedsavedobjects_encryptionkey
+      label: XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY
+      defaultValue: d1a66dfd-c4d3-4a0a-8290-2abcb83ab3aa
+    - id: $$cap_no_proxy
+      label: NO_PROXY
+      defaultValue: localhost,127.0.0.1,elasticsearch,kibana
+    - id: $$cap_xpack_security_enabled
+      label: XPACK_SECURITY_ENABLED
+      defaultValue: "true"
+    - id: $$cap_xpack_security_enrollment_enabled
+      label: XPACK_SECURITY_ENROLLMENT_ENABLED
+      defaultValue: "false"
+    - id: $$cap_xpack_security_http_ssl_enabled
+      label: XPACK_SECURITY_HTTP_SSL_ENABLED
+      defaultValue: "false"
+    - id: $$cap_xpack_fleet_isairgapped
+      label: XPACK_FLEET_ISAIRGAPPED
+      defaultValue: "true"
+    - id: $$cap_i18n_locale
+      label: I18N_LOCALE
+      defaultValue: zh-CN
+    - id: $$cap_server_port
+      label: SERVER_PORT
+      defaultValue: "5601"
+    - id: $$cap_elasticsearch_hosts
+      label: ELASTICSEARCH_HOSTS
+      defaultValue: http://elasticsearch:9200
+    - id: $$cap_downloadsunstructuredio_unstructuredio_unstructuredapi_version
+      label: downloads.unstructured.io/unstructured-io/unstructured-api version
+      defaultValue: latest
+services:
+  $$cap_appname-api:
+    image: langgenius/dify-api:$$cap_langgenius_difyapi_version
+    environment:
+      MODE: api
+      SENTRY_DSN: $$cap_sentry_dsn
+      SENTRY_TRACES_SAMPLE_RATE: $$cap_sentry_traces_sample_rate
+      SENTRY_PROFILES_SAMPLE_RATE: $$cap_sentry_profiles_sample_rate
+      CONSOLE_API_URL: $$cap_console_api_url
+      CONSOLE_WEB_URL: $$cap_console_web_url
+      SERVICE_API_URL: $$cap_service_api_url
+      APP_API_URL: $$cap_app_api_url
+      APP_WEB_URL: $$cap_app_web_url
+      FILES_URL: $$cap_files_url
+      LOG_LEVEL: $$cap_log_level
+      LOG_FILE: $$cap_log_file
+      LOG_FILE_MAX_SIZE: $$cap_log_file_max_size
+      LOG_FILE_BACKUP_COUNT: $$cap_log_file_backup_count
+      LOG_DATEFORMAT: $$cap_log_dateformat
+      LOG_TZ: $$cap_log_tz
+      DEBUG: $$cap_debug
+      FLASK_DEBUG: $$cap_flask_debug
+      SECRET_KEY: $$cap_secret_key
+      INIT_PASSWORD: $$cap_init_password
+      DEPLOY_ENV: $$cap_deploy_env
+      CHECK_UPDATE_URL: $$cap_check_update_url
+      OPENAI_API_BASE: $$cap_openai_api_base
+      MIGRATION_ENABLED: $$cap_migration_enabled
+      FILES_ACCESS_TIMEOUT: $$cap_files_access_timeout
+      ACCESS_TOKEN_EXPIRE_MINUTES: $$cap_access_token_expire_minutes
+      REFRESH_TOKEN_EXPIRE_DAYS: $$cap_refresh_token_expire_days
+      APP_MAX_ACTIVE_REQUESTS: $$cap_app_max_active_requests
+      APP_MAX_EXECUTION_TIME: $$cap_app_max_execution_time
+      DIFY_BIND_ADDRESS: $$cap_dify_bind_address
+      DIFY_PORT: $$cap_dify_port
+      SERVER_WORKER_AMOUNT: $$cap_server_worker_amount
+      SERVER_WORKER_CLASS: $$cap_server_worker_class
+      SERVER_WORKER_CONNECTIONS: $$cap_server_worker_connections
+      CELERY_WORKER_CLASS: $$cap_celery_worker_class
+      GUNICORN_TIMEOUT: $$cap_gunicorn_timeout
+      CELERY_WORKER_AMOUNT: $$cap_celery_worker_amount
+      CELERY_AUTO_SCALE: $$cap_celery_auto_scale
+      CELERY_MAX_WORKERS: $$cap_celery_max_workers
+      CELERY_MIN_WORKERS: $$cap_celery_min_workers
+      API_TOOL_DEFAULT_CONNECT_TIMEOUT: $$cap_api_tool_default_connect_timeout
+      API_TOOL_DEFAULT_READ_TIMEOUT: $$cap_api_tool_default_read_timeout
+      DB_USERNAME: $$cap_db_username
+      DB_PASSWORD: $$cap_db_password
+      DB_HOST: $$cap_db_host
+      DB_PORT: $$cap_db_port
+      DB_DATABASE: $$cap_db_database
+      SQLALCHEMY_POOL_SIZE: $$cap_sqlalchemy_pool_size
+      SQLALCHEMY_POOL_RECYCLE: $$cap_sqlalchemy_pool_recycle
+      SQLALCHEMY_ECHO: $$cap_sqlalchemy_echo
+      POSTGRES_MAX_CONNECTIONS: $$cap_postgres_max_connections
+      POSTGRES_SHARED_BUFFERS: $$cap_postgres_shared_buffers
+      POSTGRES_WORK_MEM: $$cap_postgres_work_mem
+      POSTGRES_MAINTENANCE_WORK_MEM: $$cap_postgres_maintenance_work_mem
+      POSTGRES_EFFECTIVE_CACHE_SIZE: $$cap_postgres_effective_cache_size
+      REDIS_HOST: $$cap_redis_host
+      REDIS_PORT: $$cap_redis_port
+      REDIS_USERNAME: $$cap_redis_username
+      REDIS_PASSWORD: $$cap_redis_password
+      REDIS_USE_SSL: $$cap_redis_use_ssl
+      REDIS_DB: $$cap_redis_db
+      REDIS_USE_SENTINEL: $$cap_redis_use_sentinel
+      REDIS_SENTINELS: $$cap_redis_sentinels
+      REDIS_SENTINEL_SERVICE_NAME: $$cap_redis_sentinel_service_name
+      REDIS_SENTINEL_USERNAME: $$cap_redis_sentinel_username
+      REDIS_SENTINEL_PASSWORD: $$cap_redis_sentinel_password
+      REDIS_SENTINEL_SOCKET_TIMEOUT: $$cap_redis_sentinel_socket_timeout
+      REDIS_USE_CLUSTERS: $$cap_redis_use_clusters
+      REDIS_CLUSTERS: $$cap_redis_clusters
+      REDIS_CLUSTERS_PASSWORD: $$cap_redis_clusters_password
+      CELERY_BROKER_URL: $$cap_celery_broker_url
+      BROKER_USE_SSL: $$cap_broker_use_ssl
+      CELERY_USE_SENTINEL: $$cap_celery_use_sentinel
+      CELERY_SENTINEL_MASTER_NAME: $$cap_celery_sentinel_master_name
+      CELERY_SENTINEL_SOCKET_TIMEOUT: $$cap_celery_sentinel_socket_timeout
+      WEB_API_CORS_ALLOW_ORIGINS: $$cap_web_api_cors_allow_origins
+      CONSOLE_CORS_ALLOW_ORIGINS: $$cap_console_cors_allow_origins
+      STORAGE_TYPE: $$cap_storage_type
+      OPENDAL_SCHEME: $$cap_opendal_scheme
+      OPENDAL_FS_ROOT: $$cap_opendal_fs_root
+      S3_ENDPOINT: $$cap_s3_endpoint
+      S3_REGION: $$cap_s3_region
+      S3_BUCKET_NAME: $$cap_s3_bucket_name
+      S3_ACCESS_KEY: $$cap_s3_access_key
+      S3_SECRET_KEY: $$cap_s3_secret_key
+      S3_USE_AWS_MANAGED_IAM: $$cap_s3_use_aws_managed_iam
+      AZURE_BLOB_ACCOUNT_NAME: $$cap_azure_blob_account_name
+      AZURE_BLOB_ACCOUNT_KEY: $$cap_azure_blob_account_key
+      AZURE_BLOB_CONTAINER_NAME: $$cap_azure_blob_container_name
+      AZURE_BLOB_ACCOUNT_URL: $$cap_azure_blob_account_url
+      GOOGLE_STORAGE_BUCKET_NAME: $$cap_google_storage_bucket_name
+      GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64: $$cap_google_storage_service_account_json_base64
+      ALIYUN_OSS_BUCKET_NAME: $$cap_aliyun_oss_bucket_name
+      ALIYUN_OSS_ACCESS_KEY: $$cap_aliyun_oss_access_key
+      ALIYUN_OSS_SECRET_KEY: $$cap_aliyun_oss_secret_key
+      ALIYUN_OSS_ENDPOINT: $$cap_aliyun_oss_endpoint
+      ALIYUN_OSS_REGION: $$cap_aliyun_oss_region
+      ALIYUN_OSS_AUTH_VERSION: $$cap_aliyun_oss_auth_version
+      ALIYUN_OSS_PATH: $$cap_aliyun_oss_path
+      TENCENT_COS_BUCKET_NAME: $$cap_tencent_cos_bucket_name
+      TENCENT_COS_SECRET_KEY: $$cap_tencent_cos_secret_key
+      TENCENT_COS_SECRET_ID: $$cap_tencent_cos_secret_id
+      TENCENT_COS_REGION: $$cap_tencent_cos_region
+      TENCENT_COS_SCHEME: $$cap_tencent_cos_scheme
+      OCI_ENDPOINT: $$cap_oci_endpoint
+      OCI_BUCKET_NAME: $$cap_oci_bucket_name
+      OCI_ACCESS_KEY: $$cap_oci_access_key
+      OCI_SECRET_KEY: $$cap_oci_secret_key
+      OCI_REGION: $$cap_oci_region
+      HUAWEI_OBS_BUCKET_NAME: $$cap_huawei_obs_bucket_name
+      HUAWEI_OBS_SECRET_KEY: $$cap_huawei_obs_secret_key
+      HUAWEI_OBS_ACCESS_KEY: $$cap_huawei_obs_access_key
+      HUAWEI_OBS_SERVER: $$cap_huawei_obs_server
+      VOLCENGINE_TOS_BUCKET_NAME: $$cap_volcengine_tos_bucket_name
+      VOLCENGINE_TOS_SECRET_KEY: $$cap_volcengine_tos_secret_key
+      VOLCENGINE_TOS_ACCESS_KEY: $$cap_volcengine_tos_access_key
+      VOLCENGINE_TOS_ENDPOINT: $$cap_volcengine_tos_endpoint
+      VOLCENGINE_TOS_REGION: $$cap_volcengine_tos_region
+      BAIDU_OBS_BUCKET_NAME: $$cap_baidu_obs_bucket_name
+      BAIDU_OBS_SECRET_KEY: $$cap_baidu_obs_secret_key
+      BAIDU_OBS_ACCESS_KEY: $$cap_baidu_obs_access_key
+      BAIDU_OBS_ENDPOINT: $$cap_baidu_obs_endpoint
+      SUPABASE_BUCKET_NAME: $$cap_supabase_bucket_name
+      SUPABASE_API_KEY: $$cap_supabase_api_key
+      SUPABASE_URL: $$cap_supabase_url
+      VECTOR_STORE: $$cap_vector_store
+      WEAVIATE_ENDPOINT: $$cap_weaviate_endpoint
+      WEAVIATE_API_KEY: $$cap_weaviate_api_key
+      QDRANT_URL: $$cap_qdrant_url
+      QDRANT_API_KEY: $$cap_qdrant_api_key
+      QDRANT_CLIENT_TIMEOUT: $$cap_qdrant_client_timeout
+      QDRANT_GRPC_ENABLED: $$cap_qdrant_grpc_enabled
+      QDRANT_GRPC_PORT: $$cap_qdrant_grpc_port
+      MILVUS_URI: $$cap_milvus_uri
+      MILVUS_TOKEN: $$cap_milvus_token
+      MILVUS_USER: $$cap_milvus_user
+      MILVUS_PASSWORD: $$cap_milvus_password
+      MILVUS_ENABLE_HYBRID_SEARCH: $$cap_milvus_enable_hybrid_search
+      MYSCALE_HOST: $$cap_myscale_host
+      MYSCALE_PORT: $$cap_myscale_port
+      MYSCALE_USER: $$cap_myscale_user
+      MYSCALE_PASSWORD: $$cap_myscale_password
+      MYSCALE_DATABASE: $$cap_myscale_database
+      MYSCALE_FTS_PARAMS: $$cap_myscale_fts_params
+      COUCHBASE_CONNECTION_STRING: $$cap_couchbase_connection_string
+      COUCHBASE_USER: $$cap_couchbase_user
+      COUCHBASE_PASSWORD: $$cap_couchbase_password
+      COUCHBASE_BUCKET_NAME: $$cap_couchbase_bucket_name
+      COUCHBASE_SCOPE_NAME: $$cap_couchbase_scope_name
+      PGVECTOR_HOST: $$cap_pgvector_host
+      PGVECTOR_PORT: $$cap_pgvector_port
+      PGVECTOR_USER: $$cap_pgvector_user
+      PGVECTOR_PASSWORD: $$cap_pgvector_password
+      PGVECTOR_DATABASE: $$cap_pgvector_database
+      PGVECTOR_MIN_CONNECTION: $$cap_pgvector_min_connection
+      PGVECTOR_MAX_CONNECTION: $$cap_pgvector_max_connection
+      PGVECTO_RS_HOST: $$cap_pgvecto_rs_host
+      PGVECTO_RS_PORT: $$cap_pgvecto_rs_port
+      PGVECTO_RS_USER: $$cap_pgvecto_rs_user
+      PGVECTO_RS_PASSWORD: $$cap_pgvecto_rs_password
+      PGVECTO_RS_DATABASE: $$cap_pgvecto_rs_database
+      ANALYTICDB_KEY_ID: $$cap_analyticdb_key_id
+      ANALYTICDB_KEY_SECRET: $$cap_analyticdb_key_secret
+      ANALYTICDB_REGION_ID: $$cap_analyticdb_region_id
+      ANALYTICDB_INSTANCE_ID: $$cap_analyticdb_instance_id
+      ANALYTICDB_ACCOUNT: $$cap_analyticdb_account
+      ANALYTICDB_PASSWORD: $$cap_analyticdb_password
+      ANALYTICDB_NAMESPACE: $$cap_analyticdb_namespace
+      ANALYTICDB_NAMESPACE_PASSWORD: $$cap_analyticdb_namespace_password
+      ANALYTICDB_HOST: $$cap_analyticdb_host
+      ANALYTICDB_PORT: $$cap_analyticdb_port
+      ANALYTICDB_MIN_CONNECTION: $$cap_analyticdb_min_connection
+      ANALYTICDB_MAX_CONNECTION: $$cap_analyticdb_max_connection
+      TIDB_VECTOR_HOST: $$cap_tidb_vector_host
+      TIDB_VECTOR_PORT: $$cap_tidb_vector_port
+      TIDB_VECTOR_USER: $$cap_tidb_vector_user
+      TIDB_VECTOR_PASSWORD: $$cap_tidb_vector_password
+      TIDB_VECTOR_DATABASE: $$cap_tidb_vector_database
+      TIDB_ON_QDRANT_URL: $$cap_tidb_on_qdrant_url
+      TIDB_ON_QDRANT_API_KEY: $$cap_tidb_on_qdrant_api_key
+      TIDB_ON_QDRANT_CLIENT_TIMEOUT: $$cap_tidb_on_qdrant_client_timeout
+      TIDB_ON_QDRANT_GRPC_ENABLED: $$cap_tidb_on_qdrant_grpc_enabled
+      TIDB_ON_QDRANT_GRPC_PORT: $$cap_tidb_on_qdrant_grpc_port
+      TIDB_PUBLIC_KEY: $$cap_tidb_public_key
+      TIDB_PRIVATE_KEY: $$cap_tidb_private_key
+      TIDB_API_URL: $$cap_tidb_api_url
+      TIDB_IAM_API_URL: $$cap_tidb_iam_api_url
+      TIDB_REGION: $$cap_tidb_region
+      TIDB_PROJECT_ID: $$cap_tidb_project_id
+      TIDB_SPEND_LIMIT: $$cap_tidb_spend_limit
+      CHROMA_HOST: $$cap_chroma_host
+      CHROMA_PORT: $$cap_chroma_port
+      CHROMA_TENANT: $$cap_chroma_tenant
+      CHROMA_DATABASE: $$cap_chroma_database
+      CHROMA_AUTH_PROVIDER: $$cap_chroma_auth_provider
+      CHROMA_AUTH_CREDENTIALS: $$cap_chroma_auth_credentials
+      ORACLE_HOST: $$cap_oracle_host
+      ORACLE_PORT: $$cap_oracle_port
+      ORACLE_USER: $$cap_oracle_user
+      ORACLE_PASSWORD: $$cap_oracle_password
+      ORACLE_DATABASE: $$cap_oracle_database
+      RELYT_HOST: $$cap_relyt_host
+      RELYT_PORT: $$cap_relyt_port
+      RELYT_USER: $$cap_relyt_user
+      RELYT_PASSWORD: $$cap_relyt_password
+      RELYT_DATABASE: $$cap_relyt_database
+      OPENSEARCH_HOST: $$cap_opensearch_host
+      OPENSEARCH_PORT: $$cap_opensearch_port
+      OPENSEARCH_USER: $$cap_opensearch_user
+      OPENSEARCH_PASSWORD: $$cap_opensearch_password
+      OPENSEARCH_SECURE: $$cap_opensearch_secure
+      TENCENT_VECTOR_DB_URL: $$cap_tencent_vector_db_url
+      TENCENT_VECTOR_DB_API_KEY: $$cap_tencent_vector_db_api_key
+      TENCENT_VECTOR_DB_TIMEOUT: $$cap_tencent_vector_db_timeout
+      TENCENT_VECTOR_DB_USERNAME: $$cap_tencent_vector_db_username
+      TENCENT_VECTOR_DB_DATABASE: $$cap_tencent_vector_db_database
+      TENCENT_VECTOR_DB_SHARD: $$cap_tencent_vector_db_shard
+      TENCENT_VECTOR_DB_REPLICAS: $$cap_tencent_vector_db_replicas
+      ELASTICSEARCH_HOST: $$cap_elasticsearch_host
+      ELASTICSEARCH_PORT: $$cap_elasticsearch_port
+      ELASTICSEARCH_USERNAME: $$cap_elasticsearch_username
+      ELASTICSEARCH_PASSWORD: $$cap_elasticsearch_password
+      KIBANA_PORT: $$cap_kibana_port
+      BAIDU_VECTOR_DB_ENDPOINT: $$cap_baidu_vector_db_endpoint
+      BAIDU_VECTOR_DB_CONNECTION_TIMEOUT_MS: $$cap_baidu_vector_db_connection_timeout_ms
+      BAIDU_VECTOR_DB_ACCOUNT: $$cap_baidu_vector_db_account
+      BAIDU_VECTOR_DB_API_KEY: $$cap_baidu_vector_db_api_key
+      BAIDU_VECTOR_DB_DATABASE: $$cap_baidu_vector_db_database
+      BAIDU_VECTOR_DB_SHARD: $$cap_baidu_vector_db_shard
+      BAIDU_VECTOR_DB_REPLICAS: $$cap_baidu_vector_db_replicas
+      VIKINGDB_ACCESS_KEY: $$cap_vikingdb_access_key
+      VIKINGDB_SECRET_KEY: $$cap_vikingdb_secret_key
+      VIKINGDB_REGION: $$cap_vikingdb_region
+      VIKINGDB_HOST: $$cap_vikingdb_host
+      VIKINGDB_SCHEMA: $$cap_vikingdb_schema
+      VIKINGDB_CONNECTION_TIMEOUT: $$cap_vikingdb_connection_timeout
+      VIKINGDB_SOCKET_TIMEOUT: $$cap_vikingdb_socket_timeout
+      LINDORM_URL: $$cap_lindorm_url
+      LINDORM_USERNAME: $$cap_lindorm_username
+      LINDORM_PASSWORD: $$cap_lindorm_password
+      OCEANBASE_VECTOR_HOST: $$cap_oceanbase_vector_host
+      OCEANBASE_VECTOR_PORT: $$cap_oceanbase_vector_port
+      OCEANBASE_VECTOR_USER: $$cap_oceanbase_vector_user
+      OCEANBASE_VECTOR_PASSWORD: $$cap_oceanbase_vector_password
+      OCEANBASE_VECTOR_DATABASE: $$cap_oceanbase_vector_database
+      OCEANBASE_CLUSTER_NAME: $$cap_oceanbase_cluster_name
+      OCEANBASE_MEMORY_LIMIT: $$cap_oceanbase_memory_limit
+      UPSTASH_VECTOR_URL: $$cap_upstash_vector_url
+      UPSTASH_VECTOR_TOKEN: $$cap_upstash_vector_token
+      UPLOAD_FILE_SIZE_LIMIT: $$cap_upload_file_size_limit
+      UPLOAD_FILE_BATCH_LIMIT: $$cap_upload_file_batch_limit
+      ETL_TYPE: $$cap_etl_type
+      UNSTRUCTURED_API_URL: $$cap_unstructured_api_url
+      UNSTRUCTURED_API_KEY: $$cap_unstructured_api_key
+      SCARF_NO_ANALYTICS: $$cap_scarf_no_analytics
+      PROMPT_GENERATION_MAX_TOKENS: $$cap_prompt_generation_max_tokens
+      CODE_GENERATION_MAX_TOKENS: $$cap_code_generation_max_tokens
+      MULTIMODAL_SEND_FORMAT: $$cap_multimodal_send_format
+      UPLOAD_IMAGE_FILE_SIZE_LIMIT: $$cap_upload_image_file_size_limit
+      UPLOAD_VIDEO_FILE_SIZE_LIMIT: $$cap_upload_video_file_size_limit
+      UPLOAD_AUDIO_FILE_SIZE_LIMIT: $$cap_upload_audio_file_size_limit
+      API_SENTRY_DSN: $$cap_api_sentry_dsn
+      API_SENTRY_TRACES_SAMPLE_RATE: $$cap_api_sentry_traces_sample_rate
+      API_SENTRY_PROFILES_SAMPLE_RATE: $$cap_api_sentry_profiles_sample_rate
+      WEB_SENTRY_DSN: $$cap_web_sentry_dsn
+      NOTION_INTEGRATION_TYPE: $$cap_notion_integration_type
+      NOTION_CLIENT_SECRET: $$cap_notion_client_secret
+      NOTION_CLIENT_ID: $$cap_notion_client_id
+      NOTION_INTERNAL_SECRET: $$cap_notion_internal_secret
+      MAIL_TYPE: $$cap_mail_type
+      MAIL_DEFAULT_SEND_FROM: $$cap_mail_default_send_from
+      RESEND_API_URL: $$cap_resend_api_url
+      RESEND_API_KEY: $$cap_resend_api_key
+      SMTP_SERVER: $$cap_smtp_server
+      SMTP_PORT: $$cap_smtp_port
+      SMTP_USERNAME: $$cap_smtp_username
+      SMTP_PASSWORD: $$cap_smtp_password
+      SMTP_USE_TLS: $$cap_smtp_use_tls
+      SMTP_OPPORTUNISTIC_TLS: $$cap_smtp_opportunistic_tls
+      INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH: $$cap_indexing_max_segmentation_tokens_length
+      INVITE_EXPIRY_HOURS: $$cap_invite_expiry_hours
+      RESET_PASSWORD_TOKEN_EXPIRY_MINUTES: $$cap_reset_password_token_expiry_minutes
+      CODE_EXECUTION_ENDPOINT: $$cap_code_execution_endpoint
+      CODE_EXECUTION_API_KEY: $$cap_code_execution_api_key
+      CODE_MAX_NUMBER: $$cap_code_max_number
+      CODE_MIN_NUMBER: $$cap_code_min_number
+      CODE_MAX_DEPTH: $$cap_code_max_depth
+      CODE_MAX_PRECISION: $$cap_code_max_precision
+      CODE_MAX_STRING_LENGTH: $$cap_code_max_string_length
+      CODE_MAX_STRING_ARRAY_LENGTH: $$cap_code_max_string_array_length
+      CODE_MAX_OBJECT_ARRAY_LENGTH: $$cap_code_max_object_array_length
+      CODE_MAX_NUMBER_ARRAY_LENGTH: $$cap_code_max_number_array_length
+      CODE_EXECUTION_CONNECT_TIMEOUT: $$cap_code_execution_connect_timeout
+      CODE_EXECUTION_READ_TIMEOUT: $$cap_code_execution_read_timeout
+      CODE_EXECUTION_WRITE_TIMEOUT: $$cap_code_execution_write_timeout
+      TEMPLATE_TRANSFORM_MAX_LENGTH: $$cap_template_transform_max_length
+      WORKFLOW_MAX_EXECUTION_STEPS: $$cap_workflow_max_execution_steps
+      WORKFLOW_MAX_EXECUTION_TIME: $$cap_workflow_max_execution_time
+      WORKFLOW_CALL_MAX_DEPTH: $$cap_workflow_call_max_depth
+      MAX_VARIABLE_SIZE: $$cap_max_variable_size
+      WORKFLOW_PARALLEL_DEPTH_LIMIT: $$cap_workflow_parallel_depth_limit
+      WORKFLOW_FILE_UPLOAD_LIMIT: $$cap_workflow_file_upload_limit
+      HTTP_REQUEST_NODE_MAX_BINARY_SIZE: $$cap_http_request_node_max_binary_size
+      HTTP_REQUEST_NODE_MAX_TEXT_SIZE: $$cap_http_request_node_max_text_size
+      SSRF_PROXY_HTTP_URL: $$cap_ssrf_proxy_http_url
+      SSRF_PROXY_HTTPS_URL: $$cap_ssrf_proxy_https_url
+      TEXT_GENERATION_TIMEOUT_MS: $$cap_text_generation_timeout_ms
+      PGUSER: $$cap_pguser
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
+      PGDATA: $$cap_pgdata
+      SANDBOX_API_KEY: $$cap_sandbox_api_key
+      SANDBOX_GIN_MODE: $$cap_sandbox_gin_mode
+      SANDBOX_WORKER_TIMEOUT: $$cap_sandbox_worker_timeout
+      SANDBOX_ENABLE_NETWORK: $$cap_sandbox_enable_network
+      SANDBOX_HTTP_PROXY: $$cap_sandbox_http_proxy
+      SANDBOX_HTTPS_PROXY: $$cap_sandbox_https_proxy
+      SANDBOX_PORT: $$cap_sandbox_port
+      WEAVIATE_PERSISTENCE_DATA_PATH: $$cap_weaviate_persistence_data_path
+      WEAVIATE_QUERY_DEFAULTS_LIMIT: $$cap_weaviate_query_defaults_limit
+      WEAVIATE_AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: $$cap_weaviate_authentication_anonymous_access_enabled
+      WEAVIATE_DEFAULT_VECTORIZER_MODULE: $$cap_weaviate_default_vectorizer_module
+      WEAVIATE_CLUSTER_HOSTNAME: $$cap_weaviate_cluster_hostname
+      WEAVIATE_AUTHENTICATION_APIKEY_ENABLED: $$cap_weaviate_authentication_apikey_enabled
+      WEAVIATE_AUTHENTICATION_APIKEY_ALLOWED_KEYS: $$cap_weaviate_authentication_apikey_allowed_keys
+      WEAVIATE_AUTHENTICATION_APIKEY_USERS: $$cap_weaviate_authentication_apikey_users
+      WEAVIATE_AUTHORIZATION_ADMINLIST_ENABLED: $$cap_weaviate_authorization_adminlist_enabled
+      WEAVIATE_AUTHORIZATION_ADMINLIST_USERS: $$cap_weaviate_authorization_adminlist_users
+      CHROMA_SERVER_AUTHN_CREDENTIALS: $$cap_chroma_server_authn_credentials
+      CHROMA_SERVER_AUTHN_PROVIDER: $$cap_chroma_server_authn_provider
+      CHROMA_IS_PERSISTENT: $$cap_chroma_is_persistent
+      ORACLE_PWD: $$cap_oracle_pwd
+      ORACLE_CHARACTERSET: $$cap_oracle_characterset
+      ETCD_AUTO_COMPACTION_MODE: $$cap_etcd_auto_compaction_mode
+      ETCD_AUTO_COMPACTION_RETENTION: $$cap_etcd_auto_compaction_retention
+      ETCD_QUOTA_BACKEND_BYTES: $$cap_etcd_quota_backend_bytes
+      ETCD_SNAPSHOT_COUNT: $$cap_etcd_snapshot_count
+      MINIO_ACCESS_KEY: $$cap_minio_access_key
+      MINIO_SECRET_KEY: $$cap_minio_secret_key
+      ETCD_ENDPOINTS: $$cap_etcd_endpoints
+      MINIO_ADDRESS: $$cap_minio_address
+      MILVUS_AUTHORIZATION_ENABLED: $$cap_milvus_authorization_enabled
+      PGVECTOR_PGUSER: $$cap_pgvector_pguser
+      PGVECTOR_POSTGRES_PASSWORD: $$cap_pgvector_postgres_password
+      PGVECTOR_POSTGRES_DB: $$cap_pgvector_postgres_db
+      PGVECTOR_PGDATA: $$cap_pgvector_pgdata
+      OPENSEARCH_DISCOVERY_TYPE: $$cap_opensearch_discovery_type
+      OPENSEARCH_BOOTSTRAP_MEMORY_LOCK: $$cap_opensearch_bootstrap_memory_lock
+      OPENSEARCH_JAVA_OPTS_MIN: $$cap_opensearch_java_opts_min
+      OPENSEARCH_JAVA_OPTS_MAX: $$cap_opensearch_java_opts_max
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: $$cap_opensearch_initial_admin_password
+      OPENSEARCH_MEMLOCK_SOFT: $$cap_opensearch_memlock_soft
+      OPENSEARCH_MEMLOCK_HARD: $$cap_opensearch_memlock_hard
+      OPENSEARCH_NOFILE_SOFT: $$cap_opensearch_nofile_soft
+      OPENSEARCH_NOFILE_HARD: $$cap_opensearch_nofile_hard
+      NGINX_SERVER_NAME: $$cap_nginx_server_name
+      NGINX_HTTPS_ENABLED: $$cap_nginx_https_enabled
+      NGINX_PORT: $$cap_nginx_port
+      NGINX_SSL_PORT: $$cap_nginx_ssl_port
+      NGINX_SSL_CERT_FILENAME: $$cap_nginx_ssl_cert_filename
+      NGINX_SSL_CERT_KEY_FILENAME: $$cap_nginx_ssl_cert_key_filename
+      NGINX_SSL_PROTOCOLS: $$cap_nginx_ssl_protocols
+      NGINX_WORKER_PROCESSES: $$cap_nginx_worker_processes
+      NGINX_CLIENT_MAX_BODY_SIZE: $$cap_nginx_client_max_body_size
+      NGINX_KEEPALIVE_TIMEOUT: $$cap_nginx_keepalive_timeout
+      NGINX_PROXY_READ_TIMEOUT: $$cap_nginx_proxy_read_timeout
+      NGINX_PROXY_SEND_TIMEOUT: $$cap_nginx_proxy_send_timeout
+      NGINX_ENABLE_CERTBOT_CHALLENGE: $$cap_nginx_enable_certbot_challenge
+      CERTBOT_EMAIL: $$cap_certbot_email
+      CERTBOT_DOMAIN: $$cap_certbot_domain
+      CERTBOT_OPTIONS: $$cap_certbot_options
+      SSRF_HTTP_PORT: $$cap_ssrf_http_port
+      SSRF_COREDUMP_DIR: $$cap_ssrf_coredump_dir
+      SSRF_REVERSE_PROXY_PORT: $$cap_ssrf_reverse_proxy_port
+      SSRF_SANDBOX_HOST: $$cap_ssrf_sandbox_host
+      EXPOSE_NGINX_PORT: $$cap_expose_nginx_port
+      EXPOSE_NGINX_SSL_PORT: $$cap_expose_nginx_ssl_port
+      POSITION_TOOL_PINS: $$cap_position_tool_pins
+      POSITION_TOOL_INCLUDES: $$cap_position_tool_includes
+      POSITION_TOOL_EXCLUDES: $$cap_position_tool_excludes
+      POSITION_PROVIDER_PINS: $$cap_position_provider_pins
+      POSITION_PROVIDER_INCLUDES: $$cap_position_provider_includes
+      POSITION_PROVIDER_EXCLUDES: $$cap_position_provider_excludes
+      CSP_WHITELIST: $$cap_csp_whitelist
+      CREATE_TIDB_SERVICE_JOB_ENABLED: $$cap_create_tidb_service_job_enabled
+      MAX_SUBMIT_COUNT: $$cap_max_submit_count
+      TOP_K_MAX_VALUE: $$cap_top_k_max_value
+    volumes:
+      - $$cap_appname-volumesappstorage:/app/api/storage
+    caproverExtra:
+      notExposeAsWebApp: true
+    depends_on:
+      - $$cap_appname-db
+      - $$cap_appname-redis
+  $$cap_appname-worker:
+    image: langgenius/dify-api:$$cap_langgenius_difyapi_version
+    environment:
+      MODE: worker
+      SENTRY_DSN: $$cap_sentry_dsn
+      SENTRY_TRACES_SAMPLE_RATE: $$cap_sentry_traces_sample_rate
+      SENTRY_PROFILES_SAMPLE_RATE: $$cap_sentry_profiles_sample_rate
+      CONSOLE_API_URL: $$cap_console_api_url
+      CONSOLE_WEB_URL: $$cap_console_web_url
+      SERVICE_API_URL: $$cap_service_api_url
+      APP_API_URL: $$cap_app_api_url
+      APP_WEB_URL: $$cap_app_web_url
+      FILES_URL: $$cap_files_url
+      LOG_LEVEL: $$cap_log_level
+      LOG_FILE: $$cap_log_file
+      LOG_FILE_MAX_SIZE: $$cap_log_file_max_size
+      LOG_FILE_BACKUP_COUNT: $$cap_log_file_backup_count
+      LOG_DATEFORMAT: $$cap_log_dateformat
+      LOG_TZ: $$cap_log_tz
+      DEBUG: $$cap_debug
+      FLASK_DEBUG: $$cap_flask_debug
+      SECRET_KEY: $$cap_secret_key
+      INIT_PASSWORD: $$cap_init_password
+      DEPLOY_ENV: $$cap_deploy_env
+      CHECK_UPDATE_URL: $$cap_check_update_url
+      OPENAI_API_BASE: $$cap_openai_api_base
+      MIGRATION_ENABLED: $$cap_migration_enabled
+      FILES_ACCESS_TIMEOUT: $$cap_files_access_timeout
+      ACCESS_TOKEN_EXPIRE_MINUTES: $$cap_access_token_expire_minutes
+      REFRESH_TOKEN_EXPIRE_DAYS: $$cap_refresh_token_expire_days
+      APP_MAX_ACTIVE_REQUESTS: $$cap_app_max_active_requests
+      APP_MAX_EXECUTION_TIME: $$cap_app_max_execution_time
+      DIFY_BIND_ADDRESS: $$cap_dify_bind_address
+      DIFY_PORT: $$cap_dify_port
+      SERVER_WORKER_AMOUNT: $$cap_server_worker_amount
+      SERVER_WORKER_CLASS: $$cap_server_worker_class
+      SERVER_WORKER_CONNECTIONS: $$cap_server_worker_connections
+      CELERY_WORKER_CLASS: $$cap_celery_worker_class
+      GUNICORN_TIMEOUT: $$cap_gunicorn_timeout
+      CELERY_WORKER_AMOUNT: $$cap_celery_worker_amount
+      CELERY_AUTO_SCALE: $$cap_celery_auto_scale
+      CELERY_MAX_WORKERS: $$cap_celery_max_workers
+      CELERY_MIN_WORKERS: $$cap_celery_min_workers
+      API_TOOL_DEFAULT_CONNECT_TIMEOUT: $$cap_api_tool_default_connect_timeout
+      API_TOOL_DEFAULT_READ_TIMEOUT: $$cap_api_tool_default_read_timeout
+      DB_USERNAME: $$cap_db_username
+      DB_PASSWORD: $$cap_db_password
+      DB_HOST: $$cap_db_host
+      DB_PORT: $$cap_db_port
+      DB_DATABASE: $$cap_db_database
+      SQLALCHEMY_POOL_SIZE: $$cap_sqlalchemy_pool_size
+      SQLALCHEMY_POOL_RECYCLE: $$cap_sqlalchemy_pool_recycle
+      SQLALCHEMY_ECHO: $$cap_sqlalchemy_echo
+      POSTGRES_MAX_CONNECTIONS: $$cap_postgres_max_connections
+      POSTGRES_SHARED_BUFFERS: $$cap_postgres_shared_buffers
+      POSTGRES_WORK_MEM: $$cap_postgres_work_mem
+      POSTGRES_MAINTENANCE_WORK_MEM: $$cap_postgres_maintenance_work_mem
+      POSTGRES_EFFECTIVE_CACHE_SIZE: $$cap_postgres_effective_cache_size
+      REDIS_HOST: $$cap_redis_host
+      REDIS_PORT: $$cap_redis_port
+      REDIS_USERNAME: $$cap_redis_username
+      REDIS_PASSWORD: $$cap_redis_password
+      REDIS_USE_SSL: $$cap_redis_use_ssl
+      REDIS_DB: $$cap_redis_db
+      REDIS_USE_SENTINEL: $$cap_redis_use_sentinel
+      REDIS_SENTINELS: $$cap_redis_sentinels
+      REDIS_SENTINEL_SERVICE_NAME: $$cap_redis_sentinel_service_name
+      REDIS_SENTINEL_USERNAME: $$cap_redis_sentinel_username
+      REDIS_SENTINEL_PASSWORD: $$cap_redis_sentinel_password
+      REDIS_SENTINEL_SOCKET_TIMEOUT: $$cap_redis_sentinel_socket_timeout
+      REDIS_USE_CLUSTERS: $$cap_redis_use_clusters
+      REDIS_CLUSTERS: $$cap_redis_clusters
+      REDIS_CLUSTERS_PASSWORD: $$cap_redis_clusters_password
+      CELERY_BROKER_URL: $$cap_celery_broker_url
+      BROKER_USE_SSL: $$cap_broker_use_ssl
+      CELERY_USE_SENTINEL: $$cap_celery_use_sentinel
+      CELERY_SENTINEL_MASTER_NAME: $$cap_celery_sentinel_master_name
+      CELERY_SENTINEL_SOCKET_TIMEOUT: $$cap_celery_sentinel_socket_timeout
+      WEB_API_CORS_ALLOW_ORIGINS: $$cap_web_api_cors_allow_origins
+      CONSOLE_CORS_ALLOW_ORIGINS: $$cap_console_cors_allow_origins
+      STORAGE_TYPE: $$cap_storage_type
+      OPENDAL_SCHEME: $$cap_opendal_scheme
+      OPENDAL_FS_ROOT: $$cap_opendal_fs_root
+      S3_ENDPOINT: $$cap_s3_endpoint
+      S3_REGION: $$cap_s3_region
+      S3_BUCKET_NAME: $$cap_s3_bucket_name
+      S3_ACCESS_KEY: $$cap_s3_access_key
+      S3_SECRET_KEY: $$cap_s3_secret_key
+      S3_USE_AWS_MANAGED_IAM: $$cap_s3_use_aws_managed_iam
+      AZURE_BLOB_ACCOUNT_NAME: $$cap_azure_blob_account_name
+      AZURE_BLOB_ACCOUNT_KEY: $$cap_azure_blob_account_key
+      AZURE_BLOB_CONTAINER_NAME: $$cap_azure_blob_container_name
+      AZURE_BLOB_ACCOUNT_URL: $$cap_azure_blob_account_url
+      GOOGLE_STORAGE_BUCKET_NAME: $$cap_google_storage_bucket_name
+      GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64: $$cap_google_storage_service_account_json_base64
+      ALIYUN_OSS_BUCKET_NAME: $$cap_aliyun_oss_bucket_name
+      ALIYUN_OSS_ACCESS_KEY: $$cap_aliyun_oss_access_key
+      ALIYUN_OSS_SECRET_KEY: $$cap_aliyun_oss_secret_key
+      ALIYUN_OSS_ENDPOINT: $$cap_aliyun_oss_endpoint
+      ALIYUN_OSS_REGION: $$cap_aliyun_oss_region
+      ALIYUN_OSS_AUTH_VERSION: $$cap_aliyun_oss_auth_version
+      ALIYUN_OSS_PATH: $$cap_aliyun_oss_path
+      TENCENT_COS_BUCKET_NAME: $$cap_tencent_cos_bucket_name
+      TENCENT_COS_SECRET_KEY: $$cap_tencent_cos_secret_key
+      TENCENT_COS_SECRET_ID: $$cap_tencent_cos_secret_id
+      TENCENT_COS_REGION: $$cap_tencent_cos_region
+      TENCENT_COS_SCHEME: $$cap_tencent_cos_scheme
+      OCI_ENDPOINT: $$cap_oci_endpoint
+      OCI_BUCKET_NAME: $$cap_oci_bucket_name
+      OCI_ACCESS_KEY: $$cap_oci_access_key
+      OCI_SECRET_KEY: $$cap_oci_secret_key
+      OCI_REGION: $$cap_oci_region
+      HUAWEI_OBS_BUCKET_NAME: $$cap_huawei_obs_bucket_name
+      HUAWEI_OBS_SECRET_KEY: $$cap_huawei_obs_secret_key
+      HUAWEI_OBS_ACCESS_KEY: $$cap_huawei_obs_access_key
+      HUAWEI_OBS_SERVER: $$cap_huawei_obs_server
+      VOLCENGINE_TOS_BUCKET_NAME: $$cap_volcengine_tos_bucket_name
+      VOLCENGINE_TOS_SECRET_KEY: $$cap_volcengine_tos_secret_key
+      VOLCENGINE_TOS_ACCESS_KEY: $$cap_volcengine_tos_access_key
+      VOLCENGINE_TOS_ENDPOINT: $$cap_volcengine_tos_endpoint
+      VOLCENGINE_TOS_REGION: $$cap_volcengine_tos_region
+      BAIDU_OBS_BUCKET_NAME: $$cap_baidu_obs_bucket_name
+      BAIDU_OBS_SECRET_KEY: $$cap_baidu_obs_secret_key
+      BAIDU_OBS_ACCESS_KEY: $$cap_baidu_obs_access_key
+      BAIDU_OBS_ENDPOINT: $$cap_baidu_obs_endpoint
+      SUPABASE_BUCKET_NAME: $$cap_supabase_bucket_name
+      SUPABASE_API_KEY: $$cap_supabase_api_key
+      SUPABASE_URL: $$cap_supabase_url
+      VECTOR_STORE: $$cap_vector_store
+      WEAVIATE_ENDPOINT: $$cap_weaviate_endpoint
+      WEAVIATE_API_KEY: $$cap_weaviate_api_key
+      QDRANT_URL: $$cap_qdrant_url
+      QDRANT_API_KEY: $$cap_qdrant_api_key
+      QDRANT_CLIENT_TIMEOUT: $$cap_qdrant_client_timeout
+      QDRANT_GRPC_ENABLED: $$cap_qdrant_grpc_enabled
+      QDRANT_GRPC_PORT: $$cap_qdrant_grpc_port
+      MILVUS_URI: $$cap_milvus_uri
+      MILVUS_TOKEN: $$cap_milvus_token
+      MILVUS_USER: $$cap_milvus_user
+      MILVUS_PASSWORD: $$cap_milvus_password
+      MILVUS_ENABLE_HYBRID_SEARCH: $$cap_milvus_enable_hybrid_search
+      MYSCALE_HOST: $$cap_myscale_host
+      MYSCALE_PORT: $$cap_myscale_port
+      MYSCALE_USER: $$cap_myscale_user
+      MYSCALE_PASSWORD: $$cap_myscale_password
+      MYSCALE_DATABASE: $$cap_myscale_database
+      MYSCALE_FTS_PARAMS: $$cap_myscale_fts_params
+      COUCHBASE_CONNECTION_STRING: $$cap_couchbase_connection_string
+      COUCHBASE_USER: $$cap_couchbase_user
+      COUCHBASE_PASSWORD: $$cap_couchbase_password
+      COUCHBASE_BUCKET_NAME: $$cap_couchbase_bucket_name
+      COUCHBASE_SCOPE_NAME: $$cap_couchbase_scope_name
+      PGVECTOR_HOST: $$cap_pgvector_host
+      PGVECTOR_PORT: $$cap_pgvector_port
+      PGVECTOR_USER: $$cap_pgvector_user
+      PGVECTOR_PASSWORD: $$cap_pgvector_password
+      PGVECTOR_DATABASE: $$cap_pgvector_database
+      PGVECTOR_MIN_CONNECTION: $$cap_pgvector_min_connection
+      PGVECTOR_MAX_CONNECTION: $$cap_pgvector_max_connection
+      PGVECTO_RS_HOST: $$cap_pgvecto_rs_host
+      PGVECTO_RS_PORT: $$cap_pgvecto_rs_port
+      PGVECTO_RS_USER: $$cap_pgvecto_rs_user
+      PGVECTO_RS_PASSWORD: $$cap_pgvecto_rs_password
+      PGVECTO_RS_DATABASE: $$cap_pgvecto_rs_database
+      ANALYTICDB_KEY_ID: $$cap_analyticdb_key_id
+      ANALYTICDB_KEY_SECRET: $$cap_analyticdb_key_secret
+      ANALYTICDB_REGION_ID: $$cap_analyticdb_region_id
+      ANALYTICDB_INSTANCE_ID: $$cap_analyticdb_instance_id
+      ANALYTICDB_ACCOUNT: $$cap_analyticdb_account
+      ANALYTICDB_PASSWORD: $$cap_analyticdb_password
+      ANALYTICDB_NAMESPACE: $$cap_analyticdb_namespace
+      ANALYTICDB_NAMESPACE_PASSWORD: $$cap_analyticdb_namespace_password
+      ANALYTICDB_HOST: $$cap_analyticdb_host
+      ANALYTICDB_PORT: $$cap_analyticdb_port
+      ANALYTICDB_MIN_CONNECTION: $$cap_analyticdb_min_connection
+      ANALYTICDB_MAX_CONNECTION: $$cap_analyticdb_max_connection
+      TIDB_VECTOR_HOST: $$cap_tidb_vector_host
+      TIDB_VECTOR_PORT: $$cap_tidb_vector_port
+      TIDB_VECTOR_USER: $$cap_tidb_vector_user
+      TIDB_VECTOR_PASSWORD: $$cap_tidb_vector_password
+      TIDB_VECTOR_DATABASE: $$cap_tidb_vector_database
+      TIDB_ON_QDRANT_URL: $$cap_tidb_on_qdrant_url
+      TIDB_ON_QDRANT_API_KEY: $$cap_tidb_on_qdrant_api_key
+      TIDB_ON_QDRANT_CLIENT_TIMEOUT: $$cap_tidb_on_qdrant_client_timeout
+      TIDB_ON_QDRANT_GRPC_ENABLED: $$cap_tidb_on_qdrant_grpc_enabled
+      TIDB_ON_QDRANT_GRPC_PORT: $$cap_tidb_on_qdrant_grpc_port
+      TIDB_PUBLIC_KEY: $$cap_tidb_public_key
+      TIDB_PRIVATE_KEY: $$cap_tidb_private_key
+      TIDB_API_URL: $$cap_tidb_api_url
+      TIDB_IAM_API_URL: $$cap_tidb_iam_api_url
+      TIDB_REGION: $$cap_tidb_region
+      TIDB_PROJECT_ID: $$cap_tidb_project_id
+      TIDB_SPEND_LIMIT: $$cap_tidb_spend_limit
+      CHROMA_HOST: $$cap_chroma_host
+      CHROMA_PORT: $$cap_chroma_port
+      CHROMA_TENANT: $$cap_chroma_tenant
+      CHROMA_DATABASE: $$cap_chroma_database
+      CHROMA_AUTH_PROVIDER: $$cap_chroma_auth_provider
+      CHROMA_AUTH_CREDENTIALS: $$cap_chroma_auth_credentials
+      ORACLE_HOST: $$cap_oracle_host
+      ORACLE_PORT: $$cap_oracle_port
+      ORACLE_USER: $$cap_oracle_user
+      ORACLE_PASSWORD: $$cap_oracle_password
+      ORACLE_DATABASE: $$cap_oracle_database
+      RELYT_HOST: $$cap_relyt_host
+      RELYT_PORT: $$cap_relyt_port
+      RELYT_USER: $$cap_relyt_user
+      RELYT_PASSWORD: $$cap_relyt_password
+      RELYT_DATABASE: $$cap_relyt_database
+      OPENSEARCH_HOST: $$cap_opensearch_host
+      OPENSEARCH_PORT: $$cap_opensearch_port
+      OPENSEARCH_USER: $$cap_opensearch_user
+      OPENSEARCH_PASSWORD: $$cap_opensearch_password
+      OPENSEARCH_SECURE: $$cap_opensearch_secure
+      TENCENT_VECTOR_DB_URL: $$cap_tencent_vector_db_url
+      TENCENT_VECTOR_DB_API_KEY: $$cap_tencent_vector_db_api_key
+      TENCENT_VECTOR_DB_TIMEOUT: $$cap_tencent_vector_db_timeout
+      TENCENT_VECTOR_DB_USERNAME: $$cap_tencent_vector_db_username
+      TENCENT_VECTOR_DB_DATABASE: $$cap_tencent_vector_db_database
+      TENCENT_VECTOR_DB_SHARD: $$cap_tencent_vector_db_shard
+      TENCENT_VECTOR_DB_REPLICAS: $$cap_tencent_vector_db_replicas
+      ELASTICSEARCH_HOST: $$cap_elasticsearch_host
+      ELASTICSEARCH_PORT: $$cap_elasticsearch_port
+      ELASTICSEARCH_USERNAME: $$cap_elasticsearch_username
+      ELASTICSEARCH_PASSWORD: $$cap_elasticsearch_password
+      KIBANA_PORT: $$cap_kibana_port
+      BAIDU_VECTOR_DB_ENDPOINT: $$cap_baidu_vector_db_endpoint
+      BAIDU_VECTOR_DB_CONNECTION_TIMEOUT_MS: $$cap_baidu_vector_db_connection_timeout_ms
+      BAIDU_VECTOR_DB_ACCOUNT: $$cap_baidu_vector_db_account
+      BAIDU_VECTOR_DB_API_KEY: $$cap_baidu_vector_db_api_key
+      BAIDU_VECTOR_DB_DATABASE: $$cap_baidu_vector_db_database
+      BAIDU_VECTOR_DB_SHARD: $$cap_baidu_vector_db_shard
+      BAIDU_VECTOR_DB_REPLICAS: $$cap_baidu_vector_db_replicas
+      VIKINGDB_ACCESS_KEY: $$cap_vikingdb_access_key
+      VIKINGDB_SECRET_KEY: $$cap_vikingdb_secret_key
+      VIKINGDB_REGION: $$cap_vikingdb_region
+      VIKINGDB_HOST: $$cap_vikingdb_host
+      VIKINGDB_SCHEMA: $$cap_vikingdb_schema
+      VIKINGDB_CONNECTION_TIMEOUT: $$cap_vikingdb_connection_timeout
+      VIKINGDB_SOCKET_TIMEOUT: $$cap_vikingdb_socket_timeout
+      LINDORM_URL: $$cap_lindorm_url
+      LINDORM_USERNAME: $$cap_lindorm_username
+      LINDORM_PASSWORD: $$cap_lindorm_password
+      OCEANBASE_VECTOR_HOST: $$cap_oceanbase_vector_host
+      OCEANBASE_VECTOR_PORT: $$cap_oceanbase_vector_port
+      OCEANBASE_VECTOR_USER: $$cap_oceanbase_vector_user
+      OCEANBASE_VECTOR_PASSWORD: $$cap_oceanbase_vector_password
+      OCEANBASE_VECTOR_DATABASE: $$cap_oceanbase_vector_database
+      OCEANBASE_CLUSTER_NAME: $$cap_oceanbase_cluster_name
+      OCEANBASE_MEMORY_LIMIT: $$cap_oceanbase_memory_limit
+      UPSTASH_VECTOR_URL: $$cap_upstash_vector_url
+      UPSTASH_VECTOR_TOKEN: $$cap_upstash_vector_token
+      UPLOAD_FILE_SIZE_LIMIT: $$cap_upload_file_size_limit
+      UPLOAD_FILE_BATCH_LIMIT: $$cap_upload_file_batch_limit
+      ETL_TYPE: $$cap_etl_type
+      UNSTRUCTURED_API_URL: $$cap_unstructured_api_url
+      UNSTRUCTURED_API_KEY: $$cap_unstructured_api_key
+      SCARF_NO_ANALYTICS: $$cap_scarf_no_analytics
+      PROMPT_GENERATION_MAX_TOKENS: $$cap_prompt_generation_max_tokens
+      CODE_GENERATION_MAX_TOKENS: $$cap_code_generation_max_tokens
+      MULTIMODAL_SEND_FORMAT: $$cap_multimodal_send_format
+      UPLOAD_IMAGE_FILE_SIZE_LIMIT: $$cap_upload_image_file_size_limit
+      UPLOAD_VIDEO_FILE_SIZE_LIMIT: $$cap_upload_video_file_size_limit
+      UPLOAD_AUDIO_FILE_SIZE_LIMIT: $$cap_upload_audio_file_size_limit
+      API_SENTRY_DSN: $$cap_api_sentry_dsn
+      API_SENTRY_TRACES_SAMPLE_RATE: $$cap_api_sentry_traces_sample_rate
+      API_SENTRY_PROFILES_SAMPLE_RATE: $$cap_api_sentry_profiles_sample_rate
+      WEB_SENTRY_DSN: $$cap_web_sentry_dsn
+      NOTION_INTEGRATION_TYPE: $$cap_notion_integration_type
+      NOTION_CLIENT_SECRET: $$cap_notion_client_secret
+      NOTION_CLIENT_ID: $$cap_notion_client_id
+      NOTION_INTERNAL_SECRET: $$cap_notion_internal_secret
+      MAIL_TYPE: $$cap_mail_type
+      MAIL_DEFAULT_SEND_FROM: $$cap_mail_default_send_from
+      RESEND_API_URL: $$cap_resend_api_url
+      RESEND_API_KEY: $$cap_resend_api_key
+      SMTP_SERVER: $$cap_smtp_server
+      SMTP_PORT: $$cap_smtp_port
+      SMTP_USERNAME: $$cap_smtp_username
+      SMTP_PASSWORD: $$cap_smtp_password
+      SMTP_USE_TLS: $$cap_smtp_use_tls
+      SMTP_OPPORTUNISTIC_TLS: $$cap_smtp_opportunistic_tls
+      INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH: $$cap_indexing_max_segmentation_tokens_length
+      INVITE_EXPIRY_HOURS: $$cap_invite_expiry_hours
+      RESET_PASSWORD_TOKEN_EXPIRY_MINUTES: $$cap_reset_password_token_expiry_minutes
+      CODE_EXECUTION_ENDPOINT: $$cap_code_execution_endpoint
+      CODE_EXECUTION_API_KEY: $$cap_code_execution_api_key
+      CODE_MAX_NUMBER: $$cap_code_max_number
+      CODE_MIN_NUMBER: $$cap_code_min_number
+      CODE_MAX_DEPTH: $$cap_code_max_depth
+      CODE_MAX_PRECISION: $$cap_code_max_precision
+      CODE_MAX_STRING_LENGTH: $$cap_code_max_string_length
+      CODE_MAX_STRING_ARRAY_LENGTH: $$cap_code_max_string_array_length
+      CODE_MAX_OBJECT_ARRAY_LENGTH: $$cap_code_max_object_array_length
+      CODE_MAX_NUMBER_ARRAY_LENGTH: $$cap_code_max_number_array_length
+      CODE_EXECUTION_CONNECT_TIMEOUT: $$cap_code_execution_connect_timeout
+      CODE_EXECUTION_READ_TIMEOUT: $$cap_code_execution_read_timeout
+      CODE_EXECUTION_WRITE_TIMEOUT: $$cap_code_execution_write_timeout
+      TEMPLATE_TRANSFORM_MAX_LENGTH: $$cap_template_transform_max_length
+      WORKFLOW_MAX_EXECUTION_STEPS: $$cap_workflow_max_execution_steps
+      WORKFLOW_MAX_EXECUTION_TIME: $$cap_workflow_max_execution_time
+      WORKFLOW_CALL_MAX_DEPTH: $$cap_workflow_call_max_depth
+      MAX_VARIABLE_SIZE: $$cap_max_variable_size
+      WORKFLOW_PARALLEL_DEPTH_LIMIT: $$cap_workflow_parallel_depth_limit
+      WORKFLOW_FILE_UPLOAD_LIMIT: $$cap_workflow_file_upload_limit
+      HTTP_REQUEST_NODE_MAX_BINARY_SIZE: $$cap_http_request_node_max_binary_size
+      HTTP_REQUEST_NODE_MAX_TEXT_SIZE: $$cap_http_request_node_max_text_size
+      SSRF_PROXY_HTTP_URL: $$cap_ssrf_proxy_http_url
+      SSRF_PROXY_HTTPS_URL: $$cap_ssrf_proxy_https_url
+      TEXT_GENERATION_TIMEOUT_MS: $$cap_text_generation_timeout_ms
+      PGUSER: $$cap_pguser
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
+      PGDATA: $$cap_pgdata
+      SANDBOX_API_KEY: $$cap_sandbox_api_key
+      SANDBOX_GIN_MODE: $$cap_sandbox_gin_mode
+      SANDBOX_WORKER_TIMEOUT: $$cap_sandbox_worker_timeout
+      SANDBOX_ENABLE_NETWORK: $$cap_sandbox_enable_network
+      SANDBOX_HTTP_PROXY: $$cap_sandbox_http_proxy
+      SANDBOX_HTTPS_PROXY: $$cap_sandbox_https_proxy
+      SANDBOX_PORT: $$cap_sandbox_port
+      WEAVIATE_PERSISTENCE_DATA_PATH: $$cap_weaviate_persistence_data_path
+      WEAVIATE_QUERY_DEFAULTS_LIMIT: $$cap_weaviate_query_defaults_limit
+      WEAVIATE_AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: $$cap_weaviate_authentication_anonymous_access_enabled
+      WEAVIATE_DEFAULT_VECTORIZER_MODULE: $$cap_weaviate_default_vectorizer_module
+      WEAVIATE_CLUSTER_HOSTNAME: $$cap_weaviate_cluster_hostname
+      WEAVIATE_AUTHENTICATION_APIKEY_ENABLED: $$cap_weaviate_authentication_apikey_enabled
+      WEAVIATE_AUTHENTICATION_APIKEY_ALLOWED_KEYS: $$cap_weaviate_authentication_apikey_allowed_keys
+      WEAVIATE_AUTHENTICATION_APIKEY_USERS: $$cap_weaviate_authentication_apikey_users
+      WEAVIATE_AUTHORIZATION_ADMINLIST_ENABLED: $$cap_weaviate_authorization_adminlist_enabled
+      WEAVIATE_AUTHORIZATION_ADMINLIST_USERS: $$cap_weaviate_authorization_adminlist_users
+      CHROMA_SERVER_AUTHN_CREDENTIALS: $$cap_chroma_server_authn_credentials
+      CHROMA_SERVER_AUTHN_PROVIDER: $$cap_chroma_server_authn_provider
+      CHROMA_IS_PERSISTENT: $$cap_chroma_is_persistent
+      ORACLE_PWD: $$cap_oracle_pwd
+      ORACLE_CHARACTERSET: $$cap_oracle_characterset
+      ETCD_AUTO_COMPACTION_MODE: $$cap_etcd_auto_compaction_mode
+      ETCD_AUTO_COMPACTION_RETENTION: $$cap_etcd_auto_compaction_retention
+      ETCD_QUOTA_BACKEND_BYTES: $$cap_etcd_quota_backend_bytes
+      ETCD_SNAPSHOT_COUNT: $$cap_etcd_snapshot_count
+      MINIO_ACCESS_KEY: $$cap_minio_access_key
+      MINIO_SECRET_KEY: $$cap_minio_secret_key
+      ETCD_ENDPOINTS: $$cap_etcd_endpoints
+      MINIO_ADDRESS: $$cap_minio_address
+      MILVUS_AUTHORIZATION_ENABLED: $$cap_milvus_authorization_enabled
+      PGVECTOR_PGUSER: $$cap_pgvector_pguser
+      PGVECTOR_POSTGRES_PASSWORD: $$cap_pgvector_postgres_password
+      PGVECTOR_POSTGRES_DB: $$cap_pgvector_postgres_db
+      PGVECTOR_PGDATA: $$cap_pgvector_pgdata
+      OPENSEARCH_DISCOVERY_TYPE: $$cap_opensearch_discovery_type
+      OPENSEARCH_BOOTSTRAP_MEMORY_LOCK: $$cap_opensearch_bootstrap_memory_lock
+      OPENSEARCH_JAVA_OPTS_MIN: $$cap_opensearch_java_opts_min
+      OPENSEARCH_JAVA_OPTS_MAX: $$cap_opensearch_java_opts_max
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: $$cap_opensearch_initial_admin_password
+      OPENSEARCH_MEMLOCK_SOFT: $$cap_opensearch_memlock_soft
+      OPENSEARCH_MEMLOCK_HARD: $$cap_opensearch_memlock_hard
+      OPENSEARCH_NOFILE_SOFT: $$cap_opensearch_nofile_soft
+      OPENSEARCH_NOFILE_HARD: $$cap_opensearch_nofile_hard
+      NGINX_SERVER_NAME: $$cap_nginx_server_name
+      NGINX_HTTPS_ENABLED: $$cap_nginx_https_enabled
+      NGINX_PORT: $$cap_nginx_port
+      NGINX_SSL_PORT: $$cap_nginx_ssl_port
+      NGINX_SSL_CERT_FILENAME: $$cap_nginx_ssl_cert_filename
+      NGINX_SSL_CERT_KEY_FILENAME: $$cap_nginx_ssl_cert_key_filename
+      NGINX_SSL_PROTOCOLS: $$cap_nginx_ssl_protocols
+      NGINX_WORKER_PROCESSES: $$cap_nginx_worker_processes
+      NGINX_CLIENT_MAX_BODY_SIZE: $$cap_nginx_client_max_body_size
+      NGINX_KEEPALIVE_TIMEOUT: $$cap_nginx_keepalive_timeout
+      NGINX_PROXY_READ_TIMEOUT: $$cap_nginx_proxy_read_timeout
+      NGINX_PROXY_SEND_TIMEOUT: $$cap_nginx_proxy_send_timeout
+      NGINX_ENABLE_CERTBOT_CHALLENGE: $$cap_nginx_enable_certbot_challenge
+      CERTBOT_EMAIL: $$cap_certbot_email
+      CERTBOT_DOMAIN: $$cap_certbot_domain
+      CERTBOT_OPTIONS: $$cap_certbot_options
+      SSRF_HTTP_PORT: $$cap_ssrf_http_port
+      SSRF_COREDUMP_DIR: $$cap_ssrf_coredump_dir
+      SSRF_REVERSE_PROXY_PORT: $$cap_ssrf_reverse_proxy_port
+      SSRF_SANDBOX_HOST: $$cap_ssrf_sandbox_host
+      EXPOSE_NGINX_PORT: $$cap_expose_nginx_port
+      EXPOSE_NGINX_SSL_PORT: $$cap_expose_nginx_ssl_port
+      POSITION_TOOL_PINS: $$cap_position_tool_pins
+      POSITION_TOOL_INCLUDES: $$cap_position_tool_includes
+      POSITION_TOOL_EXCLUDES: $$cap_position_tool_excludes
+      POSITION_PROVIDER_PINS: $$cap_position_provider_pins
+      POSITION_PROVIDER_INCLUDES: $$cap_position_provider_includes
+      POSITION_PROVIDER_EXCLUDES: $$cap_position_provider_excludes
+      CSP_WHITELIST: $$cap_csp_whitelist
+      CREATE_TIDB_SERVICE_JOB_ENABLED: $$cap_create_tidb_service_job_enabled
+      MAX_SUBMIT_COUNT: $$cap_max_submit_count
+      TOP_K_MAX_VALUE: $$cap_top_k_max_value
+    volumes:
+      - $$cap_appname-volumesappstorage:/app/api/storage
+    caproverExtra:
+      notExposeAsWebApp: true
+    depends_on:
+      - $$cap_appname-db
+      - $$cap_appname-redis
+  $$cap_appname-web:
+    image: langgenius/dify-web:$$cap_langgenius_difyweb_version
+    environment:
+      CONSOLE_API_URL: $$cap_console_api_url
+      APP_API_URL: $$cap_app_api_url
+      SENTRY_DSN: $$cap_sentry_dsn
+      NEXT_TELEMETRY_DISABLED: $$cap_next_telemetry_disabled
+      TEXT_GENERATION_TIMEOUT_MS: $$cap_text_generation_timeout_ms
+      CSP_WHITELIST: $$cap_csp_whitelist
+      TOP_K_MAX_VALUE: $$cap_top_k_max_value
+      INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH: $$cap_indexing_max_segmentation_tokens_length
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-db:
+    image: postgres:$$cap_postgres_version
+    environment:
+      PGUSER: $$cap_pguser
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
+      PGDATA: $$cap_pgdata
+    command: >
+      postgres -c 'max_connections=${POSTGRES_MAX_CONNECTIONS:-100}'
+               -c 'shared_buffers=${POSTGRES_SHARED_BUFFERS:-128MB}'
+               -c 'work_mem=${POSTGRES_WORK_MEM:-4MB}'
+               -c 'maintenance_work_mem=${POSTGRES_MAINTENANCE_WORK_MEM:-64MB}'
+               -c 'effective_cache_size=${POSTGRES_EFFECTIVE_CACHE_SIZE:-4096MB}'
+    volumes:
+      - $$cap_appname-volumesdbdata:/var/lib/postgresql/data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-redis:
+    image: redis:$$cap_redis_version
+    environment:
+      REDISCLI_AUTH: $$cap_rediscli_auth
+    command: redis-server --requirepass ${REDIS_PASSWORD:-difyai123456}
+    volumes:
+      - $$cap_appname-volumesredisdata:/data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-sandbox:
+    image: langgenius/dify-sandbox:$$cap_langgenius_difysandbox_version
+    environment:
+      API_KEY: $$cap_api_key
+      GIN_MODE: $$cap_gin_mode
+      WORKER_TIMEOUT: $$cap_worker_timeout
+      ENABLE_NETWORK: $$cap_enable_network
+      HTTP_PROXY: $$cap_http_proxy
+      HTTPS_PROXY: $$cap_https_proxy
+      SANDBOX_PORT: $$cap_sandbox_port
+    volumes:
+      - $$cap_appname-volumessandboxdependencies:/dependencies
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-tidb:
+    image: pingcap/tidb:$$cap_pingcap_tidb_version
+    command:
+      - --store=unistore
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-weaviate:
+    image: semitechnologies/weaviate:$$cap_semitechnologies_weaviate_version
+    environment:
+      PERSISTENCE_DATA_PATH: $$cap_persistence_data_path
+      QUERY_DEFAULTS_LIMIT: $$cap_query_defaults_limit
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: $$cap_authentication_anonymous_access_enabled
+      DEFAULT_VECTORIZER_MODULE: $$cap_default_vectorizer_module
+      CLUSTER_HOSTNAME: $$cap_cluster_hostname
+      AUTHENTICATION_APIKEY_ENABLED: $$cap_authentication_apikey_enabled
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: $$cap_authentication_apikey_allowed_keys
+      AUTHENTICATION_APIKEY_USERS: $$cap_authentication_apikey_users
+      AUTHORIZATION_ADMINLIST_ENABLED: $$cap_authorization_adminlist_enabled
+      AUTHORIZATION_ADMINLIST_USERS: $$cap_authorization_adminlist_users
+    volumes:
+      - $$cap_appname-volumesweaviate:/var/lib/weaviate
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-qdrant:
+    image: langgenius/qdrant:$$cap_langgenius_qdrant_version
+    environment:
+      QDRANT_API_KEY: $$cap_qdrant_api_key
+    volumes:
+      - $$cap_appname-volumesqdrant:/qdrant/storage
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-couchbase-server:
+    environment:
+      CLUSTER_NAME: dify_search
+      COUCHBASE_ADMINISTRATOR_USERNAME: $$cap_couchbase_administrator_username
+      COUCHBASE_ADMINISTRATOR_PASSWORD: $$cap_couchbase_administrator_password
+      COUCHBASE_BUCKET: $$cap_couchbase_bucket
+      COUCHBASE_BUCKET_RAMSIZE: "512"
+      COUCHBASE_RAM_SIZE: "2048"
+      COUCHBASE_EVENTING_RAM_SIZE: "512"
+      COUCHBASE_INDEX_RAM_SIZE: "512"
+      COUCHBASE_FTS_RAM_SIZE: "1024"
+    hostname: couchbase-server
+    command: sh -c "/opt/couchbase/init/init-cbserver.sh"
+    volumes:
+      - $$cap_appname-volumescouchbasedata:/opt/couchbase/var/lib/couchbase/data
+    caproverExtra:
+      dockerfileLines:
+        - FROM undefined
+        - ENTRYPOINT [""]
+      notExposeAsWebApp: true
+  $$cap_appname-pgvector:
+    image: pgvector/pgvector:$$cap_pgvector_pgvector_version
+    environment:
+      PGUSER: $$cap_pguser
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
+      PGDATA: $$cap_pgdata
+    volumes:
+      - $$cap_appname-volumespgvectordata:/var/lib/postgresql/data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-pgvecto-rs:
+    image: tensorchord/pgvecto-rs:$$cap_tensorchord_pgvectors_version
+    environment:
+      PGUSER: $$cap_pguser
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
+      PGDATA: $$cap_pgdata
+    volumes:
+      - $$cap_appname-volumespgvecto-rsdata:/var/lib/postgresql/data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-chroma:
+    image: ghcr.io/chroma-core/chroma:$$cap_ghcrio_chromacore_chroma_version
+    environment:
+      CHROMA_SERVER_AUTHN_CREDENTIALS: $$cap_chroma_server_authn_credentials
+      CHROMA_SERVER_AUTHN_PROVIDER: $$cap_chroma_server_authn_provider
+      IS_PERSISTENT: $$cap_is_persistent
+    volumes:
+      - $$cap_appname-volumeschroma:/chroma/chroma
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-oceanbase:
+    image: quay.io/oceanbase/oceanbase-ce:$$cap_quayio_oceanbase_oceanbasece_version
+    environment:
+      OB_MEMORY_LIMIT: $$cap_ob_memory_limit
+      OB_SYS_PASSWORD: $$cap_ob_sys_password
+      OB_TENANT_PASSWORD: $$cap_ob_tenant_password
+      OB_CLUSTER_NAME: $$cap_ob_cluster_name
+      OB_SERVER_IP: 127.0.0.1
+    volumes:
+      - $$cap_appname-volumesoceanbasedata:/root/ob
+      - $$cap_appname-volumesoceanbaseconf:/root/.obd/cluster
+      - $$cap_appname-volumesoceanbaseinit-d:/root/boot/init.d
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-oracle:
+    image: container-registry.oracle.com/database/free:$$cap_containerregistryoraclecom_database_free_version
+    environment:
+      ORACLE_PWD: $$cap_oracle_pwd
+      ORACLE_CHARACTERSET: $$cap_oracle_characterset
+    volumes:
+      - $$cap_appname-oradata:/opt/oracle/oradata
+      - $$cap_appname-startupscripts:/opt/oracle/scripts/startup
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-etcd:
+    image: quay.io/coreos/etcd:$$cap_quayio_coreos_etcd_version
+    environment:
+      ETCD_AUTO_COMPACTION_MODE: $$cap_etcd_auto_compaction_mode
+      ETCD_AUTO_COMPACTION_RETENTION: $$cap_etcd_auto_compaction_retention
+      ETCD_QUOTA_BACKEND_BYTES: $$cap_etcd_quota_backend_bytes
+      ETCD_SNAPSHOT_COUNT: $$cap_etcd_snapshot_count
+    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls
+      http://0.0.0.0:2379 --data-dir /etcd
+    volumes:
+      - $$cap_appname-volumesmilvusetcd:/etcd
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-minio:
+    image: minio/minio:$$cap_minio_minio_version
+    environment:
+      MINIO_ACCESS_KEY: $$cap_minio_access_key
+      MINIO_SECRET_KEY: $$cap_minio_secret_key
+    command: minio server /minio_data --console-address ":9001"
+    volumes:
+      - $$cap_appname-volumesmilvusminio:/minio_data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-milvus-standalone:
+    image: milvusdb/milvus:$$cap_milvusdb_milvus_version
+    environment:
+      ETCD_ENDPOINTS: $$cap_etcd_endpoints
+      MINIO_ADDRESS: $$cap_minio_address
+      common.security.authorizationEnabled: $$cap_commonsecurityauthorizationenabled
+    command:
+      - milvus
+      - run
+      - standalone
+    volumes:
+      - $$cap_appname-volumesmilvusmilvus:/var/lib/milvus
+    caproverExtra:
+      notExposeAsWebApp: true
+    depends_on:
+      - $$cap_appname-etcd
+      - $$cap_appname-minio
+  $$cap_appname-opensearch:
+    image: opensearchproject/opensearch:$$cap_opensearchproject_opensearch_version
+    environment:
+      discovery.type: $$cap_discoverytype
+      bootstrap.memory_lock: $$cap_bootstrapmemory_lock
+      OPENSEARCH_JAVA_OPTS: -Xms${OPENSEARCH_JAVA_OPTS_MIN:-512m}
+        -Xmx${OPENSEARCH_JAVA_OPTS_MAX:-1024m}
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: $$cap_opensearch_initial_admin_password
+    volumes:
+      - $$cap_appname-volumesopensearchdata:/usr/share/opensearch/data
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:$$cap_opensearchproject_opensearchdashboards_version
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
+    volumes:
+      - $$cap_appname-volumesopensearchopensearch-dashboards-yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml
+    caproverExtra:
+      notExposeAsWebApp: true
+    depends_on:
+      - $$cap_appname-opensearch
+  $$cap_appname-myscale:
+    image: myscale/myscaledb:$$cap_myscale_myscaledb_version
+    volumes:
+      - $$cap_appname-volumesmyscaledata:/var/lib/clickhouse
+      - $$cap_appname-volumesmyscalelog:/var/log/clickhouse-server
+      - $$cap_appname-volumesmyscaleconfigusers-dcustom-users-config-xml:/etc/clickhouse-server/users.d/custom_users_config.xml
+    caproverExtra:
+      notExposeAsWebApp: true
+  $$cap_appname-elasticsearch:
+    environment:
+      ELASTIC_PASSWORD: $$cap_elastic_password
+      VECTOR_STORE: $$cap_vector_store
+      cluster.name: dify-es-cluster
+      node.name: dify-es0
+      discovery.type: single-node
+      xpack.license.self_generated.type: basic
+      xpack.security.enabled: "true"
+      xpack.security.enrollment.enabled: "false"
+      xpack.security.http.ssl.enabled: "false"
+    volumes:
+      - $$cap_appname-elasticsearchdocker-entrypoint-sh:/docker-entrypoint-mount.sh
+      - $$cap_appname-dify_es01_data:/usr/share/elasticsearch/data
+    caproverExtra:
+      dockerfileLines:
+        - FROM
+          docker.elastic.co/elasticsearch/elasticsearch:$$cap_dockerelasticco_elasticsearch_elasticsearch_version
+        - ENTRYPOINT ["sh","-c","sh /docker-entrypoint-mount.sh"]
+      notExposeAsWebApp: true
+  $$cap_appname-kibana:
+    image: docker.elastic.co/kibana/kibana:$$cap_dockerelasticco_kibana_kibana_version
+    environment:
+      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: d1a66dfd-c4d3-4a0a-8290-2abcb83ab3aa
+      NO_PROXY: localhost,127.0.0.1,elasticsearch,kibana
+      XPACK_SECURITY_ENABLED: "true"
+      XPACK_SECURITY_ENROLLMENT_ENABLED: "false"
+      XPACK_SECURITY_HTTP_SSL_ENABLED: "false"
+      XPACK_FLEET_ISAIRGAPPED: "true"
+      I18N_LOCALE: zh-CN
+      SERVER_PORT: "5601"
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    caproverExtra:
+      notExposeAsWebApp: true
+    depends_on:
+      - $$cap_appname-elasticsearch
+  $$cap_appname-unstructured:
+    image: downloads.unstructured.io/unstructured-io/unstructured-api:$$cap_downloadsunstructuredio_unstructuredio_unstructuredapi_version
+    volumes:
+      - $$cap_appname-volumesunstructured:/app/data
+    caproverExtra:
+      notExposeAsWebApp: true
