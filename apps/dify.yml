@@ -11,35 +11,50 @@ caproverOneClickApp:
       label: MODE
       defaultValue: api
     - id: $$cap_sentry_dsn
-      label: SENTRY_DSN
+      label: Sentry DSN for error tracking
+      defaultValue: ""
     - id: $$cap_sentry_traces_sample_rate
-      label: SENTRY_TRACES_SAMPLE_RATE
+      label: Sentry traces sample rate (0.0 to 1.0)
+      defaultValue: "1.0"
     - id: $$cap_sentry_profiles_sample_rate
-      label: SENTRY_PROFILES_SAMPLE_RATE
+      label: Sentry profiles sample rate (0.0 to 1.0)
+      defaultValue: "1.0"
     - id: $$cap_console_api_url
-      label: CONSOLE_API_URL
+      label: Console API URL
+      defaultValue: ""
     - id: $$cap_console_web_url
-      label: CONSOLE_WEB_URL
+      label: Console Web URL
+      defaultValue: ""
     - id: $$cap_service_api_url
-      label: SERVICE_API_URL
+      label: Service API URL
+      defaultValue: ""
     - id: $$cap_app_api_url
-      label: APP_API_URL
+      label: Application API URL
+      defaultValue: ""
     - id: $$cap_app_web_url
-      label: APP_WEB_URL
+      label: Application Web URL
+      defaultValue: ""
     - id: $$cap_files_url
-      label: FILES_URL
+      label: Files URL for storage
+      defaultValue: ""
     - id: $$cap_log_level
-      label: LOG_LEVEL
+      label: Logging level (INFO, DEBUG, WARNING, ERROR)
+      defaultValue: "INFO"
     - id: $$cap_log_file
-      label: LOG_FILE
+      label: Log file path
+      defaultValue: "/app/logs/server.log"
     - id: $$cap_log_file_max_size
-      label: LOG_FILE_MAX_SIZE
+      label: Maximum log file size in MB
+      defaultValue: "20"
     - id: $$cap_log_file_backup_count
-      label: LOG_FILE_BACKUP_COUNT
+      label: Number of log file backups to keep
+      defaultValue: "5"
     - id: $$cap_log_dateformat
-      label: LOG_DATEFORMAT
+      label: Log date format
+      defaultValue: "%Y-%m-%d %H:%M:%S"
     - id: $$cap_log_tz
-      label: LOG_TZ
+      label: Timezone for logs
+      defaultValue: "UTC"
     - id: $$cap_debug
       label: DEBUG
     - id: $$cap_flask_debug
@@ -93,700 +108,1046 @@ caproverOneClickApp:
     - id: $$cap_api_tool_default_read_timeout
       label: API_TOOL_DEFAULT_READ_TIMEOUT
     - id: $$cap_db_username
-      label: DB_USERNAME
+      label: Database username
+      defaultValue: "postgres"
     - id: $$cap_db_password
-      label: DB_PASSWORD
+      label: Database password
+      defaultValue: "difyai123456"
     - id: $$cap_db_host
-      label: DB_HOST
+      label: Database host
+      defaultValue: "db"
     - id: $$cap_db_port
-      label: DB_PORT
+      label: Database port
+      defaultValue: "5432"
     - id: $$cap_db_database
-      label: DB_DATABASE
+      label: Database name
+      defaultValue: "dify"
     - id: $$cap_sqlalchemy_pool_size
-      label: SQLALCHEMY_POOL_SIZE
+      label: SQLAlchemy connection pool size
+      defaultValue: "30"
     - id: $$cap_sqlalchemy_pool_recycle
-      label: SQLALCHEMY_POOL_RECYCLE
+      label: SQLAlchemy connection pool recycle time (seconds)
+      defaultValue: "3600"
     - id: $$cap_sqlalchemy_echo
-      label: SQLALCHEMY_ECHO
+      label: Enable SQLAlchemy query logging
+      defaultValue: "false"
     - id: $$cap_postgres_max_connections
-      label: POSTGRES_MAX_CONNECTIONS
+      label: PostgreSQL maximum connections
+      defaultValue: "100"
     - id: $$cap_postgres_shared_buffers
-      label: POSTGRES_SHARED_BUFFERS
+      label: PostgreSQL shared buffers size
+      defaultValue: "128MB"
     - id: $$cap_postgres_work_mem
-      label: POSTGRES_WORK_MEM
+      label: PostgreSQL work memory per operation
+      defaultValue: "4MB"
     - id: $$cap_postgres_maintenance_work_mem
-      label: POSTGRES_MAINTENANCE_WORK_MEM
+      label: PostgreSQL maintenance operations memory
+      defaultValue: "64MB"
     - id: $$cap_postgres_effective_cache_size
-      label: POSTGRES_EFFECTIVE_CACHE_SIZE
+      label: PostgreSQL query planner memory assumption
+      defaultValue: "4096MB"
     - id: $$cap_redis_host
       label: REDIS_HOST
+      defaultValue: "redis"
     - id: $$cap_redis_port
       label: REDIS_PORT
+      defaultValue: "6379"
     - id: $$cap_redis_username
       label: REDIS_USERNAME
+      defaultValue: ""
     - id: $$cap_redis_password
       label: REDIS_PASSWORD
+      defaultValue: ""
     - id: $$cap_redis_use_ssl
       label: REDIS_USE_SSL
+      defaultValue: "false"
     - id: $$cap_redis_db
       label: REDIS_DB
+      defaultValue: "0"
     - id: $$cap_redis_use_sentinel
       label: REDIS_USE_SENTINEL
+      defaultValue: "false"
     - id: $$cap_redis_sentinels
       label: REDIS_SENTINELS
+      defaultValue: ""
     - id: $$cap_redis_sentinel_service_name
       label: REDIS_SENTINEL_SERVICE_NAME
+      defaultValue: ""
     - id: $$cap_redis_sentinel_username
       label: REDIS_SENTINEL_USERNAME
+      defaultValue: ""
     - id: $$cap_redis_sentinel_password
       label: REDIS_SENTINEL_PASSWORD
+      defaultValue: ""
     - id: $$cap_redis_sentinel_socket_timeout
       label: REDIS_SENTINEL_SOCKET_TIMEOUT
+      defaultValue: "0"
     - id: $$cap_redis_use_clusters
       label: REDIS_USE_CLUSTERS
+      defaultValue: "false"
     - id: $$cap_redis_clusters
       label: REDIS_CLUSTERS
+      defaultValue: ""
     - id: $$cap_redis_clusters_password
       label: REDIS_CLUSTERS_PASSWORD
+      defaultValue: ""
     - id: $$cap_celery_broker_url
       label: CELERY_BROKER_URL
+      defaultValue: "redis://redis:6379/0"
     - id: $$cap_broker_use_ssl
       label: BROKER_USE_SSL
+      defaultValue: "false"
     - id: $$cap_celery_use_sentinel
       label: CELERY_USE_SENTINEL
+      defaultValue: "false"
     - id: $$cap_celery_sentinel_master_name
       label: CELERY_SENTINEL_MASTER_NAME
+      defaultValue: ""
     - id: $$cap_celery_sentinel_socket_timeout
       label: CELERY_SENTINEL_SOCKET_TIMEOUT
+      defaultValue: "0"
     - id: $$cap_web_api_cors_allow_origins
       label: WEB_API_CORS_ALLOW_ORIGINS
+      defaultValue: "*"
     - id: $$cap_console_cors_allow_origins
       label: CONSOLE_CORS_ALLOW_ORIGINS
+      defaultValue: "*"
     - id: $$cap_storage_type
       label: STORAGE_TYPE
+      defaultValue: "s3"
     - id: $$cap_opendal_scheme
       label: OPENDAL_SCHEME
+      defaultValue: "s3"
     - id: $$cap_opendal_fs_root
       label: OPENDAL_FS_ROOT
+      defaultValue: "/app/api/storage"
     - id: $$cap_s3_endpoint
       label: S3_ENDPOINT
+      defaultValue: ""
     - id: $$cap_s3_region
       label: S3_REGION
+      defaultValue: ""
     - id: $$cap_s3_bucket_name
       label: S3_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_s3_access_key
       label: S3_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_s3_secret_key
       label: S3_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_s3_use_aws_managed_iam
       label: S3_USE_AWS_MANAGED_IAM
+      defaultValue: "false"
     - id: $$cap_azure_blob_account_name
       label: AZURE_BLOB_ACCOUNT_NAME
+      defaultValue: ""
     - id: $$cap_azure_blob_account_key
       label: AZURE_BLOB_ACCOUNT_KEY
+      defaultValue: ""
     - id: $$cap_azure_blob_container_name
       label: AZURE_BLOB_CONTAINER_NAME
+      defaultValue: ""
     - id: $$cap_azure_blob_account_url
       label: AZURE_BLOB_ACCOUNT_URL
+      defaultValue: ""
     - id: $$cap_google_storage_bucket_name
       label: GOOGLE_STORAGE_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_google_storage_service_account_json_base64
       label: GOOGLE_STORAGE_SERVICE_ACCOUNT_JSON_BASE64
+      defaultValue: ""
     - id: $$cap_aliyun_oss_bucket_name
       label: ALIYUN_OSS_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_aliyun_oss_access_key
       label: ALIYUN_OSS_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_aliyun_oss_secret_key
       label: ALIYUN_OSS_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_aliyun_oss_endpoint
       label: ALIYUN_OSS_ENDPOINT
+      defaultValue: ""
     - id: $$cap_aliyun_oss_region
       label: ALIYUN_OSS_REGION
+      defaultValue: ""
     - id: $$cap_aliyun_oss_auth_version
       label: ALIYUN_OSS_AUTH_VERSION
+      defaultValue: ""
     - id: $$cap_aliyun_oss_path
       label: ALIYUN_OSS_PATH
+      defaultValue: ""
     - id: $$cap_tencent_cos_bucket_name
       label: TENCENT_COS_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_tencent_cos_secret_key
       label: TENCENT_COS_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_tencent_cos_secret_id
       label: TENCENT_COS_SECRET_ID
+      defaultValue: ""
     - id: $$cap_tencent_cos_region
       label: TENCENT_COS_REGION
+      defaultValue: ""
     - id: $$cap_tencent_cos_scheme
       label: TENCENT_COS_SCHEME
+      defaultValue: ""
     - id: $$cap_oci_endpoint
       label: OCI_ENDPOINT
+      defaultValue: ""
     - id: $$cap_oci_bucket_name
       label: OCI_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_oci_access_key
       label: OCI_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_oci_secret_key
       label: OCI_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_oci_region
       label: OCI_REGION
+      defaultValue: ""
     - id: $$cap_huawei_obs_bucket_name
       label: HUAWEI_OBS_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_huawei_obs_secret_key
       label: HUAWEI_OBS_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_huawei_obs_access_key
       label: HUAWEI_OBS_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_huawei_obs_server
       label: HUAWEI_OBS_SERVER
+      defaultValue: ""
     - id: $$cap_volcengine_tos_bucket_name
       label: VOLCENGINE_TOS_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_volcengine_tos_secret_key
       label: VOLCENGINE_TOS_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_volcengine_tos_access_key
       label: VOLCENGINE_TOS_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_volcengine_tos_endpoint
       label: VOLCENGINE_TOS_ENDPOINT
+      defaultValue: ""
     - id: $$cap_volcengine_tos_region
       label: VOLCENGINE_TOS_REGION
+      defaultValue: ""
     - id: $$cap_baidu_obs_bucket_name
       label: BAIDU_OBS_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_baidu_obs_secret_key
       label: BAIDU_OBS_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_baidu_obs_access_key
       label: BAIDU_OBS_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_baidu_obs_endpoint
       label: BAIDU_OBS_ENDPOINT
+      defaultValue: ""
     - id: $$cap_supabase_bucket_name
       label: SUPABASE_BUCKET_NAME
+      defaultValue: ""
     - id: $$cap_supabase_api_key
       label: SUPABASE_API_KEY
+      defaultValue: ""
     - id: $$cap_supabase_url
       label: SUPABASE_URL
+      defaultValue: ""
     - id: $$cap_vector_store
       label: VECTOR_STORE
+      defaultValue: "weaviate"
     - id: $$cap_weaviate_endpoint
       label: WEAVIATE_ENDPOINT
+      defaultValue: ""
     - id: $$cap_weaviate_api_key
       label: WEAVIATE_API_KEY
+      defaultValue: ""
     - id: $$cap_qdrant_url
       label: QDRANT_URL
+      defaultValue: ""
     - id: $$cap_qdrant_api_key
       label: QDRANT_API_KEY
+      defaultValue: ""
     - id: $$cap_qdrant_client_timeout
       label: QDRANT_CLIENT_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_qdrant_grpc_enabled
       label: QDRANT_GRPC_ENABLED
+      defaultValue: "false"
     - id: $$cap_qdrant_grpc_port
       label: QDRANT_GRPC_PORT
+      defaultValue: "6333"
     - id: $$cap_milvus_uri
       label: MILVUS_URI
+      defaultValue: "http://milvus:19530"
     - id: $$cap_milvus_token
       label: MILVUS_TOKEN
+      defaultValue: ""
     - id: $$cap_milvus_user
       label: MILVUS_USER
+      defaultValue: ""
     - id: $$cap_milvus_password
       label: MILVUS_PASSWORD
+      defaultValue: ""
     - id: $$cap_milvus_enable_hybrid_search
       label: MILVUS_ENABLE_HYBRID_SEARCH
+      defaultValue: "false"
     - id: $$cap_myscale_host
       label: MYSCALE_HOST
+      defaultValue: "myscale"
     - id: $$cap_myscale_port
       label: MYSCALE_PORT
+      defaultValue: "8123"
     - id: $$cap_myscale_user
       label: MYSCALE_USER
+      defaultValue: "default"
     - id: $$cap_myscale_password
       label: MYSCALE_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_myscale_database
       label: MYSCALE_DATABASE
+      defaultValue: "dify"
     - id: $$cap_myscale_fts_params
       label: MYSCALE_FTS_PARAMS
+      defaultValue: ""
     - id: $$cap_couchbase_connection_string
       label: COUCHBASE_CONNECTION_STRING
+      defaultValue: "couchbase://couchbase:8091"
     - id: $$cap_couchbase_user
       label: COUCHBASE_USER
+      defaultValue: "Administrator"
     - id: $$cap_couchbase_password
       label: COUCHBASE_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_couchbase_bucket_name
       label: COUCHBASE_BUCKET_NAME
+      defaultValue: "dify"
     - id: $$cap_couchbase_scope_name
       label: COUCHBASE_SCOPE_NAME
+      defaultValue: "_default"
     - id: $$cap_pgvector_host
       label: PGVECTOR_HOST
+      defaultValue: "pgvector"
     - id: $$cap_pgvector_port
       label: PGVECTOR_PORT
+      defaultValue: "5432"
     - id: $$cap_pgvector_user
       label: PGVECTOR_USER
+      defaultValue: "postgres"
     - id: $$cap_pgvector_password
       label: PGVECTOR_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_pgvector_database
       label: PGVECTOR_DATABASE
+      defaultValue: "dify"
     - id: $$cap_pgvector_min_connection
       label: PGVECTOR_MIN_CONNECTION
+      defaultValue: "10"
     - id: $$cap_pgvector_max_connection
       label: PGVECTOR_MAX_CONNECTION
+      defaultValue: "100"
     - id: $$cap_pgvecto_rs_host
       label: PGVECTO_RS_HOST
+      defaultValue: "pgvecto-rs"
     - id: $$cap_pgvecto_rs_port
       label: PGVECTO_RS_PORT
+      defaultValue: "5432"
     - id: $$cap_pgvecto_rs_user
       label: PGVECTO_RS_USER
+      defaultValue: "postgres"
     - id: $$cap_pgvecto_rs_password
       label: PGVECTO_RS_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_pgvecto_rs_database
       label: PGVECTO_RS_DATABASE
+      defaultValue: "dify"
     - id: $$cap_analyticdb_key_id
       label: ANALYTICDB_KEY_ID
+      defaultValue: ""
     - id: $$cap_analyticdb_key_secret
       label: ANALYTICDB_KEY_SECRET
+      defaultValue: ""
     - id: $$cap_analyticdb_region_id
       label: ANALYTICDB_REGION_ID
+      defaultValue: ""
     - id: $$cap_analyticdb_instance_id
       label: ANALYTICDB_INSTANCE_ID
+      defaultValue: ""
     - id: $$cap_analyticdb_account
       label: ANALYTICDB_ACCOUNT
+      defaultValue: ""
     - id: $$cap_analyticdb_password
       label: ANALYTICDB_PASSWORD
+      defaultValue: ""
     - id: $$cap_analyticdb_namespace
       label: ANALYTICDB_NAMESPACE
+      defaultValue: ""
     - id: $$cap_analyticdb_namespace_password
       label: ANALYTICDB_NAMESPACE_PASSWORD
+      defaultValue: ""
     - id: $$cap_analyticdb_host
       label: ANALYTICDB_HOST
+      defaultValue: "analyticdb"
     - id: $$cap_analyticdb_port
       label: ANALYTICDB_PORT
+      defaultValue: "5432"
     - id: $$cap_analyticdb_min_connection
       label: ANALYTICDB_MIN_CONNECTION
+      defaultValue: "10"
     - id: $$cap_analyticdb_max_connection
       label: ANALYTICDB_MAX_CONNECTION
+      defaultValue: "100"
     - id: $$cap_tidb_vector_host
       label: TIDB_VECTOR_HOST
+      defaultValue: "tidb"
     - id: $$cap_tidb_vector_port
       label: TIDB_VECTOR_PORT
+      defaultValue: "4000"
     - id: $$cap_tidb_vector_user
       label: TIDB_VECTOR_USER
+      defaultValue: "root"
     - id: $$cap_tidb_vector_password
       label: TIDB_VECTOR_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_tidb_vector_database
       label: TIDB_VECTOR_DATABASE
+      defaultValue: "dify"
     - id: $$cap_tidb_on_qdrant_url
       label: TIDB_ON_QDRANT_URL
+      defaultValue: "http://qdrant:6333"
     - id: $$cap_tidb_on_qdrant_api_key
       label: TIDB_ON_QDRANT_API_KEY
+      defaultValue: ""
     - id: $$cap_tidb_on_qdrant_client_timeout
       label: TIDB_ON_QDRANT_CLIENT_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_tidb_on_qdrant_grpc_enabled
       label: TIDB_ON_QDRANT_GRPC_ENABLED
+      defaultValue: "false"
     - id: $$cap_tidb_on_qdrant_grpc_port
       label: TIDB_ON_QDRANT_GRPC_PORT
+      defaultValue: "6333"
     - id: $$cap_tidb_public_key
       label: TIDB_PUBLIC_KEY
+      defaultValue: ""
     - id: $$cap_tidb_private_key
       label: TIDB_PRIVATE_KEY
+      defaultValue: ""
     - id: $$cap_tidb_api_url
       label: TIDB_API_URL
+      defaultValue: "http://tidb:4000"
     - id: $$cap_tidb_iam_api_url
       label: TIDB_IAM_API_URL
+      defaultValue: "http://tidb:4000"
     - id: $$cap_tidb_region
       label: TIDB_REGION
+      defaultValue: "us-west-1"
     - id: $$cap_tidb_project_id
       label: TIDB_PROJECT_ID
+      defaultValue: "1"
     - id: $$cap_tidb_spend_limit
       label: TIDB_SPEND_LIMIT
+      defaultValue: "1000"
     - id: $$cap_chroma_host
       label: CHROMA_HOST
+      defaultValue: "chroma"
     - id: $$cap_chroma_port
       label: CHROMA_PORT
+      defaultValue: "8000"
     - id: $$cap_chroma_tenant
       label: CHROMA_TENANT
+      defaultValue: "default"
     - id: $$cap_chroma_database
       label: CHROMA_DATABASE
+      defaultValue: "dify"
     - id: $$cap_chroma_auth_provider
       label: CHROMA_AUTH_PROVIDER
+      defaultValue: "local"
     - id: $$cap_chroma_auth_credentials
       label: CHROMA_AUTH_CREDENTIALS
+      defaultValue: ""
     - id: $$cap_oracle_host
       label: ORACLE_HOST
+      defaultValue: "oracle"
     - id: $$cap_oracle_port
       label: ORACLE_PORT
+      defaultValue: "1521"
     - id: $$cap_oracle_user
       label: ORACLE_USER
+      defaultValue: "system"
     - id: $$cap_oracle_password
       label: ORACLE_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_oracle_database
       label: ORACLE_DATABASE
+      defaultValue: "dify"
     - id: $$cap_relyt_host
       label: RELYT_HOST
+      defaultValue: "relyt"
     - id: $$cap_relyt_port
       label: RELYT_PORT
+      defaultValue: "8080"
     - id: $$cap_relyt_user
       label: RELYT_USER
+      defaultValue: "relyt"
     - id: $$cap_relyt_password
       label: RELYT_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_relyt_database
       label: RELYT_DATABASE
+      defaultValue: "dify"
     - id: $$cap_opensearch_host
       label: OPENSEARCH_HOST
+      defaultValue: "opensearch"
     - id: $$cap_opensearch_port
       label: OPENSEARCH_PORT
+      defaultValue: "9200"
     - id: $$cap_opensearch_user
       label: OPENSEARCH_USER
+      defaultValue: "opensearch"
     - id: $$cap_opensearch_password
       label: OPENSEARCH_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_opensearch_secure
       label: OPENSEARCH_SECURE
+      defaultValue: "false"
     - id: $$cap_tencent_vector_db_url
       label: TENCENT_VECTOR_DB_URL
+      defaultValue: ""
     - id: $$cap_tencent_vector_db_api_key
       label: TENCENT_VECTOR_DB_API_KEY
+      defaultValue: ""
     - id: $$cap_tencent_vector_db_timeout
       label: TENCENT_VECTOR_DB_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_tencent_vector_db_username
       label: TENCENT_VECTOR_DB_USERNAME
+      defaultValue: ""
     - id: $$cap_tencent_vector_db_database
       label: TENCENT_VECTOR_DB_DATABASE
+      defaultValue: ""
     - id: $$cap_tencent_vector_db_shard
       label: TENCENT_VECTOR_DB_SHARD
+      defaultValue: ""
     - id: $$cap_tencent_vector_db_replicas
       label: TENCENT_VECTOR_DB_REPLICAS
+      defaultValue: "1"
     - id: $$cap_elasticsearch_host
       label: ELASTICSEARCH_HOST
+      defaultValue: "elasticsearch"
     - id: $$cap_elasticsearch_port
       label: ELASTICSEARCH_PORT
+      defaultValue: "9200"
     - id: $$cap_elasticsearch_username
       label: ELASTICSEARCH_USERNAME
+      defaultValue: "elasticsearch"
     - id: $$cap_elasticsearch_password
       label: ELASTICSEARCH_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_kibana_port
       label: KIBANA_PORT
+      defaultValue: "5601"
     - id: $$cap_baidu_vector_db_endpoint
       label: BAIDU_VECTOR_DB_ENDPOINT
+      defaultValue: ""
     - id: $$cap_baidu_vector_db_connection_timeout_ms
       label: BAIDU_VECTOR_DB_CONNECTION_TIMEOUT_MS
+      defaultValue: "5000"
     - id: $$cap_baidu_vector_db_account
       label: BAIDU_VECTOR_DB_ACCOUNT
+      defaultValue: ""
     - id: $$cap_baidu_vector_db_api_key
       label: BAIDU_VECTOR_DB_API_KEY
+      defaultValue: ""
     - id: $$cap_baidu_vector_db_database
       label: BAIDU_VECTOR_DB_DATABASE
+      defaultValue: ""
     - id: $$cap_baidu_vector_db_shard
       label: BAIDU_VECTOR_DB_SHARD
+      defaultValue: ""
     - id: $$cap_baidu_vector_db_replicas
       label: BAIDU_VECTOR_DB_REPLICAS
+      defaultValue: "1"
     - id: $$cap_vikingdb_access_key
       label: VIKINGDB_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_vikingdb_secret_key
       label: VIKINGDB_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_vikingdb_region
       label: VIKINGDB_REGION
+      defaultValue: ""
     - id: $$cap_vikingdb_host
       label: VIKINGDB_HOST
+      defaultValue: "vikingdb"
     - id: $$cap_vikingdb_schema
       label: VIKINGDB_SCHEMA
+      defaultValue: ""
     - id: $$cap_vikingdb_connection_timeout
       label: VIKINGDB_CONNECTION_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_vikingdb_socket_timeout
       label: VIKINGDB_SOCKET_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_lindorm_url
       label: LINDORM_URL
+      defaultValue: ""
     - id: $$cap_lindorm_username
       label: LINDORM_USERNAME
+      defaultValue: ""
     - id: $$cap_lindorm_password
       label: LINDORM_PASSWORD
+      defaultValue: ""
     - id: $$cap_oceanbase_vector_host
       label: OCEANBASE_VECTOR_HOST
+      defaultValue: "oceanbase"
     - id: $$cap_oceanbase_vector_port
       label: OCEANBASE_VECTOR_PORT
+      defaultValue: "2883"
     - id: $$cap_oceanbase_vector_user
       label: OCEANBASE_VECTOR_USER
+      defaultValue: "oceanbase"
     - id: $$cap_oceanbase_vector_password
       label: OCEANBASE_VECTOR_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_oceanbase_vector_database
       label: OCEANBASE_VECTOR_DATABASE
+      defaultValue: "dify"
     - id: $$cap_oceanbase_cluster_name
       label: OCEANBASE_CLUSTER_NAME
+      defaultValue: "oceanbase"
     - id: $$cap_oceanbase_memory_limit
       label: OCEANBASE_MEMORY_LIMIT
+      defaultValue: "1024MB"
     - id: $$cap_upstash_vector_url
       label: UPSTASH_VECTOR_URL
+      defaultValue: ""
     - id: $$cap_upstash_vector_token
       label: UPSTASH_VECTOR_TOKEN
+      defaultValue: ""
     - id: $$cap_upload_file_size_limit
       label: UPLOAD_FILE_SIZE_LIMIT
+      defaultValue: "100MB"
     - id: $$cap_upload_file_batch_limit
       label: UPLOAD_FILE_BATCH_LIMIT
+      defaultValue: "1000"
     - id: $$cap_etl_type
       label: ETL_TYPE
+      defaultValue: "full"
     - id: $$cap_unstructured_api_url
       label: UNSTRUCTURED_API_URL
+      defaultValue: ""
     - id: $$cap_unstructured_api_key
       label: UNSTRUCTURED_API_KEY
+      defaultValue: ""
     - id: $$cap_scarf_no_analytics
       label: SCARF_NO_ANALYTICS
+      defaultValue: "false"
     - id: $$cap_prompt_generation_max_tokens
       label: PROMPT_GENERATION_MAX_TOKENS
+      defaultValue: "512"
     - id: $$cap_code_generation_max_tokens
       label: CODE_GENERATION_MAX_TOKENS
+      defaultValue: "512"
     - id: $$cap_multimodal_send_format
       label: MULTIMODAL_SEND_FORMAT
+      defaultValue: "json"
     - id: $$cap_upload_image_file_size_limit
       label: UPLOAD_IMAGE_FILE_SIZE_LIMIT
+      defaultValue: "10MB"
     - id: $$cap_upload_video_file_size_limit
       label: UPLOAD_VIDEO_FILE_SIZE_LIMIT
+      defaultValue: "10MB"
     - id: $$cap_upload_audio_file_size_limit
       label: UPLOAD_AUDIO_FILE_SIZE_LIMIT
+      defaultValue: "10MB"
     - id: $$cap_api_sentry_dsn
       label: API_SENTRY_DSN
+      defaultValue: ""
     - id: $$cap_api_sentry_traces_sample_rate
       label: API_SENTRY_TRACES_SAMPLE_RATE
+      defaultValue: "1.0"
     - id: $$cap_api_sentry_profiles_sample_rate
       label: API_SENTRY_PROFILES_SAMPLE_RATE
+      defaultValue: "1.0"
     - id: $$cap_web_sentry_dsn
       label: WEB_SENTRY_DSN
+      defaultValue: ""
     - id: $$cap_notion_integration_type
       label: NOTION_INTEGRATION_TYPE
+      defaultValue: "none"
     - id: $$cap_notion_client_secret
       label: NOTION_CLIENT_SECRET
+      defaultValue: ""
     - id: $$cap_notion_client_id
       label: NOTION_CLIENT_ID
+      defaultValue: ""
     - id: $$cap_notion_internal_secret
       label: NOTION_INTERNAL_SECRET
+      defaultValue: ""
     - id: $$cap_mail_type
       label: MAIL_TYPE
+      defaultValue: "smtp"
     - id: $$cap_mail_default_send_from
       label: MAIL_DEFAULT_SEND_FROM
+      defaultValue: "noreply@dify.ai"
     - id: $$cap_resend_api_url
       label: RESEND_API_URL
+      defaultValue: ""
     - id: $$cap_resend_api_key
       label: RESEND_API_KEY
+      defaultValue: ""
     - id: $$cap_smtp_server
       label: SMTP_SERVER
+      defaultValue: "smtp.dify.ai"
     - id: $$cap_smtp_port
       label: SMTP_PORT
+      defaultValue: "587"
     - id: $$cap_smtp_username
       label: SMTP_USERNAME
+      defaultValue: "noreply@dify.ai"
     - id: $$cap_smtp_password
       label: SMTP_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_smtp_use_tls
       label: SMTP_USE_TLS
+      defaultValue: "true"
     - id: $$cap_smtp_opportunistic_tls
       label: SMTP_OPPORTUNISTIC_TLS
+      defaultValue: "true"
     - id: $$cap_indexing_max_segmentation_tokens_length
       label: INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH
+      defaultValue: "512"
     - id: $$cap_invite_expiry_hours
       label: INVITE_EXPIRY_HOURS
+      defaultValue: "24"
     - id: $$cap_reset_password_token_expiry_minutes
       label: RESET_PASSWORD_TOKEN_EXPIRY_MINUTES
+      defaultValue: "1440"
     - id: $$cap_code_execution_endpoint
       label: CODE_EXECUTION_ENDPOINT
+      defaultValue: ""
     - id: $$cap_code_execution_api_key
       label: CODE_EXECUTION_API_KEY
+      defaultValue: ""
     - id: $$cap_code_max_number
       label: CODE_MAX_NUMBER
+      defaultValue: "100"
     - id: $$cap_code_min_number
       label: CODE_MIN_NUMBER
+      defaultValue: "1"
     - id: $$cap_code_max_depth
       label: CODE_MAX_DEPTH
+      defaultValue: "10"
     - id: $$cap_code_max_precision
       label: CODE_MAX_PRECISION
+      defaultValue: "0.001"
     - id: $$cap_code_max_string_length
       label: CODE_MAX_STRING_LENGTH
+      defaultValue: "1024"
     - id: $$cap_code_max_string_array_length
       label: CODE_MAX_STRING_ARRAY_LENGTH
+      defaultValue: "100"
     - id: $$cap_code_max_object_array_length
       label: CODE_MAX_OBJECT_ARRAY_LENGTH
+      defaultValue: "100"
     - id: $$cap_code_max_number_array_length
       label: CODE_MAX_NUMBER_ARRAY_LENGTH
+      defaultValue: "100"
     - id: $$cap_code_execution_connect_timeout
       label: CODE_EXECUTION_CONNECT_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_code_execution_read_timeout
       label: CODE_EXECUTION_READ_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_code_execution_write_timeout
       label: CODE_EXECUTION_WRITE_TIMEOUT
+      defaultValue: "5000"
     - id: $$cap_template_transform_max_length
       label: TEMPLATE_TRANSFORM_MAX_LENGTH
+      defaultValue: "1024"
     - id: $$cap_workflow_max_execution_steps
       label: WORKFLOW_MAX_EXECUTION_STEPS
+      defaultValue: "100"
     - id: $$cap_workflow_max_execution_time
       label: WORKFLOW_MAX_EXECUTION_TIME
+      defaultValue: "3600"
     - id: $$cap_workflow_call_max_depth
       label: WORKFLOW_CALL_MAX_DEPTH
+      defaultValue: "10"
     - id: $$cap_max_variable_size
       label: MAX_VARIABLE_SIZE
+      defaultValue: "1024"
     - id: $$cap_workflow_parallel_depth_limit
       label: WORKFLOW_PARALLEL_DEPTH_LIMIT
+      defaultValue: "10"
     - id: $$cap_workflow_file_upload_limit
       label: WORKFLOW_FILE_UPLOAD_LIMIT
+      defaultValue: "100MB"
     - id: $$cap_http_request_node_max_binary_size
       label: HTTP_REQUEST_NODE_MAX_BINARY_SIZE
+      defaultValue: "10MB"
     - id: $$cap_http_request_node_max_text_size
       label: HTTP_REQUEST_NODE_MAX_TEXT_SIZE
+      defaultValue: "10MB"
     - id: $$cap_ssrf_proxy_http_url
       label: SSRF_PROXY_HTTP_URL
+      defaultValue: ""
     - id: $$cap_ssrf_proxy_https_url
       label: SSRF_PROXY_HTTPS_URL
+      defaultValue: ""
     - id: $$cap_text_generation_timeout_ms
       label: TEXT_GENERATION_TIMEOUT_MS
+      defaultValue: "5000"
     - id: $$cap_pguser
       label: PGUSER
+      defaultValue: "postgres"
     - id: $$cap_postgres_password
       label: POSTGRES_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_postgres_db
       label: POSTGRES_DB
+      defaultValue: "dify"
     - id: $$cap_pgdata
       label: PGDATA
+      defaultValue: "/var/lib/postgresql/data"
     - id: $$cap_sandbox_api_key
       label: SANDBOX_API_KEY
+      defaultValue: ""
     - id: $$cap_sandbox_gin_mode
       label: SANDBOX_GIN_MODE
+      defaultValue: "release"
     - id: $$cap_sandbox_worker_timeout
       label: SANDBOX_WORKER_TIMEOUT
+      defaultValue: "3600"
     - id: $$cap_sandbox_enable_network
       label: SANDBOX_ENABLE_NETWORK
+      defaultValue: "false"
     - id: $$cap_sandbox_http_proxy
       label: SANDBOX_HTTP_PROXY
+      defaultValue: ""
     - id: $$cap_sandbox_https_proxy
       label: SANDBOX_HTTPS_PROXY
+      defaultValue: ""
     - id: $$cap_sandbox_port
       label: SANDBOX_PORT
+      defaultValue: "8080"
     - id: $$cap_weaviate_persistence_data_path
       label: WEAVIATE_PERSISTENCE_DATA_PATH
+      defaultValue: "/var/lib/weaviate/data"
     - id: $$cap_weaviate_query_defaults_limit
       label: WEAVIATE_QUERY_DEFAULTS_LIMIT
+      defaultValue: "100"
     - id: $$cap_weaviate_authentication_anonymous_access_enabled
       label: WEAVIATE_AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED
+      defaultValue: "false"
     - id: $$cap_weaviate_default_vectorizer_module
       label: WEAVIATE_DEFAULT_VECTORIZER_MODULE
+      defaultValue: "text2vec-openai"
     - id: $$cap_weaviate_cluster_hostname
       label: WEAVIATE_CLUSTER_HOSTNAME
+      defaultValue: "weaviate"
     - id: $$cap_weaviate_authentication_apikey_enabled
       label: WEAVIATE_AUTHENTICATION_APIKEY_ENABLED
+      defaultValue: "false"
     - id: $$cap_weaviate_authentication_apikey_allowed_keys
       label: WEAVIATE_AUTHENTICATION_APIKEY_ALLOWED_KEYS
+      defaultValue: ""
     - id: $$cap_weaviate_authentication_apikey_users
       label: WEAVIATE_AUTHENTICATION_APIKEY_USERS
+      defaultValue: ""
     - id: $$cap_weaviate_authorization_adminlist_enabled
       label: WEAVIATE_AUTHORIZATION_ADMINLIST_ENABLED
+      defaultValue: "false"
     - id: $$cap_weaviate_authorization_adminlist_users
       label: WEAVIATE_AUTHORIZATION_ADMINLIST_USERS
+      defaultValue: ""
     - id: $$cap_chroma_server_authn_credentials
       label: CHROMA_SERVER_AUTHN_CREDENTIALS
+      defaultValue: ""
     - id: $$cap_chroma_server_authn_provider
       label: CHROMA_SERVER_AUTHN_PROVIDER
+      defaultValue: "local"
     - id: $$cap_chroma_is_persistent
       label: CHROMA_IS_PERSISTENT
+      defaultValue: "false"
     - id: $$cap_oracle_pwd
       label: ORACLE_PWD
+      defaultValue: "difyai123456"
     - id: $$cap_oracle_characterset
       label: ORACLE_CHARACTERSET
+      defaultValue: "AL32UTF8"
     - id: $$cap_etcd_auto_compaction_mode
       label: ETCD_AUTO_COMPACTION_MODE
+      defaultValue: "size"
     - id: $$cap_etcd_auto_compaction_retention
       label: ETCD_AUTO_COMPACTION_RETENTION
+      defaultValue: "1h"
     - id: $$cap_etcd_quota_backend_bytes
       label: ETCD_QUOTA_BACKEND_BYTES
+      defaultValue: "100MB"
     - id: $$cap_etcd_snapshot_count
       label: ETCD_SNAPSHOT_COUNT
+      defaultValue: "10000"
     - id: $$cap_minio_access_key
       label: MINIO_ACCESS_KEY
+      defaultValue: ""
     - id: $$cap_minio_secret_key
       label: MINIO_SECRET_KEY
+      defaultValue: ""
     - id: $$cap_etcd_endpoints
       label: ETCD_ENDPOINTS
+      defaultValue: "http://etcd:2379"
     - id: $$cap_minio_address
       label: MINIO_ADDRESS
+      defaultValue: "minio:9000"
     - id: $$cap_milvus_authorization_enabled
       label: MILVUS_AUTHORIZATION_ENABLED
+      defaultValue: "false"
     - id: $$cap_pgvector_pguser
       label: PGVECTOR_PGUSER
+      defaultValue: "postgres"
     - id: $$cap_pgvector_postgres_password
       label: PGVECTOR_POSTGRES_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_pgvector_postgres_db
       label: PGVECTOR_POSTGRES_DB
+      defaultValue: "dify"
     - id: $$cap_pgvector_pgdata
       label: PGVECTOR_PGDATA
+      defaultValue: "/var/lib/postgresql/data"
     - id: $$cap_opensearch_discovery_type
       label: OPENSEARCH_DISCOVERY_TYPE
+      defaultValue: "single-node"
     - id: $$cap_opensearch_bootstrap_memory_lock
       label: OPENSEARCH_BOOTSTRAP_MEMORY_LOCK
+      defaultValue: "false"
     - id: $$cap_opensearch_java_opts_min
       label: OPENSEARCH_JAVA_OPTS_MIN
+      defaultValue: "512m"
     - id: $$cap_opensearch_java_opts_max
       label: OPENSEARCH_JAVA_OPTS_MAX
+      defaultValue: "1024m"
     - id: $$cap_opensearch_initial_admin_password
       label: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_opensearch_memlock_soft
       label: OPENSEARCH_MEMLOCK_SOFT
+      defaultValue: "false"
     - id: $$cap_opensearch_memlock_hard
       label: OPENSEARCH_MEMLOCK_HARD
+      defaultValue: "false"
     - id: $$cap_opensearch_nofile_soft
       label: OPENSEARCH_NOFILE_SOFT
+      defaultValue: "false"
     - id: $$cap_opensearch_nofile_hard
       label: OPENSEARCH_NOFILE_HARD
+      defaultValue: "false"
     - id: $$cap_nginx_server_name
       label: NGINX_SERVER_NAME
+      defaultValue: "dify-api"
     - id: $$cap_nginx_https_enabled
       label: NGINX_HTTPS_ENABLED
+      defaultValue: "false"
     - id: $$cap_nginx_port
       label: NGINX_PORT
+      defaultValue: "80"
     - id: $$cap_nginx_ssl_port
       label: NGINX_SSL_PORT
+      defaultValue: "443"
     - id: $$cap_nginx_ssl_cert_filename
       label: NGINX_SSL_CERT_FILENAME
+      defaultValue: "/certs/nginx.crt"
     - id: $$cap_nginx_ssl_cert_key_filename
       label: NGINX_SSL_CERT_KEY_FILENAME
+      defaultValue: "/certs/nginx.key"
     - id: $$cap_nginx_ssl_protocols
       label: NGINX_SSL_PROTOCOLS
+      defaultValue: "TLSv1.2"
     - id: $$cap_nginx_worker_processes
       label: NGINX_WORKER_PROCESSES
+      defaultValue: "1"
     - id: $$cap_nginx_client_max_body_size
       label: NGINX_CLIENT_MAX_BODY_SIZE
+      defaultValue: "10MB"
     - id: $$cap_nginx_keepalive_timeout
       label: NGINX_KEEPALIVE_TIMEOUT
+      defaultValue: "65"
     - id: $$cap_nginx_proxy_read_timeout
       label: NGINX_PROXY_READ_TIMEOUT
+      defaultValue: "60"
     - id: $$cap_nginx_proxy_send_timeout
       label: NGINX_PROXY_SEND_TIMEOUT
+      defaultValue: "60"
     - id: $$cap_nginx_enable_certbot_challenge
       label: NGINX_ENABLE_CERTBOT_CHALLENGE
+      defaultValue: "false"
     - id: $$cap_certbot_email
       label: CERTBOT_EMAIL
+      defaultValue: "certbot@dify.ai"
     - id: $$cap_certbot_domain
       label: CERTBOT_DOMAIN
+      defaultValue: "dify.ai"
     - id: $$cap_certbot_options
       label: CERTBOT_OPTIONS
+      defaultValue: "--webroot --webroot-path=/var/www/certbot/"
     - id: $$cap_ssrf_http_port
       label: SSRF_HTTP_PORT
+      defaultValue: "8080"
     - id: $$cap_ssrf_coredump_dir
       label: SSRF_COREDUMP_DIR
+      defaultValue: "/tmp"
     - id: $$cap_ssrf_reverse_proxy_port
       label: SSRF_REVERSE_PROXY_PORT
+      defaultValue: "8081"
     - id: $$cap_ssrf_sandbox_host
       label: SSRF_SANDBOX_HOST
+      defaultValue: "sandbox"
     - id: $$cap_expose_nginx_port
       label: EXPOSE_NGINX_PORT
+      defaultValue: "80"
     - id: $$cap_expose_nginx_ssl_port
       label: EXPOSE_NGINX_SSL_PORT
+      defaultValue: "443"
     - id: $$cap_position_tool_pins
       label: POSITION_TOOL_PINS
+      defaultValue: "[]"
     - id: $$cap_position_tool_includes
       label: POSITION_TOOL_INCLUDES
+      defaultValue: "[]"
     - id: $$cap_position_tool_excludes
       label: POSITION_TOOL_EXCLUDES
+      defaultValue: "[]"
     - id: $$cap_position_provider_pins
       label: POSITION_PROVIDER_PINS
+      defaultValue: "[]"
     - id: $$cap_position_provider_includes
       label: POSITION_PROVIDER_INCLUDES
+      defaultValue: "[]"
     - id: $$cap_position_provider_excludes
       label: POSITION_PROVIDER_EXCLUDES
+      defaultValue: "[]"
     - id: $$cap_csp_whitelist
       label: CSP_WHITELIST
+      defaultValue: "[]"
     - id: $$cap_create_tidb_service_job_enabled
       label: CREATE_TIDB_SERVICE_JOB_ENABLED
+      defaultValue: "false"
     - id: $$cap_max_submit_count
       label: MAX_SUBMIT_COUNT
+      defaultValue: "100"
     - id: $$cap_top_k_max_value
       label: TOP_K_MAX_VALUE
+      defaultValue: "100"
     - id: $$cap_langgenius_difyweb_version
       label: langgenius/dify-web version
       defaultValue: 0.15.2
     - id: $$cap_next_telemetry_disabled
       label: NEXT_TELEMETRY_DISABLED
+      defaultValue: "false"
     - id: $$cap_postgres_version
       label: postgres version
       defaultValue: 15-alpine
@@ -795,21 +1156,28 @@ caproverOneClickApp:
       defaultValue: 6-alpine
     - id: $$cap_rediscli_auth
       label: REDISCLI_AUTH
+      defaultValue: "difyai123456"
     - id: $$cap_langgenius_difysandbox_version
       label: langgenius/dify-sandbox version
       defaultValue: 0.2.10
     - id: $$cap_api_key
       label: API_KEY
+      defaultValue: ""
     - id: $$cap_gin_mode
       label: GIN_MODE
+      defaultValue: "release"
     - id: $$cap_worker_timeout
       label: WORKER_TIMEOUT
+      defaultValue: "3600"
     - id: $$cap_enable_network
       label: ENABLE_NETWORK
+      defaultValue: "false"
     - id: $$cap_http_proxy
       label: HTTP_PROXY
+      defaultValue: ""
     - id: $$cap_https_proxy
       label: HTTPS_PROXY
+      defaultValue: ""
     - id: $$cap_pingcap_tidb_version
       label: pingcap/tidb version
       defaultValue: v8.4.0
@@ -818,24 +1186,34 @@ caproverOneClickApp:
       defaultValue: 1.19.0
     - id: $$cap_persistence_data_path
       label: PERSISTENCE_DATA_PATH
+      defaultValue: "/var/lib/weaviate/data"
     - id: $$cap_query_defaults_limit
       label: QUERY_DEFAULTS_LIMIT
+      defaultValue: "100"
     - id: $$cap_authentication_anonymous_access_enabled
       label: AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED
+      defaultValue: "false"
     - id: $$cap_default_vectorizer_module
       label: DEFAULT_VECTORIZER_MODULE
+      defaultValue: "text2vec-openai"
     - id: $$cap_cluster_hostname
       label: CLUSTER_HOSTNAME
+      defaultValue: "weaviate"
     - id: $$cap_authentication_apikey_enabled
       label: AUTHENTICATION_APIKEY_ENABLED
+      defaultValue: "false"
     - id: $$cap_authentication_apikey_allowed_keys
       label: AUTHENTICATION_APIKEY_ALLOWED_KEYS
+      defaultValue: ""
     - id: $$cap_authentication_apikey_users
       label: AUTHENTICATION_APIKEY_USERS
+      defaultValue: ""
     - id: $$cap_authorization_adminlist_enabled
       label: AUTHORIZATION_ADMINLIST_ENABLED
+      defaultValue: "false"
     - id: $$cap_authorization_adminlist_users
       label: AUTHORIZATION_ADMINLIST_USERS
+      defaultValue: ""
     - id: $$cap_langgenius_qdrant_version
       label: langgenius/qdrant version
       defaultValue: v1.7.3
@@ -844,10 +1222,13 @@ caproverOneClickApp:
       defaultValue: dify_search
     - id: $$cap_couchbase_administrator_username
       label: COUCHBASE_ADMINISTRATOR_USERNAME
+      defaultValue: "Administrator"
     - id: $$cap_couchbase_administrator_password
       label: COUCHBASE_ADMINISTRATOR_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_couchbase_bucket
       label: COUCHBASE_BUCKET
+      defaultValue: "dify"
     - id: $$cap_couchbase_bucket_ramsize
       label: COUCHBASE_BUCKET_RAMSIZE
       defaultValue: "512"
@@ -874,20 +1255,25 @@ caproverOneClickApp:
       defaultValue: 0.5.20
     - id: $$cap_is_persistent
       label: IS_PERSISTENT
+      defaultValue: "false"
     - id: $$cap_quayio_oceanbase_oceanbasece_version
       label: quay.io/oceanbase/oceanbase-ce version
       defaultValue: 4.3.3.0-100000142024101215
     - id: $$cap_ob_memory_limit
       label: OB_MEMORY_LIMIT
+      defaultValue: "1024MB"
     - id: $$cap_ob_sys_password
       label: OB_SYS_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_ob_tenant_password
       label: OB_TENANT_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_ob_cluster_name
       label: OB_CLUSTER_NAME
+      defaultValue: "oceanbase"
     - id: $$cap_ob_server_ip
       label: OB_SERVER_IP
-      defaultValue: 127.0.0.1
+      defaultValue: "127.0.0.1"
     - id: $$cap_containerregistryoraclecom_database_free_version
       label: container-registry.oracle.com/database/free version
       defaultValue: latest
@@ -902,13 +1288,16 @@ caproverOneClickApp:
       defaultValue: v2.5.0-beta
     - id: $$cap_commonsecurityauthorizationenabled
       label: common.security.authorizationEnabled
+      defaultValue: "true"
     - id: $$cap_opensearchproject_opensearch_version
       label: opensearchproject/opensearch version
       defaultValue: latest
     - id: $$cap_discoverytype
       label: discovery.type
+      defaultValue: "single-node"
     - id: $$cap_bootstrapmemory_lock
       label: bootstrap.memory_lock
+      defaultValue: "false"
     - id: $$cap_opensearch_java_opts
       label: OPENSEARCH_JAVA_OPTS
       defaultValue: -Xms${OPENSEARCH_JAVA_OPTS_MIN:-512m}
@@ -927,6 +1316,7 @@ caproverOneClickApp:
       defaultValue: 8.14.3
     - id: $$cap_elastic_password
       label: ELASTIC_PASSWORD
+      defaultValue: "difyai123456"
     - id: $$cap_clustername
       label: cluster.name
       defaultValue: dify-es-cluster
