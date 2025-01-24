@@ -69,6 +69,15 @@ async function main() {
         }
 
         forEach(composeEnv, (value, key) => {
+          if (key === "<<") {
+            forEach(value, (value1, key1) => {
+              composeEnv[key1] = value1;
+            });
+            delete composeEnv[key];
+          }
+        });
+
+        forEach(composeEnv, (value, key) => {
           const varName = `$$cap_${slugify(key, {
             replacement: "_",
             strict: true,
@@ -110,7 +119,19 @@ async function main() {
       command: service.command,
       volumes: (() => {
         const volumes = map(service.volumes, (volume) => {
-          if (volume.split(":")?.[0]?.includes("/")) return volume;
+          if (volume.startsWith("./")) volume = volume.replace("./", "");
+
+          let splitVolume = volume.split(":");
+
+          if (splitVolume?.[0]?.includes("/")) {
+            // return volume;
+            splitVolume[0] = slugify(splitVolume[0])
+              .split(".")
+              .join("-")
+              .split("_")
+              .join("-");
+            volume = splitVolume.join(":");
+          }
           return `$$cap_appname-${volume}`;
         });
 
