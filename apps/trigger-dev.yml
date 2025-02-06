@@ -1,124 +1,129 @@
 captainVersion: 4
 caproverOneClickApp:
+  displayName: triggerdotdev
+  description: A developer-first open source background jobs framework
   instructions:
-    start: Just a plain Docker Compose.
-    end: Docker Compose is deployed.
+    start: |-
+      Trigger.dev is an open source background jobs framework. It provides a complete platform for building, deploying and managing background jobs with features like:
+      - Job scheduling and queuing
+      - Real-time job monitoring
+      - Automatic retries
+      - Distributed job execution
+      - OpenTelemetry integration
+    end: |-
+      Trigger.dev has been successfully deployed! 
+
+      Important next steps:
+      1. Enable WebSocket Support in the HTTP Settings
+      2. Configure your environment variables in the App Config
+      3. Make sure all services are running properly
+
+      Your Trigger.dev instance will be available at: http://$$cap_appname.$$cap_root_domain
   variables:
     - id: $$cap_ghcrio_triggerdotdev_triggerdev_version
-      label: ghcr.io/triggerdotdev/trigger.dev version
-      defaultValue: ${TRIGGER_IMAGE_TAG
-    - id: $$cap_login_origin
-      label: LOGIN_ORIGIN
-    - id: $$cap_app_origin
-      label: APP_ORIGIN
-    - id: $$cap_dev_otel_exporter_otlp_endpoint
-      label: DEV_OTEL_EXPORTER_OTLP_ENDPOINT
-    - id: $$cap_electric_origin
-      label: ELECTRIC_ORIGIN
-      defaultValue: http://electric:3000
+      label: Trigger.dev Version
+      defaultValue: "v3"
+      description: Version of the Trigger.dev main application
     - id: $$cap_postgres_version
-      label: postgres version
-      defaultValue: ${POSTGRES_IMAGE_TAG
+      label: PostgreSQL Version
+      defaultValue: "16"
+      description: Version of PostgreSQL to use
+      validRegex: /^\d+(\.\d+)*$/
     - id: $$cap_redis_version
-      label: redis version
-      defaultValue: ${REDIS_IMAGE_TAG
+      label: Redis Version
+      defaultValue: "7"
+      description: Version of Redis to use
+      validRegex: /^\d+(\.\d+)*$/
     - id: $$cap_ghcrio_triggerdotdev_provider_docker_version
       label: ghcr.io/triggerdotdev/provider/docker version
-      defaultValue: ${TRIGGER_IMAGE_TAG
+      defaultValue: "v3"
     - id: $$cap_platform_secret
-      label: PLATFORM_SECRET
-    - id: $$cap_platform_host
-      label: PLATFORM_HOST
-      defaultValue: webapp
+      label: Platform Secret
+      description: Secret key used for internal service authentication
+      defaultValue: $$cap_gen_random_hex(32)
+      validRegex: /.{32,}/
     - id: $$cap_platform_ws_port
       label: PLATFORM_WS_PORT
       defaultValue: "3030"
     - id: $$cap_secure_connection
       label: SECURE_CONNECTION
       defaultValue: "false"
-    - id: $$cap_otel_exporter_otlp_endpoint
-      label: OTEL_EXPORTER_OTLP_ENDPOINT
     - id: $$cap_ghcrio_triggerdotdev_coordinator_version
       label: ghcr.io/triggerdotdev/coordinator version
-      defaultValue: ${TRIGGER_IMAGE_TAG
+      defaultValue: "v3"
     - id: $$cap_electricsql_electric_version
       label: electricsql/electric version
-      defaultValue: ${ELECTRIC_IMAGE_TAG
-    - id: $$cap_database_url
-      label: DATABASE_URL
+      defaultValue: "latest"
+    - id: $$cap_postgres_user
+      label: PostgreSQL Username
+      defaultValue: trigger
+      description: Username for PostgreSQL database
+    - id: $$cap_postgres_password
+      label: PostgreSQL Password
+      defaultValue: $$cap_gen_random_hex(16)
+      description: Password for PostgreSQL database
+    - id: $$cap_postgres_db
+      label: PostgreSQL Database
+      defaultValue: trigger
+      description: Name of the PostgreSQL database
+    - id: $$cap_redis_password
+      label: Redis Password
+      defaultValue: $$cap_gen_random_hex(16)
+      description: Password for Redis
 services:
   $$cap_appname-webapp:
     image: ghcr.io/triggerdotdev/trigger.dev:$$cap_ghcrio_triggerdotdev_triggerdev_version
     environment:
-      LOGIN_ORIGIN: $$cap_login_origin
-      APP_ORIGIN: $$cap_app_origin
-      DEV_OTEL_EXPORTER_OTLP_ENDPOINT: $$cap_dev_otel_exporter_otlp_endpoint
-      ELECTRIC_ORIGIN: http://electric:3000
-    ports:
-      - ${WEBAPP_PUBLISH_IP:-127.0.0.1}:3040:3030
+      DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
+      REDIS_URL: redis://:$$cap_redis_password@srv-captain--$$cap_appname-redis:6379
+      PLATFORM_SECRET: $$cap_platform_secret
     caproverExtra:
       containerHttpPort: "3030"
-    depends_on:
-      - $$cap_appname-postgres
-      - $$cap_appname-redis
   $$cap_appname-postgres:
     image: postgres:$$cap_postgres_version
-    ports:
-      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:5433:5432
+    environment:
+      POSTGRES_USER: $$cap_postgres_user
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
     command:
       - -c
       - wal_level=logical
     volumes:
       - $$cap_appname-postgres-data:/var/lib/postgresql/data/
     caproverExtra:
-      containerHttpPort: "5432"
+      notExposeAsWebApp: true
   $$cap_appname-redis:
     image: redis:$$cap_redis_version
-    ports:
-      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:6389:6379
+    command: redis-server --requirepass $$cap_redis_password
     volumes:
       - $$cap_appname-redis-data:/data
     caproverExtra:
-      containerHttpPort: "6379"
+      notExposeAsWebApp: true
   $$cap_appname-docker-provider:
     image: ghcr.io/triggerdotdev/provider/docker:$$cap_ghcrio_triggerdotdev_provider_docker_version
     environment:
       PLATFORM_SECRET: $$cap_platform_secret
-      PLATFORM_HOST: webapp
+      PLATFORM_HOST: srv-captain--$$cap_appname-webapp
       PLATFORM_WS_PORT: "3030"
       SECURE_CONNECTION: "false"
-      OTEL_EXPORTER_OTLP_ENDPOINT: $$cap_otel_exporter_otlp_endpoint
-    ports:
-      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:9021:9020
     volumes:
-      - $$cap_appname-varrundocker-sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     caproverExtra:
       containerHttpPort: "9020"
-    depends_on:
-      - $$cap_appname-webapp
   $$cap_appname-coordinator:
     image: ghcr.io/triggerdotdev/coordinator:$$cap_ghcrio_triggerdotdev_coordinator_version
     environment:
       PLATFORM_SECRET: $$cap_platform_secret
-      PLATFORM_HOST: webapp
+      PLATFORM_HOST: srv-captain--$$cap_appname-webapp
       PLATFORM_WS_PORT: "3030"
       SECURE_CONNECTION: "false"
-      OTEL_EXPORTER_OTLP_ENDPOINT: $$cap_otel_exporter_otlp_endpoint
-    ports:
-      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:9020:9020
     volumes:
-      - $$cap_appname-varrundocker-sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     caproverExtra:
       containerHttpPort: "9020"
-    depends_on:
-      - $$cap_appname-webapp
   $$cap_appname-electric:
     image: electricsql/electric:$$cap_electricsql_electric_version
     environment:
-      DATABASE_URL: $$cap_database_url
-    ports:
-      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:3061:3000
+      DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db?sslmode=disable
     caproverExtra:
       containerHttpPort: "3000"
-    depends_on:
-      - $$cap_appname-postgres
