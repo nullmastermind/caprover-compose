@@ -27,20 +27,6 @@ caproverOneClickApp:
       defaultValue: "3000"
       description: Port number for the API service
       validRegex: /^[0-9]+$/
-    - id: $$cap_proxy_server
-      label: Proxy Server URL
-      description: Full URL of the proxy server (optional)
-    - id: $$cap_proxy_username
-      label: Proxy Authentication Username
-      description: Username for proxy authentication (optional)
-    - id: $$cap_proxy_password
-      label: Proxy Authentication Password
-      description: Password for proxy authentication (optional)
-    - id: $$cap_block_media
-      label: Block Media Resources
-      defaultValue: "false"
-      description: Whether to block loading media resources like images and videos
-      validRegex: /^(true|false)$/
     - id: $$cap_use_db_authentication
       label: Enable Database Authentication
       defaultValue: "false"
@@ -115,22 +101,11 @@ caproverOneClickApp:
       defaultValue: "alpine"
       description: Redis Docker image version tag
 services:
-  $$cap_appname-playwright-service:
-    image: nullmastermind/firecrawl-playwright-service:latest
-    environment:
-      PORT: "3000"
-      PROXY_SERVER: $$cap_proxy_server
-      PROXY_USERNAME: $$cap_proxy_username
-      PROXY_PASSWORD: $$cap_proxy_password
-      BLOCK_MEDIA: $$cap_block_media
-    caproverExtra:
-      notExposeAsWebApp: true
   $$cap_appname:
     image: nullmastermind/firecrawl-api:latest
     environment:
       REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
       REDIS_RATE_LIMIT_URL: redis://srv-captain--$$cap_appname-redis:6379
-      PLAYWRIGHT_MICROSERVICE_URL: http://srv-captain--$$cap_appname-playwright-service:3000
       USE_DB_AUTHENTICATION: $$cap_use_db_authentication
       PORT: $$cap_port
       NUM_WORKERS_PER_QUEUE: $$cap_num_workers_per_queue
@@ -166,7 +141,6 @@ services:
     environment:
       REDIS_URL: redis://srv-captain--$$cap_appname-redis:6379
       REDIS_RATE_LIMIT_URL: redis://srv-captain--$$cap_appname-redis:6379
-      PLAYWRIGHT_MICROSERVICE_URL: http://srv-captain--$$cap_appname-playwright-service:3000
       USE_DB_AUTHENTICATION: $$cap_use_db_authentication
       PORT: $$cap_port
       NUM_WORKERS_PER_QUEUE: $$cap_num_workers_per_queue
