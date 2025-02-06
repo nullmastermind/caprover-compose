@@ -74,9 +74,29 @@ services:
   $$cap_appname-webapp:
     image: ghcr.io/triggerdotdev/trigger.dev:$$cap_ghcrio_triggerdotdev_triggerdev_version
     environment:
+      V3_ENABLE: true
+      INTERNAL_OTEL_TRACE_DISABLED: 1
+      INTERNAL_OTEL_TRACE_LOGGING_ENABLED: 0
+      RUNTIME_PLATFORM: docker-compose
+      NODE_ENV: production
+      DEFAULT_ORG_EXECUTION_CONCURRENCY_LIMIT: 100
+      DEFAULT_ENV_EXECUTION_CONCURRENCY_LIMIT: 100
+      POSTGRES_USER: $$cap_postgres_user
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
+      DATABASE_HOST: srv-captain--$$cap_appname-postgres
       DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres/$$cap_postgres_db
+      DIRECT_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres/$$cap_postgres_db
+      REDIS_HOST: srv-captain--$$cap_appname-redis
+      REDIS_PORT: 6379
+      REDIS_TLS_DISABLED: true
       REDIS_URL: redis://:$$cap_redis_password@srv-captain--$$cap_appname-redis:6379
       PLATFORM_SECRET: $$cap_platform_secret
+      MAGIC_LINK_SECRET: secret
+      SESSION_SECRET: secret
+      ENCRYPTION_KEY: ae13021afef0819c3a307ad487071c06
+      PROVIDER_SECRET: provider-secret
+      COORDINATOR_SECRET: coordinator-secret
     caproverExtra:
       containerHttpPort: "3030"
   $$cap_appname-postgres:
