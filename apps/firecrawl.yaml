@@ -133,9 +133,6 @@ services:
       - start:production
     caproverExtra:
       containerHttpPort: "$$cap_port"
-    depends_on:
-      - $$cap_appname-redis
-      - $$cap_appname-playwright-service
   $$cap_appname-worker:
     image: nullmastermind/firecrawl-worker:latest
     environment:
@@ -168,10 +165,6 @@ services:
       - workers
     caproverExtra:
       notExposeAsWebApp: true
-    depends_on:
-      - $$cap_appname-redis
-      - $$cap_appname-playwright-service
-      - $$cap_appname
   $$cap_appname-redis:
     image: redis:$$cap_redis_version
     command: redis-server
