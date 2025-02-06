@@ -74,7 +74,7 @@ services:
   $$cap_appname-webapp:
     image: ghcr.io/triggerdotdev/trigger.dev:$$cap_ghcrio_triggerdotdev_triggerdev_version
     environment:
-      DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
+      DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres/$$cap_postgres_db
       REDIS_URL: redis://:$$cap_redis_password@srv-captain--$$cap_appname-redis:6379
       PLATFORM_SECRET: $$cap_platform_secret
     caproverExtra:
@@ -124,6 +124,6 @@ services:
   $$cap_appname-electric:
     image: electricsql/electric:$$cap_electricsql_electric_version
     environment:
-      DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db?sslmode=disable
+      DATABASE_URL: postgres://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres/$$cap_postgres_db?sslmode=disable
     caproverExtra:
       containerHttpPort: "3000"
