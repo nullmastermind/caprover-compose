@@ -15,7 +15,8 @@ volumes:
   redis-data:
 
 networks:
-  webapp:
+  captain-overlay-network:
+    external: true
 
 services:
   webapp:
@@ -31,7 +32,7 @@ services:
       - postgres
       - redis
     networks:
-      - webapp
+      - captain-overlay-network
 
   postgres:
     image: postgres:${POSTGRES_IMAGE_TAG:-16}
@@ -41,7 +42,7 @@ services:
     env_file:
       - .env
     networks:
-      - webapp
+      - captain-overlay-network
     ports:
       - ${DOCKER_PUBLISH_IP:-127.0.0.1}:5433:5432
     command:
@@ -54,7 +55,7 @@ services:
     volumes:
       - redis-data:/data
     networks:
-      - webapp
+      - captain-overlay-network
     ports:
       - ${DOCKER_PUBLISH_IP:-127.0.0.1}:6389:6379
 
@@ -65,7 +66,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     user: root
     networks:
-      - webapp
+      - captain-overlay-network
     depends_on:
       - webapp
     ports:
@@ -83,7 +84,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     user: root
     networks:
-      - webapp
+      - captain-overlay-network
     depends_on:
       - webapp
     ports:
@@ -100,7 +101,7 @@ services:
     environment:
       DATABASE_URL: ${DATABASE_URL}?sslmode=disable
     networks:
-      - webapp
+      - captain-overlay-network
     depends_on:
       - postgres
     ports:
