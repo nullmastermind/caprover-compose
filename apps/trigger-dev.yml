@@ -1,0 +1,124 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: Just a plain Docker Compose.
+    end: Docker Compose is deployed.
+  variables:
+    - id: $$cap_ghcrio_triggerdotdev_triggerdev_version
+      label: ghcr.io/triggerdotdev/trigger.dev version
+      defaultValue: ${TRIGGER_IMAGE_TAG
+    - id: $$cap_login_origin
+      label: LOGIN_ORIGIN
+    - id: $$cap_app_origin
+      label: APP_ORIGIN
+    - id: $$cap_dev_otel_exporter_otlp_endpoint
+      label: DEV_OTEL_EXPORTER_OTLP_ENDPOINT
+    - id: $$cap_electric_origin
+      label: ELECTRIC_ORIGIN
+      defaultValue: http://electric:3000
+    - id: $$cap_postgres_version
+      label: postgres version
+      defaultValue: ${POSTGRES_IMAGE_TAG
+    - id: $$cap_redis_version
+      label: redis version
+      defaultValue: ${REDIS_IMAGE_TAG
+    - id: $$cap_ghcrio_triggerdotdev_provider_docker_version
+      label: ghcr.io/triggerdotdev/provider/docker version
+      defaultValue: ${TRIGGER_IMAGE_TAG
+    - id: $$cap_platform_secret
+      label: PLATFORM_SECRET
+    - id: $$cap_platform_host
+      label: PLATFORM_HOST
+      defaultValue: webapp
+    - id: $$cap_platform_ws_port
+      label: PLATFORM_WS_PORT
+      defaultValue: "3030"
+    - id: $$cap_secure_connection
+      label: SECURE_CONNECTION
+      defaultValue: "false"
+    - id: $$cap_otel_exporter_otlp_endpoint
+      label: OTEL_EXPORTER_OTLP_ENDPOINT
+    - id: $$cap_ghcrio_triggerdotdev_coordinator_version
+      label: ghcr.io/triggerdotdev/coordinator version
+      defaultValue: ${TRIGGER_IMAGE_TAG
+    - id: $$cap_electricsql_electric_version
+      label: electricsql/electric version
+      defaultValue: ${ELECTRIC_IMAGE_TAG
+    - id: $$cap_database_url
+      label: DATABASE_URL
+services:
+  $$cap_appname-webapp:
+    image: ghcr.io/triggerdotdev/trigger.dev:$$cap_ghcrio_triggerdotdev_triggerdev_version
+    environment:
+      LOGIN_ORIGIN: $$cap_login_origin
+      APP_ORIGIN: $$cap_app_origin
+      DEV_OTEL_EXPORTER_OTLP_ENDPOINT: $$cap_dev_otel_exporter_otlp_endpoint
+      ELECTRIC_ORIGIN: http://electric:3000
+    ports:
+      - ${WEBAPP_PUBLISH_IP:-127.0.0.1}:3040:3030
+    caproverExtra:
+      containerHttpPort: "3030"
+    depends_on:
+      - $$cap_appname-postgres
+      - $$cap_appname-redis
+  $$cap_appname-postgres:
+    image: postgres:$$cap_postgres_version
+    ports:
+      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:5433:5432
+    command:
+      - -c
+      - wal_level=logical
+    volumes:
+      - $$cap_appname-postgres-data:/var/lib/postgresql/data/
+    caproverExtra:
+      containerHttpPort: "5432"
+  $$cap_appname-redis:
+    image: redis:$$cap_redis_version
+    ports:
+      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:6389:6379
+    volumes:
+      - $$cap_appname-redis-data:/data
+    caproverExtra:
+      containerHttpPort: "6379"
+  $$cap_appname-docker-provider:
+    image: ghcr.io/triggerdotdev/provider/docker:$$cap_ghcrio_triggerdotdev_provider_docker_version
+    environment:
+      PLATFORM_SECRET: $$cap_platform_secret
+      PLATFORM_HOST: webapp
+      PLATFORM_WS_PORT: "3030"
+      SECURE_CONNECTION: "false"
+      OTEL_EXPORTER_OTLP_ENDPOINT: $$cap_otel_exporter_otlp_endpoint
+    ports:
+      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:9021:9020
+    volumes:
+      - $$cap_appname-varrundocker-sock:/var/run/docker.sock
+    caproverExtra:
+      containerHttpPort: "9020"
+    depends_on:
+      - $$cap_appname-webapp
+  $$cap_appname-coordinator:
+    image: ghcr.io/triggerdotdev/coordinator:$$cap_ghcrio_triggerdotdev_coordinator_version
+    environment:
+      PLATFORM_SECRET: $$cap_platform_secret
+      PLATFORM_HOST: webapp
+      PLATFORM_WS_PORT: "3030"
+      SECURE_CONNECTION: "false"
+      OTEL_EXPORTER_OTLP_ENDPOINT: $$cap_otel_exporter_otlp_endpoint
+    ports:
+      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:9020:9020
+    volumes:
+      - $$cap_appname-varrundocker-sock:/var/run/docker.sock
+    caproverExtra:
+      containerHttpPort: "9020"
+    depends_on:
+      - $$cap_appname-webapp
+  $$cap_appname-electric:
+    image: electricsql/electric:$$cap_electricsql_electric_version
+    environment:
+      DATABASE_URL: $$cap_database_url
+    ports:
+      - ${DOCKER_PUBLISH_IP:-127.0.0.1}:3061:3000
+    caproverExtra:
+      containerHttpPort: "3000"
+    depends_on:
+      - $$cap_appname-postgres
