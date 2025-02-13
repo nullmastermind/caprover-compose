@@ -1,18 +1,28 @@
 captainVersion: 4
 caproverOneClickApp:
   instructions:
-    start: Just a plain Docker Compose.
-    end: Docker Compose is deployed.
+    start: |-
+      Langflow is a UI for LangChain, designed with react-flow to provide an effortless way 
+      to experiment and prototype flows with drag-and-drop components. This deployment uses
+      the official Langflow Docker image with PostgreSQL backend.
+    end: |-
+      Langflow has been deployed! It might take a few moments to initialize.
+      
+      Access your instance at: $$cap_appname.$$cap_root_domain
+      
+      Default credentials: admin / admin (change immediately in settings)
+  displayName: Langflow
+  isOfficial: false
+  description: A UI for LangChain enabling visual prototyping of LLM workflows with drag-and-drop components.
+  documentation: https://github.com/langflow-ai/langflow
   variables:
     - id: $$cap_langflowai_langflow_version
       label: Version | Langflow
       defaultValue: latest
       description: Check the tag version on https://hub.docker.com/r/langflowai/langflow
-      validRegex: /^[\w.-]+$/ # Allow alphanumeric, dots and dashes
     - id: $$cap_postgres_version
       label: Version | PostgreSQL
       defaultValue: "16"
-      validRegex: /^[\d.]+$/ # Only numbers and dots
     - id: $$cap_postgres_user
       label: PostgreSQL | User
       defaultValue: langflow
