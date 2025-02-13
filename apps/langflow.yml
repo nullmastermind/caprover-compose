@@ -7,9 +7,9 @@ caproverOneClickApp:
       the official Langflow Docker image with PostgreSQL backend.
     end: |-
       Langflow has been deployed! It might take a few moments to initialize.
-      
+
       Access your instance at: $$cap_appname.$$cap_root_domain
-      
+
       Default credentials: admin / admin (change immediately in settings)
   displayName: Langflow
   isOfficial: false
@@ -43,8 +43,6 @@ services:
       - $$cap_appname-langflow-data:/app/langflow
     caproverExtra:
       containerHttpPort: "7860"
-    depends_on:
-      - $$cap_appname-postgres
   $$cap_appname-postgres:
     image: postgres:$$cap_postgres_version
     environment:
