@@ -10,7 +10,7 @@ caproverOneClickApp:
 
       Access your instance at: $$cap_appname.$$cap_root_domain
 
-      Default credentials: admin / admin (change immediately in settings)
+      Default credentials: admin / $$cap_langflow_superuser_password (change immediately in settings)
   displayName: Langflow
   isOfficial: false
   description: A UI for LangChain enabling visual prototyping of LLM workflows with drag-and-drop components.
