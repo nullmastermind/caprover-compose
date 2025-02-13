@@ -34,7 +34,7 @@ caproverOneClickApp:
       label: PostgreSQL | Database
       defaultValue: langflow
 services:
-  $$cap_appname-langflow:
+  $$cap_appname:
     image: langflowai/langflow:$$cap_langflowai_langflow_version
     environment:
       LANGFLOW_DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
