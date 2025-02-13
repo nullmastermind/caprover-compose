@@ -38,7 +38,7 @@ services:
     image: langflowai/langflow:$$cap_langflowai_langflow_version
     environment:
       LANGFLOW_DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
-      LANGFLOW_CONFIG_DIR: /app/langflow
+      LANGFLOW_CONFIG_DIR: app/langflow
     volumes:
       - $$cap_appname-langflow-data:/app/langflow
     caproverExtra:
