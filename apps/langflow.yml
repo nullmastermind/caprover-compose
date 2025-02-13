@@ -52,11 +52,11 @@ services:
     environment:
       LANGFLOW_DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
       LANGFLOW_CONFIG_DIR: app/langflow
-      LANGFLOW_AUTO_LOGIN: False
+      LANGFLOW_AUTO_LOGIN: "false"
       LANGFLOW_SUPERUSER: $$cap_langflow_superuser
       LANGFLOW_SUPERUSER_PASSWORD: $$cap_langflow_superuser_password
       LANGFLOW_SECRET_KEY: $$cap_langflow_secret_key
-      LANGFLOW_NEW_USER_IS_ACTIVE: True
+      LANGFLOW_NEW_USER_IS_ACTIVE: "true"
     volumes:
       - $$cap_appname-langflow-data:/app/langflow
     caproverExtra:
