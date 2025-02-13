@@ -9,14 +9,6 @@ caproverOneClickApp:
       defaultValue: latest
       description: Check the tag version on https://hub.docker.com/r/langflowai/langflow
       validRegex: /^[\w.-]+$/ # Allow alphanumeric, dots and dashes
-    - id: $$cap_langflow_database_url
-      label: Database URL
-      defaultValue: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
-      description: Full PostgreSQL connection URL
-    - id: $$cap_langflow_config_dir
-      label: Config Directory
-      defaultValue: /app/langflow
-      description: Path for storing configuration and secrets
     - id: $$cap_postgres_version
       label: Version | PostgreSQL
       defaultValue: "16"
@@ -26,8 +18,8 @@ caproverOneClickApp:
       defaultValue: langflow
     - id: $$cap_postgres_password
       label: PostgreSQL | Password
-      defaultValue: $$cap_gen_random_hex(16) # Generate secure password
-      validRegex: /^.{8,}$/ # Minimum 8 characters
+      defaultValue: $$cap_gen_random_hex(16)
+      validRegex: /^.{8,}$/
     - id: $$cap_postgres_db
       label: PostgreSQL | Database
       defaultValue: langflow
@@ -35,8 +27,8 @@ services:
   $$cap_appname-langflow:
     image: langflowai/langflow:$$cap_langflowai_langflow_version
     environment:
-      LANGFLOW_DATABASE_URL: $$cap_langflow_database_url
-      LANGFLOW_CONFIG_DIR: $$cap_langflow_config_dir
+      LANGFLOW_DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
+      LANGFLOW_CONFIG_DIR: /app/langflow
     volumes:
       - $$cap_appname-langflow-data:/app/langflow
     caproverExtra:
@@ -46,9 +38,9 @@ services:
   $$cap_appname-postgres:
     image: postgres:$$cap_postgres_version
     environment:
-      POSTGRES_USER: langflow
-      POSTGRES_PASSWORD: langflow
-      POSTGRES_DB: langflow
+      POSTGRES_USER: $$cap_postgres_user
+      POSTGRES_PASSWORD: $$cap_postgres_password
+      POSTGRES_DB: $$cap_postgres_db
     volumes:
       - $$cap_appname-langflow-postgres:/var/lib/postgresql/data
     caproverExtra:
