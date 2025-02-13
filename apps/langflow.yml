@@ -33,12 +33,30 @@ caproverOneClickApp:
     - id: $$cap_postgres_db
       label: PostgreSQL | Database
       defaultValue: langflow
+    - id: $$cap_langflow_secret_key
+      label: Langflow Secret Key
+      defaultValue: $$cap_gen_random_hex(32)
+      description: Secret key used for security tokens and encryption
+    - id: $$cap_langflow_superuser
+      label: Admin Username
+      defaultValue: admin
+      description: Initial administrator username
+    - id: $$cap_langflow_superuser_password
+      label: Admin Password
+      defaultValue: $$cap_gen_random_hex(16)
+      validRegex: /^.{8,}$/
+      description: Initial administrator password (min 8 characters)
 services:
   $$cap_appname:
     image: langflowai/langflow:$$cap_langflowai_langflow_version
     environment:
       LANGFLOW_DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
       LANGFLOW_CONFIG_DIR: app/langflow
+      LANGFLOW_AUTO_LOGIN: False
+      LANGFLOW_SUPERUSER: $$cap_langflow_superuser
+      LANGFLOW_SUPERUSER_PASSWORD: $$cap_langflow_superuser_password
+      LANGFLOW_SECRET_KEY: $$cap_langflow_secret_key
+      LANGFLOW_NEW_USER_IS_ACTIVE: True
     volumes:
       - $$cap_appname-langflow-data:/app/langflow
     caproverExtra:
