@@ -37,8 +37,6 @@ services:
     environment:
       LANGFLOW_DATABASE_URL: $$cap_langflow_database_url
       LANGFLOW_CONFIG_DIR: $$cap_langflow_config_dir
-    ports:
-      - 7860:7860
     volumes:
       - $$cap_appname-langflow-data:/app/langflow
     caproverExtra:
@@ -51,9 +49,7 @@ services:
       POSTGRES_USER: langflow
       POSTGRES_PASSWORD: langflow
       POSTGRES_DB: langflow
-    ports:
-      - 5432:5432
     volumes:
       - $$cap_appname-langflow-postgres:/var/lib/postgresql/data
     caproverExtra:
-      containerHttpPort: "5432"
+      notExposeAsWebApp: true
