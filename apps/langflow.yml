@@ -1,0 +1,59 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: Just a plain Docker Compose.
+    end: Docker Compose is deployed.
+  variables:
+    - id: $$cap_langflowai_langflow_version
+      label: Version | Langflow
+      defaultValue: latest
+      description: Check the tag version on https://hub.docker.com/r/langflowai/langflow
+      validRegex: /^[\w.-]+$/ # Allow alphanumeric, dots and dashes
+    - id: $$cap_langflow_database_url
+      label: Database URL
+      defaultValue: postgresql://$$cap_postgres_user:$$cap_postgres_password@srv-captain--$$cap_appname-postgres:5432/$$cap_postgres_db
+      description: Full PostgreSQL connection URL
+    - id: $$cap_langflow_config_dir
+      label: Config Directory
+      defaultValue: /app/langflow
+      description: Path for storing configuration and secrets
+    - id: $$cap_postgres_version
+      label: Version | PostgreSQL
+      defaultValue: "16"
+      validRegex: /^[\d.]+$/ # Only numbers and dots
+    - id: $$cap_postgres_user
+      label: PostgreSQL | User
+      defaultValue: langflow
+    - id: $$cap_postgres_password
+      label: PostgreSQL | Password
+      defaultValue: $$cap_gen_random_hex(16) # Generate secure password
+      validRegex: /^.{8,}$/ # Minimum 8 characters
+    - id: $$cap_postgres_db
+      label: PostgreSQL | Database
+      defaultValue: langflow
+services:
+  $$cap_appname-langflow:
+    image: langflowai/langflow:$$cap_langflowai_langflow_version
+    environment:
+      LANGFLOW_DATABASE_URL: $$cap_langflow_database_url
+      LANGFLOW_CONFIG_DIR: $$cap_langflow_config_dir
+    ports:
+      - 7860:7860
+    volumes:
+      - $$cap_appname-langflow-data:/app/langflow
+    caproverExtra:
+      containerHttpPort: "7860"
+    depends_on:
+      - $$cap_appname-postgres
+  $$cap_appname-postgres:
+    image: postgres:$$cap_postgres_version
+    environment:
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+      POSTGRES_DB: langflow
+    ports:
+      - 5432:5432
+    volumes:
+      - $$cap_appname-langflow-postgres:/var/lib/postgresql/data
+    caproverExtra:
+      containerHttpPort: "5432"
